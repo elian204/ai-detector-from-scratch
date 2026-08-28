@@ -1,0 +1,9 @@
+text,label,source,ai_probability
+"I repaired the loose shelf after work and cooked soup for dinner.",human,personal,0.18
+"The bus was late again, so I walked the final two blocks.",human,personal,0.22
+"Our experiment failed twice before the control values stabilized.",human,technical,0.41
+"I left my notes beside the blue mug on the kitchen table.",human,personal,0.63
+"This comprehensive overview examines the topic through several key dimensions.",ai,technical,0.86
+"In conclusion, these considerations highlight the importance of a balanced approach.",ai,technical,0.91
+"The proposed system offers a robust and scalable solution for modern organizations.",ai,technical,0.71
+"Here is the short answer I would give a colleague during lunch.",ai,personal,0.38

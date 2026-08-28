@@ -39,6 +39,7 @@ project:
 | 16 | [Substack case study](scripts/16_case-study-substack/) | Evaluation on labeled Substack notes |
 | 17 | [Browser UI](scripts/17_browser-ui/) | Local React and FastAPI interface |
 | 18 | [Reinforcement learning](scripts/18_reinforcement-learning/) | Detector-as-verifier RLVR experiments |
+| 19 | [Robustness evaluation](scripts/19_robustness-evaluation/) | Calibration, threshold, and slice analysis on labeled data |
 
 The reusable inference code is in [`src/ai_detector`](src/ai_detector/), and
 the repository checks are in [`tests`](tests/). Stages with additional setup

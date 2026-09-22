@@ -1,0 +1,531 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 5769.10it/s]
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  69%|██████▊   | 213/310 [00:00<00:00, 2115.12it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 2221.88it/s]
+Run dir: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32
+Policy dtype: torch.float32  device: cuda
+Verifier dtype: torch.bfloat16
+Prompts after filter: 1781 (targets [50, 100])
+[Step 1/500] loss=17.2150 reward=0.2484 human=0.2484 length=0.8900 step_time=6.6s eta=0.9h
+[Step 2/500] loss=1.3788 reward=0.7431 human=0.7832 length=0.9190 step_time=5.1s eta=0.8h
+[Step 3/500] loss=15.8249 reward=0.5428 human=0.8246 length=0.6671 step_time=6.8s eta=0.9h
+[Step 4/500] loss=9.0239 reward=0.5423 human=0.7587 length=0.7482 step_time=6.7s eta=0.9h
+[Step 5/500] loss=-11.7671 reward=0.6412 human=0.9873 length=0.6515 step_time=4.4s eta=0.8h
+[Step 6/500] loss=42.7799 reward=0.7219 human=0.9996 length=0.7222 step_time=6.7s eta=0.9h
+[Step 7/500] loss=43.7285 reward=0.5601 human=0.9943 length=0.5618 step_time=7.0s eta=0.9h
+[Step 8/500] loss=-41.2841 reward=0.7848 human=0.9994 length=0.7853 step_time=6.7s eta=0.9h
+[Step 9/500] loss=-3.8714 reward=0.6342 human=0.9995 length=0.6345 step_time=6.8s eta=0.9h
+[Step 10/500] loss=16.1893 reward=0.5802 human=0.9994 length=0.5805 step_time=4.2s eta=0.9h
+[Step 11/500] loss=-38.2927 reward=0.7449 human=0.9972 length=0.7474 step_time=6.8s eta=0.9h
+[Step 12/500] loss=28.7378 reward=0.6628 human=0.9996 length=0.6630 step_time=7.0s eta=0.9h
+[Step 13/500] loss=0.5169 reward=0.6155 human=0.9982 length=0.6166 step_time=4.0s eta=0.8h
+[Step 14/500] loss=-5.1769 reward=0.6031 human=0.9993 length=0.6036 step_time=4.0s eta=0.8h
+[Step 15/500] loss=3.7892 reward=0.6299 human=0.9985 length=0.6309 step_time=4.0s eta=0.8h
+[Step 16/500] loss=9.3460 reward=0.6075 human=0.9992 length=0.6080 step_time=6.7s eta=0.8h
+[Step 17/500] loss=-27.7900 reward=0.7114 human=0.9995 length=0.7118 step_time=6.7s eta=0.8h
+[Step 18/500] loss=-5.7557 reward=0.6859 human=0.9996 length=0.6862 step_time=7.0s eta=0.8h
+[Step 19/500] loss=28.5471 reward=0.6849 human=0.9996 length=0.6852 step_time=6.7s eta=0.8h
+[Step 20/500] loss=-0.0613 reward=0.7400 human=0.9995 length=0.7403 step_time=6.7s eta=0.8h
+[Step 21/500] loss=2.6096 reward=0.5728 human=0.9994 length=0.5732 step_time=6.8s eta=0.8h
+[Step 22/500] loss=-27.5083 reward=0.6749 human=0.9984 length=0.6759 step_time=4.1s eta=0.8h
+[Step 23/500] loss=-13.4084 reward=0.6578 human=0.9994 length=0.6582 step_time=4.0s eta=0.8h
+[Step 24/500] loss=59.3438 reward=0.7504 human=0.9996 length=0.7507 step_time=7.0s eta=0.8h
+[Step 25/500] loss=-5.3626 reward=0.6316 human=0.9992 length=0.6321 step_time=4.1s eta=0.8h
+[Step 26/500] loss=13.6445 reward=0.6778 human=0.9996 length=0.6781 step_time=6.8s eta=0.8h
+[Step 27/500] loss=54.9706 reward=0.6846 human=0.9988 length=0.6855 step_time=6.7s eta=0.8h
+[Step 28/500] loss=-1.6355 reward=0.6889 human=0.9996 length=0.6892 step_time=6.8s eta=0.8h
+[Step 29/500] loss=13.6422 reward=0.6636 human=0.9994 length=0.6640 step_time=7.0s eta=0.8h
+[Step 30/500] loss=0.3317 reward=0.6535 human=0.9996 length=0.6537 step_time=4.1s eta=0.8h
+[Step 31/500] loss=-21.9017 reward=0.8568 human=0.9996 length=0.8571 step_time=6.7s eta=0.8h
+[Step 32/500] loss=-6.4204 reward=0.7618 human=0.9992 length=0.7623 step_time=4.1s eta=0.8h
+[Step 33/500] loss=-0.5316 reward=0.8103 human=0.9996 length=0.8106 step_time=4.1s eta=0.8h
+[Step 34/500] loss=-5.5555 reward=0.7293 human=0.9996 length=0.7295 step_time=6.7s eta=0.8h
+[Step 35/500] loss=9.9385 reward=0.7578 human=0.9996 length=0.7582 step_time=4.5s eta=0.8h
+[Step 36/500] loss=18.1318 reward=0.7742 human=0.9995 length=0.7746 step_time=4.1s eta=0.8h
+[Step 37/500] loss=-19.8829 reward=0.8298 human=0.9986 length=0.8310 step_time=4.0s eta=0.8h
+[Step 38/500] loss=-10.3522 reward=0.7652 human=0.9997 length=0.7654 step_time=6.8s eta=0.8h
+[Step 39/500] loss=-12.0734 reward=0.7685 human=0.9997 length=0.7687 step_time=6.7s eta=0.8h
+[Step 40/500] loss=-19.4727 reward=0.8092 human=0.9997 length=0.8094 step_time=6.7s eta=0.8h
+[Step 41/500] loss=38.6274 reward=0.7240 human=0.9995 length=0.7244 step_time=4.3s eta=0.8h
+[Step 42/500] loss=-17.8726 reward=0.8249 human=0.9996 length=0.8253 step_time=4.0s eta=0.8h
+[Step 43/500] loss=48.0416 reward=0.6774 human=0.9995 length=0.6777 step_time=6.8s eta=0.8h
+[Step 44/500] loss=-7.1482 reward=0.8424 human=0.9997 length=0.8426 step_time=4.0s eta=0.8h
+[Step 45/500] loss=-10.9612 reward=0.8119 human=0.9997 length=0.8121 step_time=6.9s eta=0.8h
+[Step 46/500] loss=-18.6060 reward=0.8639 human=0.9997 length=0.8642 step_time=6.9s eta=0.8h
+[Step 47/500] loss=1.6334 reward=0.8609 human=0.9995 length=0.8614 step_time=4.0s eta=0.7h
+[Step 48/500] loss=1.9870 reward=0.9233 human=0.9997 length=0.9236 step_time=6.7s eta=0.7h
+[Step 49/500] loss=-2.9699 reward=0.8121 human=0.9995 length=0.8125 step_time=6.7s eta=0.7h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:10<00:00, 10.96s/it]Writing model shards: 100%|██████████| 1/1 [00:10<00:00, 10.96s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00050
+[Step 50/500] loss=-12.7788 reward=0.8776 human=0.9997 length=0.8778 step_time=6.8s eta=0.8h
+[Step 51/500] loss=-8.7123 reward=0.8640 human=0.9997 length=0.8643 step_time=4.1s eta=0.8h
+[Step 52/500] loss=2.9631 reward=0.8401 human=0.9996 length=0.8405 step_time=4.2s eta=0.8h
+[Step 53/500] loss=-0.8025 reward=0.9399 human=0.9997 length=0.9402 step_time=6.9s eta=0.8h
+[Step 54/500] loss=0.1009 reward=0.9304 human=0.9996 length=0.9308 step_time=4.0s eta=0.8h
+[Step 55/500] loss=-3.7384 reward=0.8242 human=0.9996 length=0.8245 step_time=4.1s eta=0.8h
+[Step 56/500] loss=-3.0001 reward=0.9399 human=0.9997 length=0.9402 step_time=6.7s eta=0.8h
+[Step 57/500] loss=-0.0092 reward=0.9801 human=0.9997 length=0.9804 step_time=6.9s eta=0.8h
+[Step 58/500] loss=-0.1756 reward=0.7498 human=0.9996 length=0.7501 step_time=7.0s eta=0.8h
+[Step 59/500] loss=-0.3699 reward=0.9650 human=0.9997 length=0.9653 step_time=7.0s eta=0.8h
+[Step 60/500] loss=-1.3118 reward=0.8423 human=0.9996 length=0.8426 step_time=4.1s eta=0.8h
+[Step 61/500] loss=-0.2056 reward=0.9801 human=0.9997 length=0.9804 step_time=6.8s eta=0.8h
+[Step 62/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.1s eta=0.7h
+[Step 63/500] loss=0.6711 reward=0.8655 human=0.9996 length=0.8658 step_time=4.1s eta=0.7h
+[Step 64/500] loss=-1.5747 reward=0.8311 human=0.9996 length=0.8315 step_time=4.3s eta=0.7h
+[Step 65/500] loss=-5.4257 reward=0.9753 human=0.9997 length=0.9757 step_time=6.8s eta=0.7h
+[Step 66/500] loss=0.0287 reward=0.9801 human=0.9997 length=0.9804 step_time=6.8s eta=0.7h
+[Step 67/500] loss=0.0000 reward=0.8617 human=0.9996 length=0.8621 step_time=3.3s eta=0.7h
+[Step 68/500] loss=0.5907 reward=0.8693 human=0.9996 length=0.8696 step_time=4.1s eta=0.7h
+[Step 69/500] loss=-0.9057 reward=0.8617 human=0.9996 length=0.8621 step_time=4.0s eta=0.7h
+[Step 70/500] loss=0.0000 reward=0.8617 human=0.9996 length=0.8621 step_time=3.3s eta=0.7h
+[Step 71/500] loss=-1.4469 reward=0.8727 human=0.9995 length=0.8731 step_time=4.1s eta=0.7h
+[Step 72/500] loss=-2.4118 reward=0.9773 human=0.9996 length=0.9777 step_time=7.1s eta=0.7h
+[Step 73/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.7h
+[Step 74/500] loss=0.0423 reward=0.9801 human=0.9997 length=0.9804 step_time=6.6s eta=0.7h
+[Step 75/500] loss=-4.9174 reward=0.8834 human=0.9996 length=0.8837 step_time=4.1s eta=0.7h
+[Step 76/500] loss=-2.9863 reward=0.9921 human=0.9996 length=0.9925 step_time=6.7s eta=0.7h
+[Step 77/500] loss=0.0000 reward=0.8617 human=0.9996 length=0.8621 step_time=3.2s eta=0.7h
+[Step 78/500] loss=0.8285 reward=0.8655 human=0.9996 length=0.8658 step_time=4.1s eta=0.7h
+[Step 79/500] loss=0.2348 reward=0.9801 human=0.9997 length=0.9804 step_time=6.8s eta=0.7h
+[Step 80/500] loss=0.4938 reward=0.9007 human=0.9996 length=0.9010 step_time=4.4s eta=0.7h
+[Step 81/500] loss=-1.4959 reward=0.9897 human=0.9997 length=0.9900 step_time=6.9s eta=0.7h
+[Step 82/500] loss=-54.8092 reward=0.9766 human=0.9997 length=0.9769 step_time=7.1s eta=0.7h
+[Step 83/500] loss=-0.5638 reward=0.9972 human=0.9997 length=0.9975 step_time=6.8s eta=0.7h
+[Step 84/500] loss=-0.5021 reward=0.9899 human=0.9997 length=0.9902 step_time=6.9s eta=0.7h
+[Step 85/500] loss=0.0000 reward=0.9996 human=0.9996 length=1.0000 step_time=6.0s eta=0.7h
+[Step 86/500] loss=-0.0658 reward=0.9997 human=0.9997 length=1.0000 step_time=6.7s eta=0.7h
+[Step 87/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.7h
+[Step 88/500] loss=-0.2138 reward=0.9087 human=0.9996 length=0.9091 step_time=4.3s eta=0.7h
+[Step 89/500] loss=0.5367 reward=0.8847 human=0.9996 length=0.8850 step_time=4.0s eta=0.7h
+[Step 90/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.7h
+[Step 91/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.7h
+[Step 92/500] loss=0.4003 reward=0.9850 human=0.9997 length=0.9853 step_time=6.8s eta=0.7h
+[Step 93/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.7h
+[Step 94/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.7h
+[Step 95/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.1s eta=0.7h
+[Step 96/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.7h
+[Step 97/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.7h
+[Step 98/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.3s eta=0.7h
+[Step 99/500] loss=-0.1757 reward=0.9997 human=0.9997 length=1.0000 step_time=6.7s eta=0.7h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.34s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.34s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00100
+[Step 100/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.7h
+[Step 101/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.7h
+[Step 102/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.1s eta=0.7h
+[Step 103/500] loss=-0.2383 reward=0.9997 human=0.9997 length=1.0000 step_time=6.7s eta=0.7h
+[Step 104/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.7h
+[Step 105/500] loss=-0.6067 reward=0.8886 human=0.9996 length=0.8889 step_time=4.0s eta=0.7h
+[Step 106/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 107/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.6h
+[Step 108/500] loss=-15.3473 reward=0.9833 human=0.9997 length=0.9836 step_time=7.0s eta=0.6h
+[Step 109/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 110/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 111/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 112/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 113/500] loss=-1.3110 reward=0.8847 human=0.9997 length=0.8850 step_time=4.1s eta=0.6h
+[Step 114/500] loss=-6.6749 reward=0.8927 human=0.9996 length=0.8930 step_time=4.1s eta=0.6h
+[Step 115/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.3s eta=0.6h
+[Step 116/500] loss=0.0000 reward=0.9996 human=0.9996 length=1.0000 step_time=6.0s eta=0.6h
+[Step 117/500] loss=0.0000 reward=0.9996 human=0.9996 length=1.0000 step_time=6.2s eta=0.6h
+[Step 118/500] loss=0.0000 reward=0.9996 human=0.9996 length=1.0000 step_time=6.0s eta=0.6h
+[Step 119/500] loss=0.0000 reward=0.9996 human=0.9996 length=1.0000 step_time=6.0s eta=0.6h
+[Step 120/500] loss=0.2541 reward=0.9007 human=0.9996 length=0.9010 step_time=4.0s eta=0.6h
+[Step 121/500] loss=-0.3837 reward=0.9897 human=0.9997 length=0.9900 step_time=6.7s eta=0.6h
+[Step 122/500] loss=-0.1514 reward=0.9797 human=0.9997 length=0.9800 step_time=7.0s eta=0.6h
+[Step 123/500] loss=-1.3081 reward=0.9947 human=0.9997 length=0.9950 step_time=6.8s eta=0.6h
+[Step 124/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.1s eta=0.6h
+[Step 125/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 126/500] loss=0.9005 reward=0.9129 human=0.9996 length=0.9133 step_time=4.1s eta=0.6h
+[Step 127/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 128/500] loss=0.0628 reward=0.9129 human=0.9996 length=0.9133 step_time=4.1s eta=0.6h
+[Step 129/500] loss=0.4762 reward=0.9947 human=0.9997 length=0.9950 step_time=7.1s eta=0.6h
+[Step 130/500] loss=-0.2985 reward=0.9387 human=0.9996 length=0.9390 step_time=4.1s eta=0.6h
+[Step 131/500] loss=0.0000 reward=0.9597 human=0.9997 length=0.9600 step_time=6.0s eta=0.6h
+[Step 132/500] loss=44.8036 reward=0.9647 human=0.9997 length=0.9650 step_time=7.0s eta=0.6h
+[Step 133/500] loss=-35.3008 reward=0.9697 human=0.9996 length=0.9700 step_time=4.0s eta=0.6h
+[Step 134/500] loss=-0.0452 reward=0.9397 human=0.9997 length=0.9400 step_time=6.7s eta=0.6h
+[Step 135/500] loss=1.2708 reward=0.9747 human=0.9997 length=0.9750 step_time=6.7s eta=0.6h
+[Step 136/500] loss=0.0000 reward=0.9800 human=0.9996 length=0.9804 step_time=3.3s eta=0.6h
+[Step 137/500] loss=2.7591 reward=0.9847 human=0.9997 length=0.9850 step_time=6.9s eta=0.6h
+[Step 138/500] loss=-0.8132 reward=0.9300 human=0.9997 length=0.9303 step_time=4.3s eta=0.6h
+[Step 139/500] loss=-2.4771 reward=0.9801 human=0.9997 length=0.9804 step_time=6.8s eta=0.6h
+[Step 140/500] loss=2.6735 reward=0.9847 human=0.9997 length=0.9850 step_time=6.7s eta=0.6h
+[Step 141/500] loss=-0.0561 reward=0.9997 human=0.9997 length=1.0000 step_time=6.8s eta=0.6h
+[Step 142/500] loss=0.0000 reward=0.9797 human=0.9997 length=0.9800 step_time=5.9s eta=0.6h
+[Step 143/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 144/500] loss=-0.3970 reward=0.9345 human=0.9996 length=0.9348 step_time=4.1s eta=0.6h
+[Step 145/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 146/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+[Step 147/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.2s eta=0.6h
+[Step 148/500] loss=0.0000 reward=0.9256 human=0.9997 length=0.9259 step_time=3.3s eta=0.6h
+[Step 149/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.6h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.28s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.28s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00150
+[Step 150/500] loss=0.0000 reward=0.9087 human=0.9995 length=0.9091 step_time=3.3s eta=0.6h
+[Step 151/500] loss=1.1088 reward=0.9129 human=0.9996 length=0.9133 step_time=4.1s eta=0.6h
+[Step 152/500] loss=-0.6841 reward=0.9947 human=0.9997 length=0.9950 step_time=7.0s eta=0.6h
+[Step 153/500] loss=-81.1418 reward=0.9652 human=0.9997 length=0.9655 step_time=6.7s eta=0.6h
+[Step 154/500] loss=0.0000 reward=0.9087 human=0.9995 length=0.9091 step_time=3.3s eta=0.6h
+[Step 155/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.2s eta=0.6h
+[Step 156/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.6h
+[Step 157/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.2s eta=0.6h
+[Step 158/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.3s eta=0.6h
+[Step 159/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.3s eta=0.6h
+[Step 160/500] loss=0.0000 reward=0.9087 human=0.9995 length=0.9091 step_time=3.3s eta=0.6h
+[Step 161/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.6h
+[Step 162/500] loss=0.0000 reward=0.9087 human=0.9995 length=0.9091 step_time=3.3s eta=0.5h
+[Step 163/500] loss=-0.0033 reward=0.9997 human=0.9997 length=1.0000 step_time=6.7s eta=0.5h
+[Step 164/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.5h
+[Step 165/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.5h
+[Step 166/500] loss=0.0000 reward=0.9088 human=0.9996 length=0.9091 step_time=3.3s eta=0.5h
+[Step 167/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.5h
+[Step 168/500] loss=0.0914 reward=0.9087 human=0.9996 length=0.9091 step_time=4.0s eta=0.5h
+[Step 169/500] loss=0.0395 reward=0.8926 human=0.9997 length=0.8929 step_time=4.1s eta=0.5h
+[Step 170/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.2s eta=0.5h
+[Step 171/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 172/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.5h
+[Step 173/500] loss=-0.4210 reward=0.9801 human=0.9997 length=0.9804 step_time=6.7s eta=0.5h
+[Step 174/500] loss=0.0000 reward=0.8768 human=0.9995 length=0.8772 step_time=3.2s eta=0.5h
+[Step 175/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.5h
+[Step 176/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 177/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 178/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.1s eta=0.5h
+[Step 179/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.5h
+[Step 180/500] loss=0.0000 reward=0.8768 human=0.9995 length=0.8772 step_time=3.5s eta=0.5h
+[Step 181/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.3s eta=0.5h
+[Step 182/500] loss=0.0307 reward=0.9997 human=0.9997 length=1.0000 step_time=7.2s eta=0.5h
+[Step 183/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 184/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 185/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 186/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 187/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 188/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 189/500] loss=-1.1118 reward=0.9801 human=0.9997 length=0.9804 step_time=6.9s eta=0.5h
+[Step 190/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 191/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=6.0s eta=0.5h
+[Step 192/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 193/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 194/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 195/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 196/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 197/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 198/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 199/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.4s eta=0.5h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.87s/it]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.87s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00200
+[Step 200/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 201/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.2s eta=0.5h
+[Step 202/500] loss=0.0000 reward=0.9997 human=0.9997 length=1.0000 step_time=5.9s eta=0.5h
+[Step 203/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.2s eta=0.5h
+[Step 204/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 205/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.2s eta=0.5h
+[Step 206/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 207/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 208/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.2s eta=0.5h
+[Step 209/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.2s eta=0.5h
+[Step 210/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=5.9s eta=0.5h
+[Step 211/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.0s eta=0.5h
+[Step 212/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.2s eta=0.5h
+[Step 213/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 214/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.5h
+[Step 215/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.4h
+[Step 216/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.3s eta=0.4h
+[Step 217/500] loss=0.0000 reward=0.8768 human=0.9996 length=0.8772 step_time=3.4s eta=0.4h
+[Step 218/500] loss=0.0000 reward=0.9801 human=0.9997 length=0.9804 step_time=6.1s eta=0.4h
+[Step 219/500] loss=-0.0832 reward=0.9801 human=0.9997 length=0.9804 step_time=6.7s eta=0.4h
+[Step 220/500] loss=0.6634 reward=0.9850 human=0.9997 length=0.9853 step_time=6.8s eta=0.4h
+[Step 221/500] loss=0.0000 reward=0.8926 human=0.9997 length=0.8929 step_time=3.3s eta=0.4h
+[Step 222/500] loss=0.4170 reward=0.9097 human=0.9996 length=0.9100 step_time=4.0s eta=0.4h
+[Step 223/500] loss=0.0000 reward=0.9197 human=0.9997 length=0.9200 step_time=5.9s eta=0.4h
+[Step 224/500] loss=0.1027 reward=0.9705 human=0.9995 length=0.9710 step_time=4.3s eta=0.4h
+[Step 225/500] loss=-0.0332 reward=0.9072 human=0.9997 length=0.9075 step_time=6.8s eta=0.4h
+[Step 226/500] loss=0.1880 reward=0.9097 human=0.9996 length=0.9100 step_time=6.7s eta=0.4h
+[Step 227/500] loss=-9.5929 reward=0.8622 human=0.9997 length=0.8625 step_time=7.0s eta=0.4h
+[Step 228/500] loss=0.4111 reward=0.9899 human=0.9997 length=0.9902 step_time=4.0s eta=0.4h
+[Step 229/500] loss=0.4528 reward=0.9897 human=0.9997 length=0.9900 step_time=4.0s eta=0.4h
+[Step 230/500] loss=11.0451 reward=0.8921 human=0.9996 length=0.8925 step_time=7.0s eta=0.4h
+[Step 231/500] loss=0.0002 reward=0.9647 human=0.9996 length=0.9650 step_time=4.0s eta=0.4h
+[Step 232/500] loss=2.9251 reward=0.9197 human=0.9997 length=0.9200 step_time=6.7s eta=0.4h
+[Step 233/500] loss=-3.8502 reward=0.9172 human=0.9996 length=0.9175 step_time=6.7s eta=0.4h
+[Step 234/500] loss=0.7532 reward=0.9801 human=0.9996 length=0.9805 step_time=4.1s eta=0.4h
+[Step 235/500] loss=19.8585 reward=0.9659 human=0.9996 length=0.9662 step_time=6.8s eta=0.4h
+[Step 236/500] loss=-9.6604 reward=0.9747 human=0.9996 length=0.9750 step_time=7.1s eta=0.4h
+[Step 237/500] loss=-4.1891 reward=0.9518 human=0.9996 length=0.9522 step_time=6.7s eta=0.4h
+[Step 238/500] loss=29.8921 reward=0.6689 human=0.9996 length=0.6691 step_time=6.8s eta=0.4h
+[Step 239/500] loss=3.5832 reward=0.8826 human=0.9996 length=0.8830 step_time=4.0s eta=0.4h
+[Step 240/500] loss=6.2698 reward=0.8663 human=0.9997 length=0.8666 step_time=4.0s eta=0.4h
+[Step 241/500] loss=-31.5596 reward=0.9442 human=0.9997 length=0.9445 step_time=6.8s eta=0.4h
+[Step 242/500] loss=0.1231 reward=0.9523 human=0.9997 length=0.9526 step_time=7.1s eta=0.4h
+[Step 243/500] loss=-4.5354 reward=0.9453 human=0.9997 length=0.9456 step_time=6.7s eta=0.4h
+[Step 244/500] loss=2.0945 reward=0.9385 human=0.9997 length=0.9387 step_time=6.7s eta=0.4h
+[Step 245/500] loss=1.6876 reward=0.9010 human=0.9997 length=0.9013 step_time=4.0s eta=0.4h
+[Step 246/500] loss=0.1951 reward=0.7350 human=0.9996 length=0.7353 step_time=4.0s eta=0.4h
+[Step 247/500] loss=0.5192 reward=0.9486 human=0.9996 length=0.9490 step_time=6.9s eta=0.4h
+[Step 248/500] loss=2.6365 reward=0.9619 human=0.9996 length=0.9623 step_time=4.0s eta=0.4h
+[Step 249/500] loss=3.6686 reward=0.9022 human=0.9997 length=0.9025 step_time=6.7s eta=0.4h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.62s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.62s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00250
+[Step 250/500] loss=-1.1891 reward=0.9547 human=0.9997 length=0.9550 step_time=4.0s eta=0.4h
+[Step 251/500] loss=0.8837 reward=0.9247 human=0.9997 length=0.9250 step_time=4.0s eta=0.4h
+[Step 252/500] loss=2.8475 reward=0.9350 human=0.9996 length=0.9354 step_time=4.0s eta=0.4h
+[Step 253/500] loss=1.2775 reward=0.9247 human=0.9997 length=0.9250 step_time=7.1s eta=0.4h
+[Step 254/500] loss=-1.4040 reward=0.9566 human=0.9996 length=0.9570 step_time=4.1s eta=0.4h
+[Step 255/500] loss=-2.4253 reward=0.9697 human=0.9997 length=0.9700 step_time=6.8s eta=0.4h
+[Step 256/500] loss=3.9686 reward=0.9923 human=0.9997 length=0.9925 step_time=6.9s eta=0.4h
+[Step 257/500] loss=-0.7112 reward=0.9102 human=0.9997 length=0.9104 step_time=6.8s eta=0.4h
+[Step 258/500] loss=-13.4526 reward=0.9625 human=0.9997 length=0.9628 step_time=7.1s eta=0.4h
+[Step 259/500] loss=-3.7600 reward=0.8813 human=0.9996 length=0.8816 step_time=4.1s eta=0.4h
+[Step 260/500] loss=-1.9549 reward=0.9586 human=0.9997 length=0.9589 step_time=6.8s eta=0.4h
+[Step 261/500] loss=0.7859 reward=0.9497 human=0.9997 length=0.9500 step_time=6.8s eta=0.4h
+[Step 262/500] loss=-0.4780 reward=0.9343 human=0.9996 length=0.9347 step_time=4.1s eta=0.4h
+[Step 263/500] loss=10.2658 reward=0.9247 human=0.9997 length=0.9250 step_time=6.8s eta=0.4h
+[Step 264/500] loss=-3.3710 reward=0.9021 human=0.9996 length=0.9025 step_time=4.3s eta=0.4h
+[Step 265/500] loss=-5.1124 reward=0.9111 human=0.9996 length=0.9114 step_time=4.2s eta=0.4h
+[Step 266/500] loss=0.6415 reward=0.9372 human=0.9997 length=0.9375 step_time=6.7s eta=0.4h
+[Step 267/500] loss=-7.7044 reward=0.9318 human=0.9997 length=0.9321 step_time=4.2s eta=0.4h
+[Step 268/500] loss=0.1080 reward=0.9222 human=0.9997 length=0.9225 step_time=6.8s eta=0.4h
+[Step 269/500] loss=-4.7100 reward=0.9706 human=0.9996 length=0.9710 step_time=4.3s eta=0.4h
+[Step 270/500] loss=2.1564 reward=0.9421 human=0.9996 length=0.9425 step_time=7.1s eta=0.4h
+[Step 271/500] loss=0.0083 reward=0.9611 human=0.9996 length=0.9615 step_time=4.1s eta=0.4h
+[Step 272/500] loss=-2.8673 reward=0.9156 human=0.9995 length=0.9160 step_time=4.1s eta=0.4h
+[Step 273/500] loss=-0.8446 reward=0.9477 human=0.9996 length=0.9481 step_time=4.1s eta=0.4h
+[Step 274/500] loss=-5.7480 reward=0.9566 human=0.9996 length=0.9570 step_time=4.1s eta=0.4h
+[Step 275/500] loss=-14.2775 reward=0.9472 human=0.9997 length=0.9475 step_time=6.8s eta=0.4h
+[Step 276/500] loss=-0.1764 reward=0.9270 human=0.9995 length=0.9275 step_time=7.0s eta=0.4h
+[Step 277/500] loss=-1.6375 reward=0.9047 human=0.9997 length=0.9050 step_time=6.8s eta=0.4h
+[Step 278/500] loss=0.5514 reward=0.9849 human=0.9997 length=0.9852 step_time=4.2s eta=0.4h
+[Step 279/500] loss=-0.0941 reward=0.9948 human=0.9997 length=0.9951 step_time=4.1s eta=0.4h
+[Step 280/500] loss=-0.9309 reward=0.9619 human=0.9996 length=0.9623 step_time=4.1s eta=0.3h
+[Step 281/500] loss=1.1638 reward=0.8922 human=0.9997 length=0.8925 step_time=6.8s eta=0.3h
+[Step 282/500] loss=-0.8623 reward=0.9072 human=0.9997 length=0.9075 step_time=7.1s eta=0.3h
+[Step 283/500] loss=0.1580 reward=0.8997 human=0.9997 length=0.9000 step_time=6.8s eta=0.3h
+[Step 284/500] loss=0.0838 reward=0.9347 human=0.9997 length=0.9350 step_time=4.0s eta=0.3h
+[Step 285/500] loss=-0.4606 reward=0.8723 human=0.9997 length=0.8725 step_time=6.8s eta=0.3h
+[Step 286/500] loss=0.1600 reward=0.8772 human=0.9997 length=0.8775 step_time=6.8s eta=0.3h
+[Step 287/500] loss=0.0395 reward=0.8847 human=0.9997 length=0.8850 step_time=6.8s eta=0.3h
+[Step 288/500] loss=-0.2069 reward=0.9047 human=0.9997 length=0.9050 step_time=4.3s eta=0.3h
+[Step 289/500] loss=-0.6206 reward=0.9097 human=0.9996 length=0.9100 step_time=4.0s eta=0.3h
+[Step 290/500] loss=-1.0890 reward=0.9447 human=0.9996 length=0.9450 step_time=4.0s eta=0.3h
+[Step 291/500] loss=-0.1144 reward=0.9697 human=0.9996 length=0.9700 step_time=4.1s eta=0.3h
+[Step 292/500] loss=-1.1172 reward=0.9247 human=0.9997 length=0.9250 step_time=6.9s eta=0.3h
+[Step 293/500] loss=-0.1731 reward=0.9797 human=0.9997 length=0.9800 step_time=4.3s eta=0.3h
+[Step 294/500] loss=0.8545 reward=0.9297 human=0.9997 length=0.9300 step_time=7.1s eta=0.3h
+[Step 295/500] loss=0.2660 reward=0.9747 human=0.9997 length=0.9750 step_time=4.0s eta=0.3h
+[Step 296/500] loss=-0.3243 reward=0.9522 human=0.9997 length=0.9525 step_time=6.7s eta=0.3h
+[Step 297/500] loss=-0.4685 reward=0.9548 human=0.9997 length=0.9550 step_time=6.8s eta=0.3h
+[Step 298/500] loss=-0.1914 reward=0.9472 human=0.9997 length=0.9475 step_time=6.8s eta=0.3h
+[Step 299/500] loss=-0.8848 reward=0.9659 human=0.9997 length=0.9663 step_time=4.3s eta=0.3h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.31s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.31s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00300
+[Step 300/500] loss=-0.1234 reward=0.9347 human=0.9997 length=0.9350 step_time=7.1s eta=0.3h
+[Step 301/500] loss=0.1988 reward=0.9197 human=0.9997 length=0.9200 step_time=6.9s eta=0.3h
+[Step 302/500] loss=-0.1173 reward=0.9198 human=0.9997 length=0.9200 step_time=7.0s eta=0.3h
+[Step 303/500] loss=19.5030 reward=0.9322 human=0.9997 length=0.9325 step_time=6.8s eta=0.3h
+[Step 304/500] loss=-0.6376 reward=0.9660 human=0.9997 length=0.9663 step_time=4.3s eta=0.3h
+[Step 305/500] loss=11.2833 reward=0.9448 human=0.9998 length=0.9450 step_time=6.8s eta=0.3h
+[Step 306/500] loss=-20.1547 reward=0.9478 human=0.9997 length=0.9481 step_time=4.1s eta=0.3h
+[Step 307/500] loss=4.4672 reward=0.9547 human=0.9997 length=0.9550 step_time=6.8s eta=0.3h
+[Step 308/500] loss=-6.4478 reward=0.9482 human=0.9997 length=0.9484 step_time=4.0s eta=0.3h
+[Step 309/500] loss=-0.0047 reward=0.9800 human=0.9996 length=0.9804 step_time=4.0s eta=0.3h
+[Step 310/500] loss=0.2016 reward=0.9497 human=0.9997 length=0.9500 step_time=7.0s eta=0.3h
+[Step 311/500] loss=-0.7015 reward=0.9472 human=0.9997 length=0.9475 step_time=6.8s eta=0.3h
+[Step 312/500] loss=-1.4892 reward=0.9497 human=0.9997 length=0.9500 step_time=6.8s eta=0.3h
+[Step 313/500] loss=0.0000 reward=0.9431 human=0.9997 length=0.9434 step_time=3.2s eta=0.3h
+[Step 314/500] loss=-22.1726 reward=0.9090 human=0.9997 length=0.9094 step_time=6.7s eta=0.3h
+[Step 315/500] loss=-19.5043 reward=0.8858 human=0.9997 length=0.8861 step_time=4.0s eta=0.3h
+[Step 316/500] loss=0.0415 reward=0.9431 human=0.9997 length=0.9434 step_time=4.2s eta=0.3h
+[Step 317/500] loss=-0.6678 reward=0.9522 human=0.9997 length=0.9525 step_time=6.9s eta=0.3h
+[Step 318/500] loss=-2.7000 reward=0.9345 human=0.9997 length=0.9348 step_time=4.0s eta=0.3h
+[Step 319/500] loss=-0.5282 reward=0.9431 human=0.9997 length=0.9434 step_time=4.0s eta=0.3h
+[Step 320/500] loss=-0.0331 reward=0.9431 human=0.9996 length=0.9434 step_time=4.0s eta=0.3h
+[Step 321/500] loss=-11.9729 reward=0.9399 human=0.9997 length=0.9402 step_time=6.6s eta=0.3h
+[Step 322/500] loss=1.5226 reward=0.8606 human=0.9997 length=0.8608 step_time=4.0s eta=0.3h
+[Step 323/500] loss=-6.1930 reward=0.9419 human=0.9997 length=0.9423 step_time=7.0s eta=0.3h
+[Step 324/500] loss=4.7900 reward=0.9647 human=0.9997 length=0.9650 step_time=6.7s eta=0.3h
+[Step 325/500] loss=-6.4100 reward=0.9572 human=0.9997 length=0.9575 step_time=6.7s eta=0.3h
+[Step 326/500] loss=2.5894 reward=0.9597 human=0.9997 length=0.9600 step_time=6.7s eta=0.3h
+[Step 327/500] loss=-8.6664 reward=0.9649 human=0.9997 length=0.9652 step_time=6.8s eta=0.3h
+[Step 328/500] loss=-7.1089 reward=0.7955 human=0.9996 length=0.7958 step_time=4.0s eta=0.3h
+[Step 329/500] loss=-2.2536 reward=0.9265 human=0.9997 length=0.9268 step_time=4.2s eta=0.3h
+[Step 330/500] loss=-38.8713 reward=0.8884 human=0.9997 length=0.8887 step_time=4.0s eta=0.3h
+[Step 331/500] loss=-11.0643 reward=0.9157 human=0.9997 length=0.9160 step_time=4.0s eta=0.3h
+[Step 332/500] loss=-9.1089 reward=0.9398 human=0.9997 length=0.9401 step_time=6.7s eta=0.3h
+[Step 333/500] loss=-46.9989 reward=0.8605 human=0.9997 length=0.8608 step_time=6.7s eta=0.3h
+[Step 334/500] loss=8.0283 reward=0.8097 human=0.9996 length=0.8100 step_time=6.9s eta=0.3h
+[Step 335/500] loss=6.2103 reward=0.9572 human=0.9996 length=0.9575 step_time=6.7s eta=0.3h
+[Step 336/500] loss=-0.4963 reward=0.9822 human=0.9997 length=0.9825 step_time=6.7s eta=0.3h
+[Step 337/500] loss=1.0891 reward=0.9849 human=0.9997 length=0.9852 step_time=7.0s eta=0.3h
+[Step 338/500] loss=-5.8564 reward=0.9092 human=0.9997 length=0.9096 step_time=4.0s eta=0.3h
+[Step 339/500] loss=-6.0050 reward=0.9547 human=0.9997 length=0.9550 step_time=6.7s eta=0.3h
+[Step 340/500] loss=4.8514 reward=0.9722 human=0.9997 length=0.9725 step_time=6.8s eta=0.3h
+[Step 341/500] loss=-1.9616 reward=0.9697 human=0.9997 length=0.9700 step_time=7.0s eta=0.3h
+[Step 342/500] loss=-23.8296 reward=0.9572 human=0.9997 length=0.9575 step_time=6.7s eta=0.3h
+[Step 343/500] loss=-10.5117 reward=0.9776 human=0.9997 length=0.9780 step_time=6.8s eta=0.3h
+[Step 344/500] loss=-76.8080 reward=0.9370 human=0.9997 length=0.9372 step_time=6.8s eta=0.3h
+[Step 345/500] loss=-2.6298 reward=0.9697 human=0.9997 length=0.9700 step_time=6.8s eta=0.2h
+[Step 346/500] loss=0.1705 reward=0.9431 human=0.9997 length=0.9434 step_time=4.3s eta=0.2h
+[Step 347/500] loss=-33.7244 reward=0.8917 human=0.9997 length=0.8920 step_time=4.1s eta=0.2h
+[Step 348/500] loss=-143.7360 reward=0.8048 human=0.9997 length=0.8050 step_time=6.8s eta=0.2h
+[Step 349/500] loss=-16.1042 reward=0.9304 human=0.9996 length=0.9308 step_time=4.2s eta=0.2h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.70s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.70s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00350
+[Step 350/500] loss=-0.1361 reward=0.9698 human=0.9998 length=0.9700 step_time=6.9s eta=0.2h
+[Step 351/500] loss=-0.1160 reward=0.9431 human=0.9997 length=0.9434 step_time=4.1s eta=0.2h
+[Step 352/500] loss=-109.4541 reward=0.8613 human=0.9996 length=0.8616 step_time=4.4s eta=0.2h
+[Step 353/500] loss=-0.0665 reward=0.9697 human=0.9997 length=0.9700 step_time=6.8s eta=0.2h
+[Step 354/500] loss=0.0555 reward=0.9697 human=0.9997 length=0.9700 step_time=6.8s eta=0.2h
+[Step 355/500] loss=-6.7760 reward=0.9447 human=0.9997 length=0.9450 step_time=6.8s eta=0.2h
+[Step 356/500] loss=0.0796 reward=0.9431 human=0.9997 length=0.9434 step_time=4.1s eta=0.2h
+[Step 357/500] loss=0.0181 reward=0.9698 human=0.9998 length=0.9700 step_time=7.0s eta=0.2h
+[Step 358/500] loss=-10.8211 reward=0.9387 human=0.9997 length=0.9390 step_time=4.0s eta=0.2h
+[Step 359/500] loss=-2.0864 reward=0.9461 human=0.9997 length=0.9464 step_time=6.8s eta=0.2h
+[Step 360/500] loss=-250.7999 reward=0.8512 human=0.9996 length=0.8515 step_time=6.8s eta=0.2h
+[Step 361/500] loss=-133.2982 reward=0.8532 human=0.9996 length=0.8535 step_time=4.1s eta=0.2h
+[Step 362/500] loss=-2.4437 reward=0.9430 human=0.9996 length=0.9434 step_time=4.1s eta=0.2h
+[Step 363/500] loss=-111.0028 reward=0.7729 human=0.9996 length=0.7732 step_time=4.3s eta=0.2h
+[Step 364/500] loss=26.0990 reward=0.8247 human=0.9996 length=0.8250 step_time=6.8s eta=0.2h
+[Step 365/500] loss=25.1893 reward=0.8147 human=0.9996 length=0.8150 step_time=6.8s eta=0.2h
+[Step 366/500] loss=-27.7560 reward=0.7229 human=0.9996 length=0.7232 step_time=4.0s eta=0.2h
+[Step 367/500] loss=-43.8887 reward=0.8325 human=0.9997 length=0.8328 step_time=6.8s eta=0.2h
+[Step 368/500] loss=-134.7636 reward=0.6527 human=0.9996 length=0.6530 step_time=6.9s eta=0.2h
+[Step 369/500] loss=-105.8266 reward=0.6672 human=0.9995 length=0.6675 step_time=6.7s eta=0.2h
+[Step 370/500] loss=26.0426 reward=0.5423 human=0.9996 length=0.5425 step_time=6.7s eta=0.2h
+[Step 371/500] loss=-83.5056 reward=0.7892 human=0.9996 length=0.7896 step_time=6.7s eta=0.2h
+[Step 372/500] loss=-5.4506 reward=0.5964 human=0.9995 length=0.5967 step_time=4.1s eta=0.2h
+[Step 373/500] loss=59.5199 reward=0.3823 human=0.9994 length=0.3825 step_time=6.7s eta=0.2h
+[Step 374/500] loss=72.3879 reward=0.7555 human=0.9995 length=0.7558 step_time=4.4s eta=0.2h
+[Step 375/500] loss=-119.6637 reward=0.5197 human=0.9994 length=0.5200 step_time=4.0s eta=0.2h
+[Step 376/500] loss=-2.6967 reward=0.5797 human=0.9995 length=0.5800 step_time=4.1s eta=0.2h
+[Step 377/500] loss=33.6604 reward=0.6447 human=0.9995 length=0.6450 step_time=6.7s eta=0.2h
+[Step 378/500] loss=-28.6346 reward=0.6622 human=0.9995 length=0.6625 step_time=6.8s eta=0.2h
+[Step 379/500] loss=-11.6204 reward=0.7111 human=0.9995 length=0.7115 step_time=4.0s eta=0.2h
+[Step 380/500] loss=-4.8336 reward=0.8389 human=0.9995 length=0.8393 step_time=4.3s eta=0.2h
+[Step 381/500] loss=2.2171 reward=0.9273 human=0.9997 length=0.9276 step_time=6.8s eta=0.2h
+[Step 382/500] loss=6.1201 reward=0.7472 human=0.9995 length=0.7475 step_time=6.8s eta=0.2h
+[Step 383/500] loss=-0.7787 reward=0.7591 human=0.9995 length=0.7595 step_time=4.1s eta=0.2h
+[Step 384/500] loss=-25.9625 reward=0.4423 human=0.9995 length=0.4425 step_time=6.8s eta=0.2h
+[Step 385/500] loss=9.0717 reward=0.8446 human=0.9996 length=0.8450 step_time=4.1s eta=0.2h
+[Step 386/500] loss=-9.7967 reward=0.9576 human=0.9995 length=0.9581 step_time=7.0s eta=0.2h
+[Step 387/500] loss=-3.8868 reward=0.9160 human=0.9995 length=0.9165 step_time=4.0s eta=0.2h
+[Step 388/500] loss=-2.4366 reward=0.6689 human=0.9996 length=0.6692 step_time=6.8s eta=0.2h
+[Step 389/500] loss=-14.6936 reward=0.7276 human=0.9994 length=0.7280 step_time=4.1s eta=0.2h
+[Step 390/500] loss=11.8334 reward=0.7958 human=0.9996 length=0.7961 step_time=6.8s eta=0.2h
+[Step 391/500] loss=41.8741 reward=0.6472 human=0.9995 length=0.6475 step_time=6.8s eta=0.2h
+[Step 392/500] loss=-0.5029 reward=0.4847 human=0.9994 length=0.4850 step_time=4.3s eta=0.2h
+[Step 393/500] loss=-3.5460 reward=0.5547 human=0.9995 length=0.5550 step_time=4.1s eta=0.2h
+[Step 394/500] loss=7.1579 reward=0.6062 human=0.9995 length=0.6065 step_time=4.0s eta=0.2h
+[Step 395/500] loss=-12.2716 reward=0.5606 human=0.9994 length=0.5609 step_time=6.8s eta=0.2h
+[Step 396/500] loss=1.0035 reward=0.7521 human=0.9995 length=0.7524 step_time=6.8s eta=0.2h
+[Step 397/500] loss=-8.3065 reward=0.9346 human=0.9996 length=0.9350 step_time=7.0s eta=0.2h
+[Step 398/500] loss=-17.2741 reward=0.7846 human=0.9995 length=0.7850 step_time=6.8s eta=0.2h
+[Step 399/500] loss=-10.4486 reward=0.8185 human=0.9995 length=0.8190 step_time=6.8s eta=0.2h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:10<00:00, 10.95s/it]Writing model shards: 100%|██████████| 1/1 [00:10<00:00, 10.95s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00400
+[Step 400/500] loss=4.0603 reward=0.9087 human=0.9995 length=0.9091 step_time=6.9s eta=0.2h
+[Step 401/500] loss=-2.8225 reward=0.6736 human=0.9994 length=0.6740 step_time=4.1s eta=0.2h
+[Step 402/500] loss=-14.9814 reward=0.9047 human=0.9996 length=0.9051 step_time=6.8s eta=0.2h
+[Step 403/500] loss=4.4363 reward=0.8547 human=0.9996 length=0.8551 step_time=4.4s eta=0.2h
+[Step 404/500] loss=5.3116 reward=0.8471 human=0.9996 length=0.8475 step_time=6.8s eta=0.2h
+[Step 405/500] loss=41.8133 reward=0.8130 human=0.9996 length=0.8134 step_time=6.8s eta=0.2h
+[Step 406/500] loss=18.9810 reward=0.9001 human=0.9995 length=0.9005 step_time=4.1s eta=0.2h
+[Step 407/500] loss=8.9407 reward=0.7930 human=0.9995 length=0.7934 step_time=4.0s eta=0.2h
+[Step 408/500] loss=-92.0193 reward=0.7698 human=0.9994 length=0.7702 step_time=6.7s eta=0.1h
+[Step 409/500] loss=-5.6888 reward=0.7599 human=0.9995 length=0.7602 step_time=4.3s eta=0.1h
+[Step 410/500] loss=6.3985 reward=0.8627 human=0.9996 length=0.8631 step_time=4.0s eta=0.1h
+[Step 411/500] loss=14.8244 reward=0.8770 human=0.9997 length=0.8772 step_time=6.8s eta=0.1h
+[Step 412/500] loss=-13.9889 reward=0.8286 human=0.9997 length=0.8289 step_time=6.8s eta=0.1h
+[Step 413/500] loss=-11.3429 reward=0.8604 human=0.9995 length=0.8608 step_time=4.0s eta=0.1h
+[Step 414/500] loss=-12.4880 reward=0.9126 human=0.9996 length=0.9129 step_time=6.9s eta=0.1h
+[Step 415/500] loss=5.0640 reward=0.8468 human=0.9996 length=0.8471 step_time=4.0s eta=0.1h
+[Step 416/500] loss=0.0674 reward=0.9395 human=0.9996 length=0.9399 step_time=6.7s eta=0.1h
+[Step 417/500] loss=-4.6571 reward=0.8104 human=0.9996 length=0.8108 step_time=4.1s eta=0.1h
+[Step 418/500] loss=-5.6598 reward=0.8883 human=0.9997 length=0.8886 step_time=6.7s eta=0.1h
+[Step 419/500] loss=-6.3687 reward=0.8338 human=0.9996 length=0.8342 step_time=4.0s eta=0.1h
+[Step 420/500] loss=-5.4684 reward=0.9340 human=0.9996 length=0.9344 step_time=6.7s eta=0.1h
+[Step 421/500] loss=-12.7614 reward=0.8979 human=0.9997 length=0.8982 step_time=7.0s eta=0.1h
+[Step 422/500] loss=-10.5213 reward=0.8064 human=0.9996 length=0.8067 step_time=4.1s eta=0.1h
+[Step 423/500] loss=-31.0427 reward=0.7370 human=0.9996 length=0.7373 step_time=6.8s eta=0.1h
+[Step 424/500] loss=14.4084 reward=0.8518 human=0.9996 length=0.8522 step_time=4.1s eta=0.1h
+[Step 425/500] loss=5.5172 reward=0.9305 human=0.9996 length=0.9309 step_time=4.0s eta=0.1h
+[Step 426/500] loss=-20.7625 reward=0.8749 human=0.9996 length=0.8752 step_time=4.3s eta=0.1h
+[Step 427/500] loss=17.8942 reward=0.6197 human=0.9995 length=0.6200 step_time=4.0s eta=0.1h
+[Step 428/500] loss=-130.6677 reward=0.7772 human=0.9996 length=0.7775 step_time=6.8s eta=0.1h
+[Step 429/500] loss=11.1185 reward=0.8450 human=0.9996 length=0.8454 step_time=4.0s eta=0.1h
+[Step 430/500] loss=34.1301 reward=0.8272 human=0.9996 length=0.8275 step_time=6.8s eta=0.1h
+[Step 431/500] loss=-14.1964 reward=0.8312 human=0.9997 length=0.8315 step_time=6.7s eta=0.1h
+[Step 432/500] loss=-0.9751 reward=0.8090 human=0.9996 length=0.8094 step_time=4.3s eta=0.1h
+[Step 433/500] loss=-1.7142 reward=0.6847 human=0.9996 length=0.6850 step_time=6.8s eta=0.1h
+[Step 434/500] loss=-5.9776 reward=0.7996 human=0.9995 length=0.8000 step_time=4.1s eta=0.1h
+[Step 435/500] loss=-10.1081 reward=0.8372 human=0.9996 length=0.8375 step_time=6.7s eta=0.1h
+[Step 436/500] loss=20.3897 reward=0.8097 human=0.9996 length=0.8101 step_time=4.0s eta=0.1h
+[Step 437/500] loss=-6.1090 reward=0.9269 human=0.9996 length=0.9273 step_time=4.0s eta=0.1h
+[Step 438/500] loss=11.0696 reward=0.8897 human=0.9996 length=0.8900 step_time=7.0s eta=0.1h
+[Step 439/500] loss=-10.1927 reward=0.9229 human=0.9996 length=0.9233 step_time=4.0s eta=0.1h
+[Step 440/500] loss=-4.7703 reward=0.9496 human=0.9995 length=0.9500 step_time=4.1s eta=0.1h
+[Step 441/500] loss=16.5834 reward=0.8776 human=0.9996 length=0.8779 step_time=6.7s eta=0.1h
+[Step 442/500] loss=-10.3626 reward=0.8896 human=0.9996 length=0.8900 step_time=6.7s eta=0.1h
+[Step 443/500] loss=17.1076 reward=0.8773 human=0.9996 length=0.8776 step_time=6.9s eta=0.1h
+[Step 444/500] loss=-2.1391 reward=0.9021 human=0.9996 length=0.9025 step_time=6.7s eta=0.1h
+[Step 445/500] loss=-14.8130 reward=0.9128 human=0.9996 length=0.9132 step_time=4.0s eta=0.1h
+[Step 446/500] loss=-174.3579 reward=0.7472 human=0.9995 length=0.7475 step_time=6.7s eta=0.1h
+[Step 447/500] loss=-10.9529 reward=0.8403 human=0.9996 length=0.8407 step_time=4.0s eta=0.1h
+[Step 448/500] loss=8.3589 reward=0.8600 human=0.9996 length=0.8604 step_time=4.0s eta=0.1h
+[Step 449/500] loss=22.5908 reward=0.8817 human=0.9996 length=0.8821 step_time=6.9s eta=0.1h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.34s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.34s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00450
+[Step 450/500] loss=-10.7760 reward=0.8897 human=0.9997 length=0.8900 step_time=6.8s eta=0.1h
+[Step 451/500] loss=21.5534 reward=0.9186 human=0.9997 length=0.9189 step_time=6.7s eta=0.1h
+[Step 452/500] loss=111.3847 reward=0.9125 human=0.9996 length=0.9129 step_time=6.7s eta=0.1h
+[Step 453/500] loss=-93.7891 reward=0.9127 human=0.9996 length=0.9130 step_time=6.7s eta=0.1h
+[Step 454/500] loss=20.9384 reward=0.9291 human=0.9995 length=0.9295 step_time=4.3s eta=0.1h
+[Step 455/500] loss=34.0111 reward=0.9385 human=0.9996 length=0.9389 step_time=6.8s eta=0.1h
+[Step 456/500] loss=11.4071 reward=0.8686 human=0.9996 length=0.8689 step_time=6.8s eta=0.1h
+[Step 457/500] loss=-23.5446 reward=0.5367 human=0.9994 length=0.5370 step_time=4.1s eta=0.1h
+[Step 458/500] loss=-13.1242 reward=0.6935 human=0.9994 length=0.6939 step_time=4.1s eta=0.1h
+[Step 459/500] loss=-79.6618 reward=0.6304 human=0.9994 length=0.6307 step_time=6.9s eta=0.1h
+[Step 460/500] loss=-28.7598 reward=0.9246 human=0.9996 length=0.9250 step_time=4.0s eta=0.1h
+[Step 461/500] loss=-29.3236 reward=0.9372 human=0.9996 length=0.9375 step_time=6.7s eta=0.1h
+[Step 462/500] loss=-43.3726 reward=0.8795 human=0.9994 length=0.8800 step_time=4.0s eta=0.1h
+[Step 463/500] loss=-48.0321 reward=0.8671 human=0.9996 length=0.8675 step_time=6.7s eta=0.1h
+[Step 464/500] loss=-14.6541 reward=0.9246 human=0.9996 length=0.9250 step_time=4.0s eta=0.1h
+[Step 465/500] loss=11.0382 reward=0.9746 human=0.9996 length=0.9750 step_time=4.3s eta=0.1h
+[Step 466/500] loss=-41.6371 reward=0.9262 human=0.9996 length=0.9266 step_time=4.1s eta=0.1h
+[Step 467/500] loss=3.2814 reward=0.9648 human=0.9994 length=0.9654 step_time=4.0s eta=0.1h
+[Step 468/500] loss=-5.6549 reward=0.9092 human=0.9989 length=0.9102 step_time=6.7s eta=0.1h
+[Step 469/500] loss=1.7609 reward=0.8270 human=0.9997 length=0.8273 step_time=4.0s eta=0.1h
+[Step 470/500] loss=21.6466 reward=0.9209 human=0.9996 length=0.9212 step_time=7.0s eta=0.0h
+[Step 471/500] loss=-15.0217 reward=0.9624 human=0.9993 length=0.9631 step_time=6.7s eta=0.0h
+[Step 472/500] loss=-39.8603 reward=0.9267 human=0.9996 length=0.9270 step_time=6.7s eta=0.0h
+[Step 473/500] loss=-43.8222 reward=0.9601 human=0.9997 length=0.9604 step_time=6.7s eta=0.0h
+[Step 474/500] loss=12.3962 reward=0.9499 human=0.9996 length=0.9502 step_time=6.7s eta=0.0h
+[Step 475/500] loss=-3.1684 reward=0.9697 human=0.9996 length=0.9701 step_time=4.0s eta=0.0h
+[Step 476/500] loss=-105.7601 reward=0.8844 human=0.9996 length=0.8848 step_time=4.3s eta=0.0h
+[Step 477/500] loss=1.3237 reward=0.9577 human=0.9996 length=0.9580 step_time=4.0s eta=0.0h
+[Step 478/500] loss=5.3883 reward=0.9772 human=0.9997 length=0.9775 step_time=6.7s eta=0.0h
+[Step 479/500] loss=4.4104 reward=0.9301 human=0.9996 length=0.9305 step_time=4.0s eta=0.0h
+[Step 480/500] loss=-5.9057 reward=0.9698 human=0.9997 length=0.9701 step_time=6.7s eta=0.0h
+[Step 481/500] loss=-40.7473 reward=0.9734 human=0.9997 length=0.9738 step_time=6.8s eta=0.0h
+[Step 482/500] loss=0.0454 reward=0.9872 human=0.9996 length=0.9876 step_time=7.0s eta=0.0h
+[Step 483/500] loss=0.3284 reward=0.8846 human=0.9995 length=0.8850 step_time=4.1s eta=0.0h
+[Step 484/500] loss=11.6129 reward=0.8987 human=0.9996 length=0.8991 step_time=6.8s eta=0.0h
+[Step 485/500] loss=10.0884 reward=0.7810 human=0.9996 length=0.7813 step_time=4.1s eta=0.0h
+[Step 486/500] loss=-17.7609 reward=0.9576 human=0.9996 length=0.9580 step_time=6.8s eta=0.0h
+[Step 487/500] loss=-17.7713 reward=0.9047 human=0.9995 length=0.9051 step_time=4.1s eta=0.0h
+[Step 488/500] loss=7.2263 reward=0.9447 human=0.9996 length=0.9450 step_time=7.0s eta=0.0h
+[Step 489/500] loss=-11.1550 reward=0.9185 human=0.9995 length=0.9189 step_time=4.1s eta=0.0h
+[Step 490/500] loss=4.9220 reward=0.8696 human=0.9995 length=0.8700 step_time=4.0s eta=0.0h
+[Step 491/500] loss=29.9603 reward=0.9046 human=0.9996 length=0.9050 step_time=6.7s eta=0.0h
+[Step 492/500] loss=4.6890 reward=0.8719 human=0.9996 length=0.8723 step_time=4.1s eta=0.0h
+[Step 493/500] loss=13.7717 reward=0.9296 human=0.9994 length=0.9301 step_time=4.3s eta=0.0h
+[Step 494/500] loss=19.5539 reward=0.8297 human=0.9996 length=0.8300 step_time=6.7s eta=0.0h
+[Step 495/500] loss=-24.9337 reward=0.9429 human=0.9996 length=0.9433 step_time=4.0s eta=0.0h
+[Step 496/500] loss=-5.4080 reward=0.9322 human=0.9997 length=0.9325 step_time=6.8s eta=0.0h
+[Step 497/500] loss=14.3103 reward=0.9731 human=0.9996 length=0.9734 step_time=6.7s eta=0.0h
+[Step 498/500] loss=-0.8863 reward=0.7856 human=0.9995 length=0.7859 step_time=4.1s eta=0.0h
+[Step 499/500] loss=-0.2316 reward=0.9414 human=0.9996 length=0.9418 step_time=6.8s eta=0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.59s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.59s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00500
+[Step 500/500] loss=1.6977 reward=0.8779 human=0.9997 length=0.8782 step_time=7.0s eta=-0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.97s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.97s/it]
+Saved final model: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-human-baseline/run-B-fp32/checkpoints/step-00500-final
+Max CUDA memory allocated: 12.23 GB
+EXIT=0

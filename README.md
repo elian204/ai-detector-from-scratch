@@ -40,10 +40,16 @@ project:
 | 17 | [Browser UI](scripts/17_browser-ui/) | Local React and FastAPI interface |
 | 18 | [Reinforcement learning](scripts/18_reinforcement-learning/) | Detector-as-verifier RLVR experiments |
 | 19 | [Robustness evaluation](scripts/19_robustness-evaluation/) | Calibration, threshold, and slice analysis on labeled data |
+| 20 | [GRPO diagnostics](scripts/20_grpo-diagnostics/) | Measure the stage-18 trainer without editing it |
 
 The reusable inference code is in [`src/ai_detector`](src/ai_detector/), and
 the repository checks are in [`tests`](tests/). Stages with additional setup
 or usage details include their own README.
+
+This fork keeps Raschka's trainer unchanged and adds stage 20 to measure it.
+The short-target GRPO pilot is written up in
+[`results/grpo-human-baseline`](results/grpo-human-baseline/README.md).
+Trained weights stay on disk and are not in Git.
 
 &nbsp;
 ## Setup

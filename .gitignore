@@ -47,3 +47,6 @@ node_modules/
 
 # Built local browser UI
 /scripts/17_browser-ui/frontend/dist/
+
+# Interrupted consult logs; not part of the experiment record
+/results/grpo-human-baseline/codex-contaminated/

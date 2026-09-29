@@ -1,11 +1,17 @@
 &nbsp;
 # Build an AI Text Detector From Scratch
 
-This repository contains the code accompanying my article
-[Build an AI Text Detector From Scratch](https://magazine.sebastianraschka.com/p/ai-detector-from-scratch).
-It starts with dataset construction, compares several classifier architectures,
-and ends with experiments that use the detector as a verifier during
-reinforcement learning.
+> **Fork notice.** This is a fork of the original project by
+> [Sebastian Raschka](https://github.com/rasbt), released under the Apache
+> License 2.0. The code for stages 01 to 18, the dataset, and the published
+> model artifacts are his work. The original repository accompanies his article
+> [Build an AI Text Detector From Scratch](https://magazine.sebastianraschka.com/p/ai-detector-from-scratch).
+> Changes made in this fork are listed under
+> [About this fork](#about-this-fork).
+
+The project starts with dataset construction, compares several classifier
+architectures, and ends with experiments that use the detector as a verifier
+during reinforcement learning.
 
 The detector is a binary classifier. Given a text, it returns a score from 0
 to 100, where larger values indicate that the model considers the text more
@@ -171,6 +177,40 @@ The full data-generation and training pipeline is substantially more
 expensive than the quick-start example. It uses several language models,
 external API calls, and GPU training runs. For most readers, the published
 dataset and model artifacts are the more practical starting point.
+
+&nbsp;
+## About this fork
+
+This fork extends the stage 18 experiment. The original reward uses a single
+frozen detector and a length term, which invites reward hacking: the policy can
+raise its "human" score with degenerate or off-topic text instead of better
+writing.
+
+The goal of this fork is to study that failure and reduce it. The work is
+planned in these steps:
+
+1. Reproduce the hacking behavior of the stage 18 reward on a short run.
+2. Add diagnostics: held-out detectors that are excluded from the reward,
+   repetition and diversity metrics, and reference-model perplexity.
+3. Train with a guarded reward that combines a detector ensemble, a fluency
+   band, a relevance term, degeneration gates, and a KL penalty.
+4. Compare the variants and report proxy score, held-out score, and quality
+   against KL.
+
+Status: the repository setup and CI are done. The experiments have not been
+run yet, so this repository does not report any results for them.
+
+A detector score is not evidence that a text was written by a human. This work
+studies the robustness of learned verifiers. It is not intended for
+misrepresenting authorship in academic or professional settings.
+
+&nbsp;
+## Credits
+
+The original project, including the article, dataset, models, and stages 01 to
+18, is by [Sebastian Raschka](https://github.com/rasbt). The stage 18 trainer
+adapts a script from
+[`reasoning-from-scratch`](https://github.com/rasbt/reasoning-from-scratch).
 
 &nbsp;
 ## License

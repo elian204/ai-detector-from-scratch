@@ -249,6 +249,15 @@ def build_parser():
     parser.add_argument("--policy-device", default="cuda")
     parser.add_argument("--verifier-device", default="cuda")
     parser.add_argument("--steps", type=int, default=500)
+    parser.add_argument(
+        "--start-index",
+        type=int,
+        default=0,
+        help=(
+            "0-based index of the first training step. Step numbers are "
+            "start-index+1 through --steps. Default 0 runs from step 1."
+        ),
+    )
     parser.add_argument("--num-rollouts", type=int, default=4)
     parser.add_argument("--rollout-batch-size", type=int, default=4)
     parser.add_argument("--verifier-batch-size", type=int, default=4)
@@ -268,6 +277,14 @@ def build_parser():
     parser.add_argument("--log-samples-every", type=int, default=1)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--skip-zero-advantage-updates", action="store_true")
+    parser.add_argument(
+        "--trigram-repetition",
+        action="store_true",
+        help=(
+            "Multiply the reward by unique word-trigrams / all word-trigrams. "
+            "Off, the reward stays P(human) * length_score."
+        ),
+    )
     parser.add_argument(
         "--gradient-checkpointing",
         action=argparse.BooleanOptionalAction,
@@ -405,6 +422,11 @@ def main():
                     "ai_probability": sample["ai_probability"],
                     "human_probability": sample["human_probability"],
                     "length_score": sample["length_score"],
+                    **(
+                        {"repetition_score": sample["repetition_score"]}
+                        if "repetition_score" in sample
+                        else {}
+                    ),
                     "reward": sample["reward"],
                     "advantage": stats["advantages"][index],
                     # Logged-only float32 reference; never touches a gradient.

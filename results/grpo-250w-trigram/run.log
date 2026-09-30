@@ -1,0 +1,90 @@
+=== grpo-250w-trigram 2026-09-30T12:10:16+03:00 ===
+CUDA_VISIBLE_DEVICES=1
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+python: /home/dsi/eli-bogdanov/ai-detector-from-scratch/.venv/bin/python3
+3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+models/distilbert already present
+train pid 1239518
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6384.87it/s]
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  66%|██████▋   | 206/310 [00:00<00:00, 2057.98it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 2161.09it/s]
+Run dir: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram
+Policy dtype: torch.float32  device: cuda
+Verifier dtype: torch.bfloat16
+Prompts after filter: 1073 (targets [250])
+[Step 1/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6689 step_time=20.8s eta=0.3h
+[Step 2/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6254 step_time=18.1s eta=0.3h
+[Step 3/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6581 step_time=16.4s eta=0.3h
+[Step 4/60] loss=-10.2669 reward=0.0068 human=0.0127 length=0.6510 step_time=8.3s eta=0.3h
+[Step 5/60] loss=-3.4773 reward=0.1179 human=0.2480 length=0.5090 step_time=8.6s eta=0.2h
+[Step 6/60] loss=-1.2558 reward=0.1076 human=0.7655 length=0.3576 step_time=60.0s eta=0.3h
+[Step 7/60] loss=74.8443 reward=0.3480 human=0.9989 length=0.4280 step_time=11.7s eta=0.3h
+[Step 8/60] loss=20.5432 reward=0.2320 human=0.7467 length=0.3400 step_time=7.9s eta=0.3h
+[Step 9/60] loss=33.3483 reward=0.4624 human=0.9993 length=0.6462 step_time=59.0s eta=0.3h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.29s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.29s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00010
+[Step 10/60] loss=14.7893 reward=0.3056 human=0.9762 length=0.6214 step_time=59.5s eta=0.4h
+[Step 11/60] loss=13.8286 reward=0.3658 human=0.9989 length=0.5973 step_time=12.6s eta=0.4h
+[Step 12/60] loss=15.9007 reward=0.4738 human=0.9989 length=0.8222 step_time=10.9s eta=0.3h
+[Step 13/60] loss=-17.7853 reward=0.0572 human=0.9995 length=0.2979 step_time=61.8s eta=0.4h
+[Step 14/60] loss=-9.9863 reward=0.4288 human=0.9985 length=0.6866 step_time=23.9s eta=0.4h
+[Step 15/60] loss=-21.3691 reward=0.3403 human=0.9987 length=0.6007 step_time=59.3s eta=0.4h
+[Step 16/60] loss=21.2164 reward=0.3173 human=0.9972 length=0.4692 step_time=59.1s eta=0.4h
+[Step 17/60] loss=9.0511 reward=0.3291 human=0.9978 length=0.5090 step_time=8.1s eta=0.4h
+[Step 18/60] loss=38.1178 reward=0.4723 human=0.9986 length=0.6580 step_time=14.9s eta=0.3h
+[Step 19/60] loss=21.5813 reward=0.4324 human=0.9989 length=0.6848 step_time=14.3s eta=0.3h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.16s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.16s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00020
+[Step 20/60] loss=-5.8706 reward=0.7389 human=0.9976 length=0.9335 step_time=14.3s eta=0.3h
+[Step 21/60] loss=17.2223 reward=0.5252 human=0.9987 length=0.6532 step_time=13.7s eta=0.3h
+[Step 22/60] loss=-4.3756 reward=0.4536 human=0.9992 length=0.7192 step_time=72.0s eta=0.3h
+[Step 23/60] loss=-13.6056 reward=0.5764 human=0.9992 length=0.7478 step_time=20.3s eta=0.3h
+[Step 24/60] loss=-51.2606 reward=0.2606 human=0.9989 length=0.5109 step_time=60.1s eta=0.3h
+[Step 25/60] loss=-61.0680 reward=0.3863 human=0.9988 length=0.5700 step_time=34.0s eta=0.3h
+[Step 26/60] loss=8.4303 reward=0.3865 human=0.9991 length=0.5878 step_time=59.8s eta=0.3h
+[Step 27/60] loss=7.6095 reward=0.3643 human=0.9993 length=0.4648 step_time=60.3s eta=0.3h
+[Step 28/60] loss=12.1231 reward=0.5700 human=0.9991 length=0.7947 step_time=14.5s eta=0.3h
+[Step 29/60] loss=12.1584 reward=0.5871 human=0.9704 length=0.6950 step_time=10.5s eta=0.3h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.72s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.72s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00030
+[Step 30/60] loss=8.1300 reward=0.6582 human=0.9859 length=0.7270 step_time=8.9s eta=0.3h
+[Step 31/60] loss=2.7720 reward=0.3878 human=0.9985 length=0.4578 step_time=59.5s eta=0.3h
+[Step 32/60] loss=12.7081 reward=0.4566 human=0.7515 length=0.7041 step_time=11.0s eta=0.2h
+[Step 33/60] loss=12.2747 reward=0.5363 human=0.9983 length=0.6840 step_time=10.6s eta=0.2h
+[Step 34/60] loss=13.6516 reward=0.4510 human=0.9991 length=0.7566 step_time=12.5s eta=0.2h
+[Step 35/60] loss=5.3775 reward=0.5818 human=0.9992 length=0.8662 step_time=11.6s eta=0.2h
+[Step 36/60] loss=6.9845 reward=0.4860 human=0.9987 length=0.7000 step_time=8.3s eta=0.2h
+[Step 37/60] loss=5.8493 reward=0.5648 human=0.9992 length=0.8590 step_time=10.9s eta=0.2h
+[Step 38/60] loss=4.2308 reward=0.5773 human=0.9982 length=0.7390 step_time=9.0s eta=0.2h
+[Step 39/60] loss=5.0698 reward=0.4952 human=0.9993 length=0.8766 step_time=10.7s eta=0.2h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.11s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.11s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00040
+[Step 40/60] loss=6.1060 reward=0.5092 human=0.9990 length=0.7495 step_time=11.9s eta=0.2h
+[Step 41/60] loss=4.0873 reward=0.5186 human=0.9992 length=0.7150 step_time=10.0s eta=0.1h
+[Step 42/60] loss=0.8393 reward=0.4542 human=0.9993 length=0.6660 step_time=8.5s eta=0.1h
+[Step 43/60] loss=0.9383 reward=0.5387 human=0.9994 length=0.7200 step_time=8.5s eta=0.1h
+[Step 44/60] loss=1.5931 reward=0.5373 human=0.9993 length=0.8750 step_time=12.9s eta=0.1h
+[Step 45/60] loss=0.4422 reward=0.4397 human=0.9994 length=0.7864 step_time=12.4s eta=0.1h
+[Step 46/60] loss=1.8643 reward=0.4721 human=0.9996 length=0.7985 step_time=14.3s eta=0.1h
+[Step 47/60] loss=0.9334 reward=0.5057 human=0.9995 length=0.7211 step_time=10.7s eta=0.1h
+[Step 48/60] loss=-7.0066 reward=0.5651 human=0.9990 length=0.8309 step_time=16.8s eta=0.1h
+[Step 49/60] loss=-1.6602 reward=0.6574 human=0.9990 length=0.8710 step_time=10.1s eta=0.1h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.23s/it]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.23s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00050
+[Step 50/60] loss=6.7323 reward=0.6230 human=0.9995 length=0.7865 step_time=14.1s eta=0.1h
+[Step 51/60] loss=-0.1377 reward=0.6534 human=0.9996 length=0.9358 step_time=11.6s eta=0.1h
+[Step 52/60] loss=16.2591 reward=0.5283 human=0.9995 length=0.7992 step_time=11.4s eta=0.1h
+[Step 53/60] loss=1.2853 reward=0.6136 human=0.9995 length=0.8665 step_time=12.9s eta=0.0h
+[Step 54/60] loss=-7.3052 reward=0.6653 human=0.9996 length=0.8766 step_time=14.1s eta=0.0h
+[Step 55/60] loss=4.1967 reward=0.6070 human=0.9995 length=0.7770 step_time=8.7s eta=0.0h
+[Step 56/60] loss=14.4757 reward=0.5296 human=0.9996 length=0.7952 step_time=12.0s eta=0.0h
+[Step 57/60] loss=2.6094 reward=0.6347 human=0.9996 length=0.9290 step_time=11.4s eta=0.0h
+[Step 58/60] loss=2.6455 reward=0.7420 human=0.9993 length=0.9433 step_time=10.1s eta=0.0h
+[Step 59/60] loss=4.1435 reward=0.7022 human=0.9995 length=0.8892 step_time=11.3s eta=0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.76s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.76s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00060
+[Step 60/60] loss=-1.7867 reward=0.6959 human=0.9983 length=0.9191 step_time=10.5s eta=-0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.18s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.18s/it]
+Saved final model: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-trigram/checkpoints/step-00060-final
+Max CUDA memory allocated: 15.29 GB
+train exit 0

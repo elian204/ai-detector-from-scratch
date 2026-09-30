@@ -73,6 +73,20 @@ def response_token_limit(target_words, maximum):
     return min(maximum, max(64, estimated_tokens))
 
 
+def trigram_repetition_score(text):
+    """Unique whitespace word-trigrams divided by all word-trigrams.
+
+    Fewer than three words cannot repeat a trigram, so the score is 1.
+    """
+    words = text.split()
+    if len(words) < 3:
+        return 1.0
+    grams = [
+        " ".join(words[index : index + 3]) for index in range(len(words) - 2)
+    ]
+    return len(set(grams)) / len(grams)
+
+
 def length_adherence_score(word_count, target_words):
     """Return a smooth 0-1 score based on distance from the target length."""
     if target_words < 1:
@@ -88,6 +102,7 @@ def compute_human_writing_rewards(
     target_words,
     verifier,
     verifier_batch_size,
+    trigram_repetition=False,
 ):
     if verifier_batch_size < 1:
         raise ValueError("verifier_batch_size must be at least 1")
@@ -109,15 +124,18 @@ def compute_human_writing_rewards(
         human_probability = 1.0 - ai_probability
         length_score = length_adherence_score(word_count, target_words)
         reward = human_probability * length_score
+        detail = {
+            "ai_probability": ai_probability,
+            "human_probability": human_probability,
+            "length_score": length_score,
+            "word_count": word_count,
+        }
+        if trigram_repetition:
+            repetition_score = trigram_repetition_score(text)
+            reward *= repetition_score
+            detail["repetition_score"] = repetition_score
         rewards.append(reward)
-        details.append(
-            {
-                "ai_probability": ai_probability,
-                "human_probability": human_probability,
-                "length_score": length_score,
-                "word_count": word_count,
-            }
-        )
+        details.append(detail)
     return rewards, details
 
 
@@ -215,6 +233,7 @@ def compute_grpo_loss(
     temperature,
     top_p,
     skip_zero_advantage,
+    trigram_repetition=False,
 ):
     prompt = render_prompt(example)
     target_words = int(example["target_words"])
@@ -247,6 +266,7 @@ def compute_grpo_loss(
         target_words=target_words,
         verifier=verifier,
         verifier_batch_size=verifier_batch_size,
+        trigram_repetition=trigram_repetition,
     )
     advantages = normalized_advantages(rewards, device)
     is_zero_advantage = torch.allclose(
@@ -326,6 +346,9 @@ def append_metrics(step, total_steps, stats, elapsed):
         "zero_advantage",
     ]
     samples = stats["samples"]
+    log_repetition = bool(samples) and "repetition_score" in samples[0]
+    if log_repetition:
+        fieldnames.append("repetition_score")
     generated_tokens = sum(sample["gen_len"] for sample in samples)
     row = {
         "step": step,
@@ -343,6 +366,10 @@ def append_metrics(step, total_steps, stats, elapsed):
         "tokens_per_second": generated_tokens / elapsed if elapsed > 0 else 0.0,
         "zero_advantage": stats["is_zero_advantage"],
     }
+    if log_repetition:
+        row["repetition_score"] = (
+            sum(sample["repetition_score"] for sample in samples) / len(samples)
+        )
     write_header = not METRICS_LOG_PATH.exists()
     with METRICS_LOG_PATH.open("a", encoding="utf-8", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -371,13 +398,16 @@ def train(
     total_steps = len(train_data) if args.steps is None else args.steps
     if total_steps < 1:
         raise ValueError("steps must be positive")
+    start_index = getattr(args, "start_index", 0)
+    if start_index < 0 or start_index >= total_steps:
+        raise ValueError("start_index must be in [0, steps)")
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
     model.train()
     current_step = 0
     start_time = time.perf_counter()
 
     try:
-        for step_index in range(total_steps):
+        for step_index in range(start_index, total_steps):
             step_start = time.perf_counter()
             current_step = step_index + 1
             example = train_data[step_index % len(train_data)]
@@ -394,6 +424,7 @@ def train(
                 temperature=args.temperature,
                 top_p=args.top_p,
                 skip_zero_advantage=args.skip_zero_advantage_updates,
+                trigram_repetition=getattr(args, "trigram_repetition", False),
             )
             if stats["loss_tensor"] is not None:
                 optimizer.zero_grad(set_to_none=True)
@@ -505,6 +536,14 @@ def parse_args():
     parser.add_argument(
         "--skip-zero-advantage-updates",
         action="store_true",
+    )
+    parser.add_argument(
+        "--trigram-repetition",
+        action="store_true",
+        help=(
+            "Multiply the reward by unique word-trigrams / all word-trigrams. "
+            "Off, the reward stays P(human) * length_score."
+        ),
     )
     parser.add_argument(
         "--gradient-checkpointing",

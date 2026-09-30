@@ -1,0 +1,78 @@
+=== grpo-250w-cap1616-cont 2026-09-30T12:03:42+03:00 ===
+CUDA_VISIBLE_DEVICES=0
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+python: /home/dsi/eli-bogdanov/ai-detector-from-scratch/.venv/bin/python3
+3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+models/distilbert already present
+train pid 1230913
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 6364.37it/s]
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:   5%|▍         | 14/310 [00:00<00:03, 97.81it/s]Loading weights:   8%|▊         | 26/310 [00:00<00:02, 104.59it/s]Loading weights:  12%|█▏        | 37/310 [00:00<00:03, 71.21it/s] Loading weights:  15%|█▍        | 45/310 [00:00<00:05, 48.60it/s]Loading weights:  17%|█▋        | 53/310 [00:00<00:04, 55.04it/s]Loading weights:  20%|██        | 62/310 [00:00<00:04, 61.37it/s]Loading weights:  25%|██▌       | 78/310 [00:01<00:02, 83.76it/s]Loading weights:  31%|███▏      | 97/310 [00:01<00:01, 107.96it/s]Loading weights:  35%|███▌      | 110/310 [00:01<00:02, 88.77it/s]Loading weights:  42%|████▏     | 129/310 [00:01<00:01, 107.67it/s]Loading weights:  46%|████▌     | 142/310 [00:01<00:01, 103.98it/s]Loading weights:  50%|████▉     | 154/310 [00:01<00:01, 85.81it/s] Loading weights:  53%|█████▎    | 164/310 [00:02<00:01, 77.13it/s]Loading weights:  57%|█████▋    | 176/310 [00:02<00:01, 79.94it/s]Loading weights:  60%|█████▉    | 185/310 [00:02<00:01, 69.96it/s]Loading weights:  65%|██████▍   | 201/310 [00:02<00:01, 84.93it/s]Loading weights:  68%|██████▊   | 211/310 [00:02<00:01, 82.88it/s]Loading weights:  72%|███████▏  | 223/310 [00:02<00:00, 88.27it/s]Loading weights:  75%|███████▌  | 233/310 [00:02<00:01, 76.06it/s]Loading weights:  78%|███████▊  | 242/310 [00:03<00:00, 74.60it/s]Loading weights:  81%|████████  | 250/310 [00:03<00:00, 73.77it/s]Loading weights:  85%|████████▍ | 262/310 [00:03<00:00, 83.44it/s]Loading weights:  87%|████████▋ | 271/310 [00:03<00:00, 82.19it/s]Loading weights:  90%|█████████ | 280/310 [00:03<00:00, 64.52it/s]Loading weights:  95%|█████████▍| 293/310 [00:03<00:00, 77.74it/s]Loading weights: 100%|██████████| 310/310 [00:03<00:00, 82.19it/s]
+Run dir: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation
+Policy dtype: torch.float32  device: cuda
+Verifier dtype: torch.bfloat16
+Prompts after filter: 1073 (targets [250])
+[Step 51/100] loss=10.4130 reward=0.6243 human=0.9989 length=0.6249 step_time=13.3s eta=0.0h
+[Step 52/100] loss=-19.6245 reward=0.7932 human=0.9987 length=0.7941 step_time=16.3s eta=0.0h
+[Step 53/100] loss=-1.4655 reward=0.6796 human=0.9985 length=0.6806 step_time=24.0s eta=0.0h
+[Step 54/100] loss=2.7521 reward=0.3545 human=0.9985 length=0.3550 step_time=8.2s eta=0.0h
+[Step 55/100] loss=1.7916 reward=0.6069 human=0.9983 length=0.6080 step_time=9.1s eta=0.0h
+[Step 56/100] loss=0.9955 reward=0.7430 human=0.9991 length=0.7436 step_time=13.4s eta=0.0h
+[Step 57/100] loss=-3.7515 reward=0.6944 human=0.9988 length=0.6953 step_time=18.5s eta=0.0h
+[Step 58/100] loss=-4.1581 reward=0.3914 human=0.9981 length=0.3922 step_time=54.2s eta=0.0h
+[Step 59/100] loss=8.3450 reward=0.2673 human=0.9994 length=0.2674 step_time=59.1s eta=0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.91s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.91s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00060
+[Step 60/100] loss=0.0117 reward=0.2411 human=0.9992 length=0.2413 step_time=61.3s eta=0.1h
+[Step 61/100] loss=-7.4548 reward=0.2066 human=0.9993 length=0.2068 step_time=61.9s eta=0.1h
+[Step 62/100] loss=-28.3951 reward=0.1787 human=0.9993 length=0.1788 step_time=62.5s eta=0.1h
+[Step 63/100] loss=-0.3799 reward=0.2373 human=0.9995 length=0.2374 step_time=62.2s eta=0.1h
+[Step 64/100] loss=30.7217 reward=0.1956 human=0.9996 length=0.1957 step_time=62.0s eta=0.1h
+[Step 65/100] loss=37.7782 reward=0.2033 human=0.9995 length=0.2034 step_time=62.0s eta=0.1h
+[Step 66/100] loss=-7.6173 reward=0.2217 human=0.9994 length=0.2218 step_time=61.9s eta=0.1h
+[Step 67/100] loss=71.8880 reward=0.2080 human=0.9991 length=0.2081 step_time=62.2s eta=0.1h
+[Step 68/100] loss=-11.6894 reward=0.1912 human=0.9988 length=0.1914 step_time=61.9s eta=0.1h
+[Step 69/100] loss=-44.4402 reward=0.2311 human=0.9996 length=0.2312 step_time=62.0s eta=0.1h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.30s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.30s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00070
+[Step 70/100] loss=12.2237 reward=0.2226 human=0.9996 length=0.2227 step_time=62.2s eta=0.1h
+[Step 71/100] loss=7.0622 reward=0.2224 human=0.9995 length=0.2225 step_time=62.2s eta=0.1h
+[Step 72/100] loss=-12.1319 reward=0.2415 human=0.9995 length=0.2416 step_time=62.3s eta=0.1h
+[Step 73/100] loss=-11.2227 reward=0.2273 human=0.9997 length=0.2274 step_time=62.2s eta=0.1h
+[Step 74/100] loss=-78.6989 reward=0.2627 human=0.9994 length=0.2628 step_time=62.1s eta=0.1h
+[Step 75/100] loss=-171.6725 reward=0.2494 human=0.9992 length=0.2496 step_time=61.9s eta=0.1h
+[Step 76/100] loss=-166.1247 reward=0.3086 human=0.9989 length=0.3089 step_time=62.0s eta=0.1h
+[Step 77/100] loss=-231.5805 reward=0.2677 human=0.9995 length=0.2679 step_time=61.5s eta=0.1h
+[Step 78/100] loss=-56.7412 reward=0.2510 human=0.9996 length=0.2511 step_time=61.4s eta=0.1h
+[Step 79/100] loss=-172.7089 reward=0.2551 human=0.9985 length=0.2555 step_time=61.5s eta=0.1h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.12s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.12s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00080
+[Step 80/100] loss=-65.3616 reward=0.2400 human=0.9997 length=0.2401 step_time=61.4s eta=0.1h
+[Step 81/100] loss=-346.7523 reward=0.3105 human=0.9996 length=0.3106 step_time=61.3s eta=0.1h
+[Step 82/100] loss=-406.3494 reward=0.4407 human=0.9996 length=0.4409 step_time=61.5s eta=0.1h
+[Step 83/100] loss=-295.8840 reward=0.3072 human=0.9992 length=0.3075 step_time=61.4s eta=0.1h
+[Step 84/100] loss=-152.5135 reward=0.4301 human=0.9988 length=0.4307 step_time=60.9s eta=0.1h
+[Step 85/100] loss=-155.3540 reward=0.2531 human=0.9993 length=0.2532 step_time=60.6s eta=0.1h
+[Step 86/100] loss=-842.6906 reward=0.3142 human=0.9997 length=0.3143 step_time=60.9s eta=0.1h
+[Step 87/100] loss=-1133.0664 reward=0.2632 human=0.9998 length=0.2632 step_time=61.0s eta=0.1h
+[Step 88/100] loss=-259.7207 reward=0.3895 human=0.9991 length=0.3899 step_time=60.9s eta=0.1h
+[Step 89/100] loss=-190.8162 reward=0.2873 human=0.9994 length=0.2875 step_time=61.0s eta=0.1h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.15s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.15s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00090
+[Step 90/100] loss=-463.0992 reward=0.2377 human=0.9997 length=0.2378 step_time=60.8s eta=0.1h
+[Step 91/100] loss=-1566.8213 reward=0.3399 human=0.9997 length=0.3400 step_time=60.9s eta=0.1h
+[Step 92/100] loss=-1799.9219 reward=0.3853 human=0.9997 length=0.3854 step_time=61.1s eta=0.1h
+[Step 93/100] loss=-1514.6738 reward=0.5025 human=0.9996 length=0.5027 step_time=60.9s eta=0.0h
+[Step 94/100] loss=321.3096 reward=0.5564 human=0.9993 length=0.5567 step_time=60.9s eta=0.0h
+[Step 95/100] loss=-726.5679 reward=0.6918 human=0.9995 length=0.6922 step_time=61.0s eta=0.0h
+[Step 96/100] loss=-18.2673 reward=0.1729 human=0.9992 length=0.1730 step_time=60.9s eta=0.0h
+[Step 97/100] loss=-9.1289 reward=0.1671 human=0.9991 length=0.1673 step_time=61.2s eta=0.0h
+[Step 98/100] loss=62.1860 reward=0.5285 human=0.9978 length=0.5297 step_time=61.1s eta=0.0h
+[Step 99/100] loss=76.0006 reward=0.2923 human=0.9976 length=0.2930 step_time=61.0s eta=0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.93s/it]Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.93s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00100
+[Step 100/100] loss=163.8423 reward=0.2753 human=0.9973 length=0.2760 step_time=61.0s eta=-0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.10s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.10s/it]
+Saved final model: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-cap1616/continuation/checkpoints/step-00100-final
+Max CUDA memory allocated: 15.50 GB
+train exit 0

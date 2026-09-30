@@ -1,11 +1,14 @@
+&nbsp;
 # grpo-250w-trigram
 
 Same setup as `results/grpo-250w-cap1616`, for 60 steps, starting from `Qwen/Qwen3-0.6B-Base`. The extra factor is on only because this command passes `--trigram-repetition`.
 
+&nbsp;
 ## Conclusion
 
 Finished, exit 0. Step 60 is a template essay of about 233 words, repetition_score 0.763, length score 0.919. Training P(human) is 0.998, and DistilBERT also scores it human. The no-penalty step 60, same prompt, was the noun-phrase loop ("player career progression and team performance analysis" repeated). Checkpoints and model weights are not in this commit.
 
+&nbsp;
 ## Reward
 
 With the flag off, `reward = P(human) * length_score`.
@@ -18,6 +21,7 @@ With `--trigram-repetition`:
 
 `metrics.csv` adds a `repetition_score` column, the mean of the four rollouts. Each rollout in `rollouts.jsonl` also has its own `repetition_score`.
 
+&nbsp;
 ## Command
 
 GPU: `CUDA_VISIBLE_DEVICES=1`. The continuation `grpo-250w-cap1616-cont` stays on GPU 0.

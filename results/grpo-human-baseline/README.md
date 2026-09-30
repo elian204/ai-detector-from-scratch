@@ -1,3 +1,4 @@
+&nbsp;
 # GRPO human-writing baseline — Phase 1 + 2
 
 **Question.** Can no-KL GRPO against a frozen neural AI-text detector raise the
@@ -15,6 +16,7 @@ accuracy** assigns **P(human) = 0.9995** to
 ( Take 1 4 4 / 4 / 4 / ../ ../ /../ / 3  [ align ] Tarefas Group common Core 4l - 4l 4l 4/4 /4 4 / 4 /
 ```
 
+&nbsp;
 ## Runs
 
 Two runs, identical seed, prompts, reward, loss and hyperparameters. One
@@ -35,6 +37,7 @@ patches only its output paths and its logging sink. See
 `scripts/20_grpo-diagnostics/README.md` for how the trainer works and what the
 instrumentation does.
 
+&nbsp;
 ## Before training: two bfloat16 defects in the published recipe
 
 Both are properties of the number **format**, not of our GPUs. Native bf16
@@ -66,6 +69,7 @@ the probabilities live at the other end of the range, where bf16 is fine. That i
 why `rollouts.jsonl` logs both the training reward and a float32 reference score
 — it is the only way to tell "the detector saturated" from "bf16 tied everything".
 
+&nbsp;
 ## Result: the trajectory (float32, run B)
 
 | steps | reward | human_train | human_heldout | dist-3g | base logprob | uniq/grp | collapsed |
@@ -86,6 +90,7 @@ other column keeps changing. **The training verifier's score stops carrying
 information after step ~50** — it reads the same for coherent repetition, for
 word salad, and for digit salad.
 
+&nbsp;
 ### Four regimes, not one
 
 1. **Exploring** (1-50). Prose. Reward climbing.
@@ -103,6 +108,7 @@ word salad, and for digit salad.
    0.972 to 0.766: the policy abandons a better-rewarded exploit. With no KL and
    no clip, nothing holds it anywhere.
 
+&nbsp;
 ### No single automatic metric catches both failure modes
 
 | | repetition (regime 2) | gibberish (regime 4) |
@@ -122,6 +128,7 @@ falling and base logprob falling. Of five predicted signals, **two were inverted
 and they were inverted in *different* regimes. That is recorded here rather than
 quietly corrected, because the inversion is the finding.
 
+&nbsp;
 ## bfloat16 vs float32 — replicated across seeds
 
 The seed-42 pair suggested that the bfloat16 policy avoids mode collapse and the
@@ -159,6 +166,7 @@ What remains **not** established is *why* bfloat16 avoids collapse. The frozen
 table. Separating them needs a float32 run at matched step size or a bfloat16
 run continued well past 500 steps.
 
+&nbsp;
 ## Reproducing
 
 ```bash
@@ -178,6 +186,7 @@ uv run --with matplotlib python scripts/20_grpo-diagnostics/plot_run.py \
   --output results/grpo-human-baseline/panels.png
 ```
 
+&nbsp;
 ## Contents
 
 | path | what |
@@ -189,6 +198,7 @@ uv run --with matplotlib python scripts/20_grpo-diagnostics/plot_run.py \
 | `smoke/` | our 1-step smoke test |
 | `codex-contaminated/` | logs polluted by a Codex consult; cited nowhere |
 
+&nbsp;
 ## Still open
 
 * Why bfloat16 avoids collapse: matched-step float32 (`lr ~ 7e-7`) or a long

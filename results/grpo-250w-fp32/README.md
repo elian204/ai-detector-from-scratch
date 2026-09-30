@@ -1,7 +1,9 @@
+&nbsp;
 # grpo-250w-fp32
 
 Float32 GRPO pilot matching `results/grpo-human-baseline/run-B-fp32`, except target length 250 and 100 steps.
 
+&nbsp;
 ## Conclusion
 
 Finished, exit 0. Training P(human) is 0.9998 by step 20. By step 100 the four answers are one "of the U.S." loop, the length score is 1, and the update is skipped. DistilBERT, held out, scores that loop about 0.996 human. 381 of 400 answers hit the 416-token cap. KL was not started. Checkpoints and model weights are not in this commit.

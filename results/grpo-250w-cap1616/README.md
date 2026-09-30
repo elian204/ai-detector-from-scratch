@@ -1,7 +1,9 @@
+&nbsp;
 # grpo-250w-cap1616
 
 Same run as `results/grpo-250w-fp32`, except a 250-word answer may use the full 1616 new tokens. Generation still stops on EOS. The 416 cut (`ceil(250 * 1.6) + 16`) is not applied.
 
+&nbsp;
 ## Conclusion
 
 Through step 60, training P(human) is 0.999 (0.999047 at step 60). The answers are loops that stop on EOS at different lengths: step 60 mean length is 299.5 words, generated tokens run 236 / 330.5 / 408, and 0 of 4 hit 1616. Across steps 1–60, 22 of 240 rollouts hit the cap. DistilBERT, held out, also scores the step-60 loops human (mean P(human) 0.997). The identical 250-word "of the U.S." ending of the 416-token run does not appear. The run died while saving the step-60 checkpoint because the disk was full. There is no step 100. Checkpoints and model weights are not in this commit.
@@ -10,6 +12,7 @@ Reward is the published trainer reward, unchanged: `r = (1 - P_AI) * length_scor
 
 `scripts/18_reinforcement-learning/05_train_grpo_human_writing.py` is not edited. Reward, advantages, and the REINFORCE loss are unchanged. With `--uncap-response-tokens` off, `response_token_limit` is still `min(maximum, max(64, ceil(target_words * 1.6) + 16))`.
 
+&nbsp;
 ## One-line code difference
 
 In `scripts/20_grpo-diagnostics/run_grpo_baseline.py`, only when the flag is set:
@@ -18,6 +21,7 @@ In `scripts/20_grpo-diagnostics/run_grpo_baseline.py`, only when the flag is set
 trainer.response_token_limit = lambda target_words, maximum: maximum
 ```
 
+&nbsp;
 ## Command
 
 GPU: `CUDA_VISIBLE_DEVICES=2` (shared 4× RTX 6000; GPU 2 had the most free memory, about 19 GB). `--policy-device cuda` and `--verifier-device cuda`.

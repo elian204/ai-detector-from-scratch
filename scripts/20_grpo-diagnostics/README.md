@@ -1,3 +1,4 @@
+&nbsp;
 # Stage 20 — GRPO diagnostics
 
 Tooling we added to measure the stage-18 GRPO run. The published trainer,
@@ -12,6 +13,7 @@ edited**; everything here imports it and observes it.
 
 ---
 
+&nbsp;
 # How the trainer actually works
 
 This section is the "Phase 0" of the project: the five mechanisms you have to
@@ -31,6 +33,7 @@ Read that table once more before continuing. **All four rollouts have the same
 human probability to four decimals.** Every bit of the advantage spread comes
 from the length term. That single observation is the whole finding of Phase 1.
 
+&nbsp;
 ## 1. How rollouts become advantages
 
 `compute_grpo_loss` takes **one prompt per step** and samples `num_rollouts`
@@ -65,6 +68,7 @@ Two consequences that matter more than they look:
   std is tiny the numerator is tiny by the same amount. Advantages shrink toward
   zero rather than exploding.
 
+&nbsp;
 ## 2. Why empty text is scored as `"."`
 
 `compute_human_writing_rewards` line 94:
@@ -89,6 +93,7 @@ ever saw. We measured `empty_frac = 0.00` in every window of both runs, so this
 never bit us — but it is the reason `rollouts.jsonl` records an `is_empty` flag
 per rollout rather than trusting the mean.
 
+&nbsp;
 ## 3. Why the length term still allows repetition
 
 The reward is
@@ -119,6 +124,7 @@ with a gradient left is the length heuristic. Our tables show this directly:
 optimizing "sound human" — it has already won that — and spends the remaining
 450 steps learning to hit a word count.
 
+&nbsp;
 ## 4. `--skip-zero-advantage-updates`
 
 If every reward in a group is identical, then `r_i - mean(r) = 0` exactly, so
@@ -149,6 +155,7 @@ because the detector saturates at `P_AI = 1` (its confident-AI end), but because
 it saturates at `P_AI ~ 0` — every rollout is equally "human", so there is
 nothing left to rank. **The run switches itself off as it converges.**
 
+&nbsp;
 ## 5. The loss is REINFORCE — no ratio clip, no KL
 
 ```python
@@ -183,6 +190,7 @@ useful signal-strength readout but tells you nothing about step size, and the
 learning rate is doing all the work of setting how far the policy moves — which
 is exactly why the bfloat16 rounding threshold at `lr = 1e-5` mattered so much.
 
+&nbsp;
 ## Sampling is not quite on-policy
 
 Worth knowing, and left unchanged for faithfulness: rollouts are sampled with

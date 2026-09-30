@@ -1,7 +1,9 @@
+&nbsp;
 # grpo-250w-cap1616 continuation
 
 Steps 51–100 of the 1616-token run. Weights are loaded from `results/grpo-250w-cap1616/checkpoints/step-00050`. Logs from steps 1–60 stay in the parent directory and are not overwritten.
 
+&nbsp;
 ## Conclusion
 
 Finished, exit 0. Step 100 is about 69 words, length score 0.276, but every rollout is cut at 1616 tokens because the tail has no spaces. Training P(human) is 0.997, and DistilBERT scores those four answers about 0.999 human. This is not the noun-phrase loop from the no-penalty step 60. Checkpoints and model weights are not in this commit.

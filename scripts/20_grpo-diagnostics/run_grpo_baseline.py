@@ -33,9 +33,13 @@ advantages are computed from.
 
 What this wrapper changes, and what it does not
 -----------------------------------------------
-It does NOT change the reward, the loss, the advantage computation, the
-sampling, or any hyperparameter default. The reward used for training is
-whatever the unmodified trainer computes, in whatever dtype the policy runs.
+It does NOT change the reward, the loss, the advantage computation, or any
+hyperparameter default. The reward used for training is whatever the
+unmodified trainer computes, in whatever dtype the policy runs. Sampling is
+also unchanged unless `--uncap-response-tokens` is set. That flag replaces
+`response_token_limit` with the raw `--max-new-tokens` ceiling so a short
+target is not cut at `ceil(target_words * 1.6) + 16`. Off, the trainer's
+cap is used exactly as published.
 
 It DOES:
   * redirect the trainer's output globals to a per-run directory;
@@ -249,6 +253,14 @@ def build_parser():
     parser.add_argument("--rollout-batch-size", type=int, default=4)
     parser.add_argument("--verifier-batch-size", type=int, default=4)
     parser.add_argument("--max-new-tokens", type=int, default=256)
+    parser.add_argument(
+        "--uncap-response-tokens",
+        action="store_true",
+        help=(
+            "Use --max-new-tokens as the generation cap. Off, the trainer "
+            "still applies min(maximum, max(64, ceil(target_words * 1.6) + 16))."
+        ),
+    )
     parser.add_argument("--temperature", type=float, default=0.8)
     parser.add_argument("--top-p", type=float, default=0.9)
     parser.add_argument("--learning-rate", type=float, default=1e-5)
@@ -288,6 +300,8 @@ def main():
     run_dir.mkdir(parents=True, exist_ok=True)
 
     trainer = load_trainer_module()
+    if args.uncap_response_tokens:
+        trainer.response_token_limit = lambda target_words, maximum: maximum
 
     # Redirect the trainer's hardcoded output globals into this run's directory.
     trainer.LOG_DIR = run_dir

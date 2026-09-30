@@ -8,6 +8,15 @@ from .classifiers import (
     load_classifier,
     score_text,
 )
+from .evaluation import (
+    calibration_summary,
+    evaluate_predictions,
+    evaluate_slices,
+    normalize_binary_label,
+    select_threshold,
+    threshold_curve,
+    word_count_bucket,
+)
 from .registry import (
     PROJECT_DIR,
     ArtifactNotReadyError,
@@ -18,7 +27,6 @@ from .registry import (
 )
 from .scoring import score_payload, validate_text
 
-
 __all__ = [
     "PROJECT_DIR",
     "ArtifactNotReadyError",
@@ -28,10 +36,17 @@ __all__ = [
     "SklearnTextClassifier",
     "artifact_status",
     "build_causal_batch",
+    "calibration_summary",
     "ensure_artifact_ready",
+    "evaluate_predictions",
+    "evaluate_slices",
     "load_classifier",
     "model_registry",
+    "normalize_binary_label",
     "score_payload",
     "score_text",
+    "select_threshold",
+    "threshold_curve",
     "validate_text",
+    "word_count_bucket",
 ]

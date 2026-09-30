@@ -1,0 +1,9 @@
+run                collapsed min logprob gibberish? final reward final human_tr final heldout final dist3g
+run-A-bf16                 0      -1.434      False        0.889         0.9981        0.9800        0.573
+run-B-fp32               105      -4.669       True        0.900         0.9996        0.7564        0.594
+seed43-bfloat16            0      -1.826      False        0.812         0.9993        0.8576        0.876
+seed43-float32           462      -1.001      False        0.914         0.9991        0.6783        0.032
+seed44-bfloat16            0      -1.596      False        0.767         0.8844        0.3964        0.963
+seed44-float32           259      -1.428      False        0.931         0.9994        0.3770        0.048
+seed45-bfloat16           14      -1.359      False        0.945         0.9993        0.9870        0.546
+seed45-float32           456      -1.093      False        0.917         0.9985        0.9891        0.016

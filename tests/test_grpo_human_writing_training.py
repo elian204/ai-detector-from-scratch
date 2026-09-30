@@ -48,6 +48,49 @@ def test_length_adherence_penalizes_short_and_long_answers(
     assert MODULE.length_adherence_score(word_count, target_words) == expected
 
 
+def test_trigram_repetition_score_penalizes_a_loop():
+    loop = " ".join(["of", "the", "U.S."] * 20)
+    prose = (
+        "Legal history is shaped by political social economic and cultural "
+        "influences today"
+    )
+
+    assert MODULE.trigram_repetition_score(loop) < 0.2
+    assert MODULE.trigram_repetition_score(prose) > 0.9
+    assert MODULE.trigram_repetition_score("one two") == 1.0
+
+
+class ConstantVerifier:
+    def score_many(self, texts, *, batch_size):
+        assert batch_size == 1
+        return [0.2] * len(texts)
+
+
+def test_flag_off_reward_ignores_trigram_repetition():
+    loop = " ".join(["of", "the", "U.S."] * 8)
+    off_rewards, off_details = MODULE.compute_human_writing_rewards(
+        [loop],
+        target_words=24,
+        verifier=ConstantVerifier(),
+        verifier_batch_size=1,
+    )
+    on_rewards, on_details = MODULE.compute_human_writing_rewards(
+        [loop],
+        target_words=24,
+        verifier=ConstantVerifier(),
+        verifier_batch_size=1,
+        trigram_repetition=True,
+    )
+
+    length_score = MODULE.length_adherence_score(len(loop.split()), 24)
+    repetition_score = MODULE.trigram_repetition_score(loop)
+    assert off_rewards == pytest.approx([0.8 * length_score])
+    assert "repetition_score" not in off_details[0]
+    assert repetition_score < 0.2
+    assert on_rewards == pytest.approx([0.8 * length_score * repetition_score])
+    assert on_details[0]["repetition_score"] == pytest.approx(repetition_score)
+
+
 def test_reward_requires_both_human_score_and_length_adherence():
     rewards, details = MODULE.compute_human_writing_rewards(
         ["one two three four", "one two"],

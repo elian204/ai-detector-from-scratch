@@ -1,0 +1,21 @@
+item,labels,notes
+1,"repetition,truncated",fabricated WRC statistics in a repeated 'In YEAR the number of X increased to N' template; nominally on topic
+2,"repetition,truncated",confabulated ranking of Linux/Mac OS X as 'software development tools'; self-contradictory
+3,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What Is Goal/Aim/Purpose' frame; nothing about cell function
+4,"repetition,truncated",invented survey percentages; same sentence template with the ordinal incremented
+5,"repetition,truncated",two facts alternated verbatim for the whole output
+6,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What is the purpose' frame; nothing about art history
+7,"gibberish,topic_abandoned",word salad with pseudo-technical math fragments
+8,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What/Why is the question' frame with each index duplicated
+9,"repetition,truncated",circular definition repeated four times verbatim
+10,"gibberish,topic_abandoned",symbol and digit salad with no recoverable language
+11,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What is the question' frame; prompt was a narrative scene
+12,"repetition,list_scaffold,truncated",multiple-choice A-D scaffold then the answer sentence repeated; vacuous but on topic
+13,"repetition,truncated",fluent but fabricated percentages; two-sentence template
+14,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What Is The Purpose' frame; nothing about drug resistance
+15,"acceptable,list_scaffold,truncated",genuine on-topic enumeration of immune cell types; some circular justifications
+16,"repetition,truncated",market-size figures contradict each other ($46.14B then $37.12B for the same year)
+17,truncated,stat-salad of confabulated publication counts; varied sentences rather than a repeated template
+18,"acceptable,truncated",coherent substantively correct prose on DNA damage response; reads as a real answer
+19,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What is the question' frame
+20,"repetition,list_scaffold,topic_abandoned,truncated",numbered 'What Is Purpose' frame; nothing about web development

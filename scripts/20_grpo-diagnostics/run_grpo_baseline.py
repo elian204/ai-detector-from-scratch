@@ -286,6 +286,16 @@ def build_parser():
         ),
     )
     parser.add_argument(
+        "--kl-beta",
+        type=float,
+        default=0.0,
+        help=(
+            "Subtract beta * mean(log π_current - log π_base) over completion "
+            "tokens. 0 leaves the reward at P(human) * length_score. The base "
+            "is a frozen copy of --policy-model, eval mode, not optimized."
+        ),
+    )
+    parser.add_argument(
         "--gradient-checkpointing",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -306,6 +316,8 @@ def build_parser():
 
 def main():
     args = build_parser().parse_args()
+    if args.kl_beta < 0:
+        raise SystemExit("--kl-beta must be >= 0")
 
     run_dir = args.run_dir.expanduser().resolve()
     if run_dir.exists() and any(run_dir.iterdir()) and not args.allow_existing:
@@ -425,6 +437,11 @@ def main():
                     **(
                         {"repetition_score": sample["repetition_score"]}
                         if "repetition_score" in sample
+                        else {}
+                    ),
+                    **(
+                        {"kl": sample["kl"]}
+                        if "kl" in sample
                         else {}
                     ),
                     "reward": sample["reward"],

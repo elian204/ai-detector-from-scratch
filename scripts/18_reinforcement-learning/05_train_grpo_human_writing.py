@@ -194,8 +194,11 @@ def sample_responses_batched(
     return results
 
 
-def sequence_logprob(model, rollout):
+def completion_token_logprobs(model, rollout):
     token_ids = rollout.token_ids
+    param_device = next(model.parameters()).device
+    if token_ids.device != param_device:
+        token_ids = token_ids.to(param_device)
     outputs = model(
         input_ids=token_ids.unsqueeze(0),
         attention_mask=torch.ones_like(token_ids).unsqueeze(0),
@@ -207,7 +210,28 @@ def sequence_logprob(model, rollout):
     selected = token_logprobs.gather(
         1, targets.unsqueeze(-1)
     ).squeeze(-1)
-    return selected[rollout.prompt_length - 1 :].sum()
+    return selected[rollout.prompt_length - 1 :]
+
+
+def sequence_logprob(model, rollout):
+    return completion_token_logprobs(model, rollout).sum()
+
+
+def mean_token_logprob_gap(current_logprobs, base_logprobs):
+    if current_logprobs.shape != base_logprobs.shape:
+        raise ValueError(
+            "current and base completion log-probs differ in shape: "
+            f"{tuple(current_logprobs.shape)} vs {tuple(base_logprobs.shape)}"
+        )
+    if current_logprobs.numel() == 0:
+        return current_logprobs.new_zeros(())
+    return (current_logprobs.float() - base_logprobs.float()).mean()
+
+
+def apply_kl_penalty(reward, kl, beta):
+    if beta == 0:
+        return reward
+    return reward - beta * kl
 
 
 def normalized_advantages(rewards, device):
@@ -234,6 +258,8 @@ def compute_grpo_loss(
     top_p,
     skip_zero_advantage,
     trigram_repetition=False,
+    kl_beta=0.0,
+    base_model=None,
 ):
     prompt = render_prompt(example)
     target_words = int(example["target_words"])
@@ -268,6 +294,18 @@ def compute_grpo_loss(
         verifier_batch_size=verifier_batch_size,
         trigram_repetition=trigram_repetition,
     )
+    if kl_beta > 0:
+        if base_model is None:
+            raise ValueError("kl_beta > 0 requires a frozen base model")
+        with torch.no_grad():
+            for index, rollout in enumerate(rollouts):
+                current_logprobs = completion_token_logprobs(model, rollout)
+                base_logprobs = completion_token_logprobs(base_model, rollout)
+                if base_logprobs.device != current_logprobs.device:
+                    base_logprobs = base_logprobs.to(current_logprobs.device)
+                kl = float(mean_token_logprob_gap(current_logprobs, base_logprobs))
+                rewards[index] = apply_kl_penalty(rewards[index], kl, kl_beta)
+                reward_details[index]["kl"] = kl
     advantages = normalized_advantages(rewards, device)
     is_zero_advantage = torch.allclose(
         advantages,
@@ -349,6 +387,9 @@ def append_metrics(step, total_steps, stats, elapsed):
     log_repetition = bool(samples) and "repetition_score" in samples[0]
     if log_repetition:
         fieldnames.append("repetition_score")
+    log_kl = bool(samples) and "kl" in samples[0]
+    if log_kl:
+        fieldnames.append("kl")
     generated_tokens = sum(sample["gen_len"] for sample in samples)
     row = {
         "step": step,
@@ -370,6 +411,8 @@ def append_metrics(step, total_steps, stats, elapsed):
         row["repetition_score"] = (
             sum(sample["repetition_score"] for sample in samples) / len(samples)
         )
+    if log_kl:
+        row["kl"] = sum(sample["kl"] for sample in samples) / len(samples)
     write_header = not METRICS_LOG_PATH.exists()
     with METRICS_LOG_PATH.open("a", encoding="utf-8", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -402,6 +445,20 @@ def train(
     if start_index < 0 or start_index >= total_steps:
         raise ValueError("start_index must be in [0, steps)")
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+    kl_beta = float(getattr(args, "kl_beta", 0.0) or 0.0)
+    if kl_beta < 0:
+        raise ValueError("kl_beta must be >= 0")
+    base_model = None
+    if kl_beta > 0:
+        policy_dtype = next(model.parameters()).dtype
+        base_model = load_frozen_base(args.policy_model, policy_dtype, device)
+        print(
+            f"Frozen base: {args.policy_model} dtype={policy_dtype} "
+            f"device={device} kl_beta={kl_beta} "
+            "trainable_params="
+            f"{sum(parameter.requires_grad for parameter in base_model.parameters())}",
+            flush=True,
+        )
     model.train()
     current_step = 0
     start_time = time.perf_counter()
@@ -425,6 +482,8 @@ def train(
                 top_p=args.top_p,
                 skip_zero_advantage=args.skip_zero_advantage_updates,
                 trigram_repetition=getattr(args, "trigram_repetition", False),
+                kl_beta=kl_beta,
+                base_model=base_model,
             )
             if stats["loss_tensor"] is not None:
                 optimizer.zero_grad(set_to_none=True)
@@ -447,6 +506,12 @@ def train(
             length_mean = sum(
                 sample["length_score"] for sample in stats["samples"]
             ) / len(stats["samples"])
+            kl_text = ""
+            if stats["samples"] and "kl" in stats["samples"][0]:
+                kl_mean = sum(
+                    sample["kl"] for sample in stats["samples"]
+                ) / len(stats["samples"])
+                kl_text = f" kl={kl_mean:.4f}"
             completed = current_step / total_steps
             eta_seconds = (
                 (time.perf_counter() - start_time) / completed
@@ -455,7 +520,7 @@ def train(
             print(
                 f"[Step {current_step}/{total_steps}] "
                 f"loss={stats['loss']:.4f} reward={reward_mean:.4f} "
-                f"human={human_mean:.4f} length={length_mean:.4f} "
+                f"human={human_mean:.4f} length={length_mean:.4f}{kl_text} "
                 f"step_time={elapsed:.1f}s eta={eta_seconds / 3600:.1f}h"
             )
     except KeyboardInterrupt:
@@ -465,6 +530,15 @@ def train(
 
     path = save_checkpoint(model, tokenizer, total_steps, "final")
     print(f"Saved final model: {path}")
+
+
+def load_frozen_base(source, dtype, device):
+    base = AutoModelForCausalLM.from_pretrained(source, dtype=dtype)
+    base.to(device)
+    base.eval()
+    base.requires_grad_(False)
+    base.config.use_cache = False
+    return base
 
 
 def load_policy(args, device):
@@ -546,6 +620,16 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--kl-beta",
+        type=float,
+        default=0.0,
+        help=(
+            "Subtract beta * mean(log π_current - log π_base) over completion "
+            "tokens. 0 leaves the reward at P(human) * length_score. The base "
+            "is a frozen copy of --policy-model."
+        ),
+    )
+    parser.add_argument(
         "--gradient-checkpointing",
         action=argparse.BooleanOptionalAction,
         default=True,
@@ -557,6 +641,8 @@ def parse_args():
         parser.error("--rollout-batch-size must be at least 1")
     if args.verifier_batch_size < 1:
         parser.error("--verifier-batch-size must be at least 1")
+    if args.kl_beta < 0:
+        parser.error("--kl-beta must be >= 0")
     if args.temperature <= 0:
         parser.error("--temperature must be positive")
     if not 0 < args.top_p <= 1:

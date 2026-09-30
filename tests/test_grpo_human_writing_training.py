@@ -113,6 +113,20 @@ def test_group_advantages_are_centered_and_finite():
     assert float(advantages.mean()) == pytest.approx(0.0, abs=1e-6)
 
 
+def test_kl_penalty_is_beta_times_mean_token_logprob_gap():
+    current = torch.tensor([1.0, 3.0])
+    base = torch.tensor([0.0, 1.0])
+    gap = MODULE.mean_token_logprob_gap(current, base)
+    beta = 0.05
+    reward = 0.8
+
+    assert float(gap) == pytest.approx(1.5)
+    penalized = MODULE.apply_kl_penalty(reward, float(gap), beta)
+    assert reward - penalized == pytest.approx(beta * float(gap))
+    assert MODULE.apply_kl_penalty(reward, float(gap), 0.0) == reward
+    assert MODULE.apply_kl_penalty(reward, float(gap), 0) is reward
+
+
 def test_rollout_token_cap_scales_with_requested_word_count():
     assert MODULE.response_token_limit(50, 1616) == 96
     assert MODULE.response_token_limit(1000, 1616) == 1616

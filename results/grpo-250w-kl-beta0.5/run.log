@@ -1,0 +1,94 @@
+=== grpo-250w-kl-beta0.5 2026-10-01T09:00:36+03:00 ===
+CUDA_VISIBLE_DEVICES=0
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+trigram-repetition: off
+kl-beta: 0.5
+python: /home/dsi/eli-bogdanov/ai-detector-from-scratch/.venv/bin/python3
+3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+models/distilbert already present
+train pid 2629688
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   2%|▏         | 7/311 [00:00<00:04, 64.69it/s]Loading weights:   5%|▍         | 14/311 [00:00<00:06, 43.72it/s]Loading weights:   6%|▌         | 19/311 [00:00<00:13, 21.16it/s]Loading weights:   7%|▋         | 23/311 [00:00<00:12, 22.32it/s]Loading weights:   9%|▊         | 27/311 [00:01<00:12, 22.57it/s]Loading weights:  10%|▉         | 30/311 [00:01<00:11, 23.75it/s]Loading weights:  13%|█▎        | 40/311 [00:01<00:06, 39.23it/s]Loading weights:  17%|█▋        | 54/311 [00:01<00:04, 57.75it/s]Loading weights:  20%|█▉        | 61/311 [00:01<00:04, 53.88it/s]Loading weights:  22%|██▏       | 69/311 [00:01<00:04, 58.03it/s]Loading weights:  25%|██▌       | 78/311 [00:01<00:03, 61.08it/s]Loading weights:  28%|██▊       | 86/311 [00:01<00:03, 64.02it/s]Loading weights:  31%|███       | 95/311 [00:02<00:03, 65.62it/s]Loading weights:  34%|███▍      | 105/311 [00:02<00:02, 71.90it/s]Loading weights:  38%|███▊      | 117/311 [00:02<00:02, 81.08it/s]Loading weights:  41%|████      | 126/311 [00:02<00:02, 61.99it/s]Loading weights:  43%|████▎     | 133/311 [00:02<00:02, 63.13it/s]Loading weights:  48%|████▊     | 148/311 [00:02<00:02, 79.93it/s]Loading weights:  52%|█████▏    | 161/311 [00:02<00:01, 92.09it/s]Loading weights:  55%|█████▍    | 171/311 [00:03<00:01, 70.33it/s]Loading weights:  58%|█████▊    | 180/311 [00:03<00:02, 56.93it/s]Loading weights:  61%|██████    | 189/311 [00:03<00:01, 62.15it/s]Loading weights:  63%|██████▎   | 197/311 [00:03<00:01, 61.69it/s]Loading weights:  68%|██████▊   | 210/311 [00:03<00:01, 74.40it/s]Loading weights:  71%|███████   | 220/311 [00:03<00:01, 79.26it/s]Loading weights:  74%|███████▎  | 229/311 [00:03<00:01, 75.70it/s]Loading weights:  78%|███████▊  | 242/311 [00:04<00:00, 85.28it/s]Loading weights:  83%|████████▎ | 259/311 [00:04<00:00, 98.97it/s]Loading weights:  87%|████████▋ | 270/311 [00:04<00:00, 86.20it/s]Loading weights:  90%|█████████ | 280/311 [00:04<00:00, 83.28it/s]Loading weights:  93%|█████████▎| 289/311 [00:04<00:00, 77.15it/s]Loading weights:  97%|█████████▋| 303/311 [00:04<00:00, 90.70it/s]Loading weights: 100%|██████████| 311/311 [00:04<00:00, 65.87it/s]
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:   0%|          | 1/310 [00:07<39:34,  7.68s/it]Loading weights:   8%|▊         | 26/310 [00:08<01:05,  4.34it/s]Loading weights:  11%|█         | 33/310 [00:08<00:51,  5.33it/s]Loading weights:  12%|█▏        | 38/310 [00:09<00:42,  6.33it/s]Loading weights:  15%|█▌        | 47/310 [00:09<00:27,  9.56it/s]Loading weights:  19%|█▉        | 59/310 [00:09<00:17, 14.73it/s]Loading weights:  22%|██▏       | 67/310 [00:09<00:13, 18.53it/s]Loading weights:  25%|██▍       | 77/310 [00:09<00:09, 23.51it/s]Loading weights:  27%|██▋       | 83/310 [00:09<00:09, 22.81it/s]Loading weights:  28%|██▊       | 88/310 [00:10<00:10, 21.44it/s]Loading weights:  30%|██▉       | 92/310 [00:10<00:10, 21.17it/s]Loading weights:  31%|███▏      | 97/310 [00:10<00:09, 22.99it/s]Loading weights:  33%|███▎      | 102/310 [00:10<00:08, 25.95it/s]Loading weights:  36%|███▋      | 113/310 [00:10<00:05, 35.70it/s]Loading weights:  39%|███▉      | 121/310 [00:11<00:04, 38.60it/s]Loading weights:  42%|████▏     | 129/310 [00:11<00:03, 45.99it/s]Loading weights:  44%|████▎     | 135/310 [00:11<00:06, 28.13it/s]Loading weights:  45%|████▌     | 140/310 [00:11<00:07, 24.01it/s]Loading weights:  49%|████▊     | 151/310 [00:12<00:04, 35.41it/s]Loading weights:  51%|█████     | 157/310 [00:12<00:04, 38.04it/s]Loading weights:  55%|█████▍    | 169/310 [00:12<00:02, 48.58it/s]Loading weights:  57%|█████▋    | 177/310 [00:12<00:02, 48.42it/s]Loading weights:  59%|█████▉    | 183/310 [00:12<00:02, 46.73it/s]Loading weights:  61%|██████    | 189/310 [00:12<00:03, 40.01it/s]Loading weights:  63%|██████▎   | 194/310 [00:13<00:04, 28.72it/s]Loading weights:  65%|██████▌   | 202/310 [00:13<00:02, 36.04it/s]Loading weights:  67%|██████▋   | 207/310 [00:13<00:03, 33.71it/s]Loading weights:  71%|███████   | 219/310 [00:13<00:01, 49.22it/s]Loading weights:  73%|███████▎  | 226/310 [00:13<00:01, 45.50it/s]Loading weights:  75%|███████▍  | 232/310 [00:14<00:02, 33.60it/s]Loading weights:  76%|███████▋  | 237/310 [00:14<00:02, 30.56it/s]Loading weights:  79%|███████▉  | 246/310 [00:14<00:02, 29.06it/s]Loading weights:  84%|████████▍ | 261/310 [00:14<00:01, 43.01it/s]Loading weights:  87%|████████▋ | 269/310 [00:15<00:01, 33.73it/s]Loading weights:  91%|█████████▏| 283/310 [00:15<00:00, 48.04it/s]Loading weights:  94%|█████████▍| 291/310 [00:15<00:00, 38.12it/s]Loading weights:  96%|█████████▌| 297/310 [00:15<00:00, 38.04it/s]Loading weights:  98%|█████████▊| 303/310 [00:15<00:00, 41.18it/s]Loading weights: 100%|██████████| 310/310 [00:15<00:00, 19.47it/s]
+Run dir: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5
+Policy dtype: torch.float32  device: cuda
+Verifier dtype: torch.bfloat16
+Prompts after filter: 1073 (targets [250])
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:  71%|███████   | 220/310 [00:00<00:00, 2182.99it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 2202.70it/s]
+Frozen base: Qwen/Qwen3-0.6B-Base dtype=torch.float32 device=cuda kl_beta=0.5 trainable_params=0
+[Step 1/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6689 kl=0.0000 step_time=36.1s eta=0.6h
+[Step 2/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6254 kl=0.0000 step_time=17.9s eta=0.4h
+[Step 3/60] loss=0.0000 reward=0.0000 human=0.0000 length=0.6581 kl=0.0000 step_time=16.1s eta=0.4h
+[Step 4/60] loss=-10.3051 reward=0.0074 human=0.0127 length=0.6510 kl=0.0000 step_time=12.5s eta=0.3h
+[Step 5/60] loss=-0.5387 reward=0.0903 human=0.2480 length=0.5090 kl=0.0879 step_time=8.4s eta=0.3h
+[Step 6/60] loss=-7.0919 reward=0.3051 human=0.9984 length=0.3726 kl=0.1334 step_time=59.3s eta=0.4h
+[Step 7/60] loss=19.5073 reward=0.6192 human=0.9922 length=0.6990 kl=0.1487 step_time=8.9s eta=0.3h
+[Step 8/60] loss=-39.9272 reward=0.3186 human=0.9991 length=0.3717 kl=0.1054 step_time=59.9s eta=0.4h
+[Step 9/60] loss=5.3646 reward=0.2180 human=0.9993 length=0.3136 kl=0.1904 step_time=61.3s eta=0.4h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.62s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.62s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00010
+[Step 10/60] loss=36.6397 reward=0.3271 human=0.9979 length=0.4330 kl=0.2095 step_time=57.9s eta=0.5h
+[Step 11/60] loss=12.0931 reward=0.1175 human=0.9993 length=0.1912 kl=0.1473 step_time=59.4s eta=0.5h
+[Step 12/60] loss=6.9205 reward=0.1687 human=0.9995 length=0.1839 kl=0.0301 step_time=63.8s eta=0.5h
+[Step 13/60] loss=-49.4342 reward=0.1311 human=0.7650 length=0.2392 kl=0.1240 step_time=64.0s eta=0.5h
+[Step 14/60] loss=-10.4103 reward=0.2723 human=0.8703 length=0.4645 kl=0.1861 step_time=59.8s eta=0.6h
+[Step 15/60] loss=-1.3464 reward=0.1764 human=0.9987 length=0.1927 kl=0.0322 step_time=63.0s eta=0.6h
+[Step 16/60] loss=-21.1675 reward=0.1420 human=0.8705 length=0.2110 kl=0.0678 step_time=61.3s eta=0.6h
+[Step 17/60] loss=19.8178 reward=0.3032 human=0.9926 length=0.3670 kl=0.1153 step_time=61.2s eta=0.6h
+[Step 18/60] loss=-5.7899 reward=0.1889 human=0.9988 length=0.2018 kl=0.0252 step_time=63.0s eta=0.6h
+[Step 19/60] loss=-9.7517 reward=0.1823 human=0.9994 length=0.1941 kl=0.0234 step_time=63.0s eta=0.6h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.32s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.32s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00020
+[Step 20/60] loss=30.5589 reward=0.1740 human=0.9993 length=0.1846 kl=0.0210 step_time=63.0s eta=0.6h
+[Step 21/60] loss=-66.2606 reward=0.1792 human=0.9993 length=0.1904 kl=0.0222 step_time=63.5s eta=0.5h
+[Step 22/60] loss=-5.8920 reward=0.1935 human=0.9989 length=0.2069 kl=0.0262 step_time=62.9s eta=0.5h
+[Step 23/60] loss=9.9863 reward=0.1831 human=0.9992 length=0.1889 kl=0.0112 step_time=63.2s eta=0.5h
+[Step 24/60] loss=-11.1318 reward=0.1946 human=0.9991 length=0.2069 kl=0.0243 step_time=63.1s eta=0.5h
+[Step 25/60] loss=-16.8085 reward=0.1882 human=0.9995 length=0.2046 kl=0.0327 step_time=62.7s eta=0.5h
+[Step 26/60] loss=-5.2712 reward=0.1948 human=0.9992 length=0.2060 kl=0.0220 step_time=63.0s eta=0.5h
+[Step 27/60] loss=-0.4877 reward=0.1981 human=0.9988 length=0.2104 kl=0.0242 step_time=62.9s eta=0.5h
+[Step 28/60] loss=-9.7421 reward=0.1935 human=0.9990 length=0.2091 kl=0.0307 step_time=63.0s eta=0.5h
+[Step 29/60] loss=-13.0516 reward=0.1989 human=0.9989 length=0.2156 kl=0.0329 step_time=63.0s eta=0.5h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.13s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.13s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00030
+[Step 30/60] loss=-0.8624 reward=0.1969 human=0.9991 length=0.2169 kl=0.0395 step_time=63.0s eta=0.5h
+[Step 31/60] loss=-2.8441 reward=0.1975 human=0.9994 length=0.2127 kl=0.0302 step_time=62.9s eta=0.4h
+[Step 32/60] loss=-0.9775 reward=0.1937 human=0.9994 length=0.2114 kl=0.0352 step_time=63.0s eta=0.4h
+[Step 33/60] loss=1.3592 reward=0.2003 human=0.9994 length=0.2122 kl=0.0237 step_time=62.8s eta=0.4h
+[Step 34/60] loss=-0.1818 reward=0.1982 human=0.9995 length=0.2103 kl=0.0242 step_time=62.9s eta=0.4h
+[Step 35/60] loss=1.1582 reward=0.1972 human=0.9996 length=0.2141 kl=0.0334 step_time=62.7s eta=0.4h
+[Step 36/60] loss=-1.4881 reward=0.2820 human=0.9994 length=0.2918 kl=0.0193 step_time=62.9s eta=0.4h
+[Step 37/60] loss=0.0000 reward=0.3005 human=0.9994 length=0.3094 kl=0.0175 step_time=57.5s eta=0.4h
+[Step 38/60] loss=0.0000 reward=0.2989 human=0.9994 length=0.3094 kl=0.0206 step_time=57.4s eta=0.3h
+[Step 39/60] loss=0.0000 reward=0.3001 human=0.9994 length=0.3094 kl=0.0183 step_time=57.7s eta=0.3h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.29s/it]Writing model shards: 100%|██████████| 1/1 [00:08<00:00,  8.29s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00040
+[Step 40/60] loss=0.6984 reward=0.3004 human=0.9993 length=0.3094 kl=0.0176 step_time=63.2s eta=0.3h
+[Step 41/60] loss=0.0000 reward=0.3019 human=0.9992 length=0.3094 kl=0.0146 step_time=57.5s eta=0.3h
+[Step 42/60] loss=0.0000 reward=0.2999 human=0.9992 length=0.3094 kl=0.0185 step_time=57.4s eta=0.3h
+[Step 43/60] loss=0.0000 reward=0.3010 human=0.9992 length=0.3094 kl=0.0163 step_time=57.9s eta=0.3h
+[Step 44/60] loss=0.0000 reward=0.3008 human=0.9992 length=0.3094 kl=0.0166 step_time=58.0s eta=0.3h
+[Step 45/60] loss=0.0000 reward=0.2996 human=0.9992 length=0.3094 kl=0.0192 step_time=57.9s eta=0.2h
+[Step 46/60] loss=0.0000 reward=0.3012 human=0.9992 length=0.3094 kl=0.0159 step_time=57.9s eta=0.2h
+[Step 47/60] loss=0.0000 reward=0.3015 human=0.9992 length=0.3094 kl=0.0153 step_time=57.9s eta=0.2h
+[Step 48/60] loss=0.0000 reward=0.3007 human=0.9992 length=0.3094 kl=0.0169 step_time=57.9s eta=0.2h
+[Step 49/60] loss=0.0000 reward=0.3008 human=0.9992 length=0.3094 kl=0.0167 step_time=57.9s eta=0.2h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.90s/it]Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.90s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00050
+[Step 50/60] loss=0.0000 reward=0.3015 human=0.9992 length=0.3094 kl=0.0152 step_time=57.9s eta=0.2h
+[Step 51/60] loss=0.0000 reward=0.3021 human=0.9992 length=0.3094 kl=0.0141 step_time=57.7s eta=0.1h
+[Step 52/60] loss=-0.4933 reward=0.3011 human=0.9992 length=0.3094 kl=0.0162 step_time=63.0s eta=0.1h
+[Step 53/60] loss=0.0000 reward=0.3007 human=0.9992 length=0.3094 kl=0.0170 step_time=57.7s eta=0.1h
+[Step 54/60] loss=2.0321 reward=0.4408 human=0.9992 length=0.4491 kl=0.0159 step_time=63.2s eta=0.1h
+[Step 55/60] loss=1.7035 reward=0.2490 human=0.9993 length=0.2619 kl=0.0255 step_time=62.8s eta=0.1h
+[Step 56/60] loss=8.7624 reward=0.2535 human=0.9991 length=0.2749 kl=0.0423 step_time=62.9s eta=0.1h
+[Step 57/60] loss=-1.0311 reward=0.3160 human=0.9992 length=0.3363 kl=0.0401 step_time=62.7s eta=0.0h
+[Step 58/60] loss=15.8186 reward=0.4662 human=0.9992 length=0.4948 kl=0.0565 step_time=63.2s eta=0.0h
+[Step 59/60] loss=11.7981 reward=0.6663 human=0.9991 length=0.6999 kl=0.0661 step_time=63.1s eta=0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.12s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.12s/it]
+Saved checkpoint: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00060
+[Step 60/60] loss=-11.3046 reward=0.4216 human=0.9995 length=0.4694 kl=0.0951 step_time=63.1s eta=-0.0h
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.09s/it]Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.09s/it]
+Saved final model: /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-250w-kl-beta0.5/checkpoints/step-00060-final
+Max CUDA memory allocated: 17.72 GB
+train exit 0

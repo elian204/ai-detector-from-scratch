@@ -204,8 +204,8 @@ planned in these steps:
 4. Compare the variants and report proxy score, held-out score, and quality
    against KL.
 
-Status: the repository setup and CI are done. The experiments have not been
-run yet, so this repository does not report any results for them.
+Status: the runs are recorded in
+[results/grpo-lab-note.md](results/grpo-lab-note.md).
 
 A detector score is not evidence that a text was written by a human. This work
 studies the robustness of learned verifiers. It is not intended for

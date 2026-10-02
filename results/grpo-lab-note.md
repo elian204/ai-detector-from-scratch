@@ -177,3 +177,5 @@ The 1616 budget did not reproduce the 250-word `of the U.S.` ending through step
 The trigram factor did not remove repetition. It moved the loop from one noun phrase to a paragraph that restates itself. β = 0.05 did not hold the policy off a degenerate string. The string that won is the one whose token log-probabilities stay close to the frozen base.
 
 Why bfloat16 collapses less is still open. These runs do not separate a frozen majority of weights from a smaller effective step.
+
+The frozen base, sampled on these prompts, looped in 0 of 32 answers. The policy's long repeats are more probable per token under that base (about -0.11) than the more normal answers (about -0.97).

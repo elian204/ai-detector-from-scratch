@@ -670,3 +670,14 @@ Pair 30, corrected essay:
 ```text
 None. The provided answer does not contain any false claims regarding Newton's second law. It correctly explains that force equals mass times acceleration (F=ma) and provides accurate descriptions of the concepts involved.
 ```
+&nbsp;
+## Method 2 on the support-vector essay
+
+Method 2, unchanged, on the same length-matched pair: the 527-word false essay and the 524-word correction. Both orders. The next-token log probabilities are for token ids 32 (`A`) and 33 (`B`) after the chat template. No letter was generated. The margin is the corrected side's log probability minus the false side's. The pair is correct only if the average of the two margins is positive.
+
+| order | logprob A | logprob B | margin |
+| --- | ---: | ---: | ---: |
+| A = false, B = corrected | -0.024 | -3.743 | -3.719 |
+| A = corrected, B = false | -0.004 | -8.629 | 8.625 |
+
+The average margin is 2.453. It is positive, so the pair is correct. The 30 selection pairs and the 80 base answers were not rescored.

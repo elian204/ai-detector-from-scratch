@@ -179,3 +179,8 @@ The trigram factor did not remove repetition. It moved the loop from one noun ph
 Why bfloat16 collapses less is still open. These runs do not separate a frozen majority of weights from a smaller effective step.
 
 The frozen base, sampled on these prompts, looped in 0 of 32 answers. The policy's long repeats are more probable per token under that base (about -0.11) than the more normal answers (about -0.97).
+
+&nbsp;
+## 9. OpenAI judge qualification
+
+Four OpenAI runs were scored on the old 30, the held-out 30, and the 20 prose-versus-junk pairs. The gate is every held-out pair and every prose-versus-junk pair, with a probability pass only at signal of at least 3. None of the four runs passed that gate. No snapshot is pinned. Token counts, dollar costs, and the per-pair signals are in `results/grpo-openai-judge.md`.

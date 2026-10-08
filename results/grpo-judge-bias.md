@@ -160,3 +160,5 @@ wins_i is the count of other rollouts j with signal(i over j) > 0.
 reward_i = (1 - P_AI_i) * length_score_i * wins_i / 3
 
 There is no KL term and no trigram term. A group of four junk rollouts can still leak detector reward to whichever junk wins the comparisons.
+
+An OpenAI qualification on 8 October 2026 did not pass the gate of every held-out pair and every prose-versus-junk pair. No snapshot is pinned. The four runs, the token counts, and the price table are in `results/grpo-openai-judge.md`.

@@ -29,7 +29,7 @@ The judge is `gpt-4.1-mini-2025-04-14`, both orders, temperature 0, the A/B prob
 
 The comparison group is the gated-in rollouts plus one frozen base-model answer to the same prompt. The base answer is sampled once from the initial policy and then held fixed. It is not trained. It is an opponent only.
 
-wins_i is the number of other gated-in completions j with signal(i over j) greater than 14. The base answer is not one of those j. N is the number of other gated-in completions, and the base answer is not in N.
+wins_i is the number of other gated-in completions j with signal(i over j) greater than 14. The base answer is one of those completions when it passes the gate. N is the number of other gated-in completions, and it includes the base answer.
 &nbsp;
 ## Reward
 
@@ -48,5 +48,3 @@ Rates are the standard text prices recorded in `results/grpo-openai-judge.md` fr
 Each answer is counted as 1616 tokens, the response budget used as a stand-in. That is not a measured API token count. The question and the fixed instruction are counted as 40 tokens. One forward is two answers, so 3,272 input tokens, plus 1 output token, which is what the 50 reference calls returned.
 
 If all four rollouts pass the gate, the comparison group has five answers. That is 10 pairs, and both orders make 20 forwards. Input is 65,440 tokens and output is 20 tokens. The estimate is 65,440 / 1,000,000 * 0.40 + 20 / 1,000,000 * 1.60 = $0.026 per step.
-
-wins_i does not use the base answer. If those four base pairs are not sent, the step is 12 forwards, 39,264 input tokens, and the estimate is $0.016. The $0.026 figure is the one for the comparison group as written, with the base answer scored.

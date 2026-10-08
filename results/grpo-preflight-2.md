@@ -48,4 +48,15 @@ reward_i = hard_i * repetition_i * s_i * length_score_i * wins_i / N
 
 hard_i is 0 for a stub under 30 words or a real 1616-token cap, and 1 otherwise. Index 0 is the unpaid base opponent. Indexes 1, 2, and 3 are rewarded. The base opponent is included in wins and in N when it is not a hard zero. On these 80 answers it is not a hard zero, so N is 3. A win is signal greater than 7.
 
-The saved dry run has both-order signals for 41 unordered pairs. The other 79 pairs were not saved. Every base answer has s_i above 0 at each of these four temperatures, so those missing signals are needed for the wins. The key file was not in the store, and those pairs were not judged. A missing signal is not treated as a tie. The spread counts are not computed.
+The 41 saved dry-run signals were reused. The other 79 pairs were judged with `gpt-4.1-mini-2025-04-14`, both orders, temperature 0, the same A/B probability method. That was 158 forwards. The response `model` field was `gpt-4.1-mini-2025-04-14` on every new call. 105 of those calls had both letters in the top list, 53 used the chosen-only fallback, and 39 of those fallback calls were clamped. A missing signal was not used.
+
+A group has a real spread when the largest of its three rewards exceeds the smallest by more than 1e-4 and the largest is above 0.
+
+| T | groups with a real spread |
+| ---: | ---: |
+| 1 | 20 of 20 |
+| 2 | 20 of 20 |
+| 4 | 20 of 20 |
+| 8 | 20 of 20 |
+
+The smallest T that does this in most of the 20 groups is 1. It is not accepted for a pilot until the training config is reviewed.

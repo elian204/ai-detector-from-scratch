@@ -16,6 +16,8 @@ The response token budget is 1616. A cap hit is that 1616 limit. The 416 cap is 
 The detector is the frozen `qwen3-variable` classifier, the verifier that trainer already calls. P(AI) is the probability it returns. The length target is 250 whitespace words. The length score is the existing symmetric score, `min(word count, 250) / max(word count, 250)`.
 
 detector_i = (1 − P_AI_i) * length_score_i
+
+The softened score in `results/grpo-preflight-2.md` uses T = 1 in s_i = sigmoid(z_i / T), where z_i is the raw human-class logit. T = 1 is the smallest temperature that gives a real spread in most of the 20 base-answer groups. That choice is not accepted for a pilot until this config is reviewed.
 &nbsp;
 ## Gate
 

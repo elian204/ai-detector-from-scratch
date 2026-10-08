@@ -1,7 +1,7 @@
 &nbsp;
-# Training config, not run
+# Training config
 
-No GRPO was started. This config is for review. The judge is not accepted for a run until this config is reviewed.
+The reward below is the reward used for the pilot in `results/grpo-pilot-40.md`.
 &nbsp;
 ## Policy
 
@@ -41,7 +41,7 @@ hard_i is 0 for a stub under 30 words or a completion that reached 1616 tokens, 
 &nbsp;
 ## Reference result
 
-On the 22 pairs in `results/grpo-reference-labels.md` that are not both-bad, this judge has 15 matches, 6 ties, and 1 miss against the Claude Opus reference labels. The both-bad pairs, 9, 13, and 25, are excluded from that count. The one miss is pair 4. The judge is not accepted for a run until this config is reviewed.
+On the 22 pairs in `results/grpo-reference-labels.md` that are not both-bad, this judge has 15 matches, 6 ties, and 1 miss against the Claude Opus reference labels. The both-bad pairs, 9, 13, and 25, are excluded from that count. The one miss is pair 4.
 &nbsp;
 ## API cost, an estimate
 
@@ -54,8 +54,10 @@ If all four rollouts pass the gate, the comparison group has five answers. That 
 &nbsp;
 ## Monitoring
 
-Every 10 steps, log the mean trigram ratio, the stub count, the 1616-runaway count, the DistilBERT score, the Claude win rate versus the base answer, and 5 sample texts. Claude writes a verdict in both orders, and only agreeing verdicts count. It is not the reward judge, and it was not called.
+Every 10 steps, log the mean trigram ratio, the stub count, the 1616-runaway count, the DistilBERT score, the evaluation-judge win rate versus the saved base answer, and 5 sample texts. Also log the tie count and the cost of that check. The mean trigram ratio is tracked every step.
 
-Stop if the mean trigram ratio falls for 20 steps, or if the Claude win rate versus the base answer drops below 50%.
+The evaluation judge is `claude-opus-5-5`. It writes a verdict in both orders. A pair counts only when both orders name the same answer. A pair whose orders disagree is a tie. Each check is 20 trained answers against the saved base answers to the same prompts. This judge is not the reward judge.
 
-The pilot is 40 steps. The judge is `gpt-4.1-mini-2025-04-14`. The response token budget is 1616. The pilot does not start until the Claude key is confirmed. No pilot was started.
+Stop if the mean trigram ratio falls for 20 consecutive steps, or if the evaluation win rate versus the base answer drops below 50%.
+
+The pilot is 40 steps. The reward judge is `gpt-4.1-mini-2025-04-14`. The response token budget is 1616. The pilot ran on GPU 3 and stopped at step 20. The evaluation win rate at that check was 7 of 18 counted pairs, which is below 50%. The trigram-ratio stop did not fire. The record is `results/grpo-pilot-40.md`.

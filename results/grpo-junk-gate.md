@@ -91,11 +91,15 @@ The response `model` field was `gpt-4.1-mini-2025-04-14` on every call.
 
 The tie threshold is 14, the maximum absolute margin in that list. A later pair is a tie unless its absolute signal is greater than 14, and so greater than every identical-answer margin. The ten margins run from 1.500 to 14.000. All ten are positive, so slot A is preferred when the texts match.
 &nbsp;
-## Rank plan, not run
+## Training plan, not run
 
 Reward is 0 when the gate fires. Otherwise rank only the rollouts the gate let through. There is no judge term in the reward.
 
 The provisional ranker, not yet accepted, is `gpt-4.1-mini-2025-04-14`. Its bar is the held-out set, which it already passed, plus later agreement with Eli's prose labels. It is not pinned.
+
+The training token budget is 1616, the uncap setting. A cap hit means the rollout used that 1616 limit. The 416 cap is not the training budget. This does not change the gate rules above.
+
+The tie threshold stays 14. If too many real pairs are ties, lower it toward 7. The order-to-order swing is what leaks into the signal, not the full size of the slot bias.
 &nbsp;
 ## Hand-label PDF
 

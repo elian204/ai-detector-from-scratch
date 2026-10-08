@@ -23,13 +23,13 @@ The gate is the frozen rule gate in `results/grpo-junk-gate.md`. The thresholds 
 &nbsp;
 ## Judge
 
-The judge is `gpt-4.1-mini-2025-04-14`, both orders, temperature 0, the A/B probability method in `results/grpo-openai-judge.md`. signal = (m1 + m2) / 2. A win requires signal greater than 14. Absolute signal at most 14 is a tie and gives the win to neither side.
+The judge is `gpt-4.1-mini-2025-04-14`, both orders, temperature 0, the A/B probability method in `results/grpo-openai-judge.md`. signal = (m1 + m2) / 2. The accepted tie threshold is 7. A win is signal greater than 7. Absolute signal at most 7 gives the win to neither side.
 &nbsp;
 ## Comparison group
 
 The comparison group is the gated-in rollouts plus one frozen base-model answer to the same prompt. The base answer is sampled once from the initial policy and then held fixed. It is not trained. It is an opponent only.
 
-wins_i is the number of other gated-in completions j with signal(i over j) greater than 14. The base answer is one of those completions when it passes the gate. N is the number of other gated-in completions, and it includes the base answer.
+wins_i is the number of other gated-in completions j with signal(i over j) greater than 7. The base answer is one of those completions when it passes the gate. N is the number of other gated-in completions, and it includes the base answer.
 &nbsp;
 ## Reward
 
@@ -52,7 +52,7 @@ If all four rollouts pass the gate, the comparison group has five answers. That 
 &nbsp;
 ## Monitoring
 
-Every 10 steps, log the gate-fire rate, the DistilBERT score, the win rate versus the base answer by a separate evaluation judge, and 5 sample texts. The evaluation judge is separate from the training judge `gpt-4.1-mini-2025-04-14`. It is not `gpt-4.1-mini`, and it is not selected yet.
+Every 10 steps, log the gate-fire rate, the DistilBERT score, the win rate versus the base answer by the evaluation judge, and 5 sample texts. The evaluation judge is Claude via API. It writes a verdict in both orders, and only agreeing verdicts count. It is not in the reward. The key is not set up, and Claude was not called.
 
 Stop if the gate-fire rate rises for 20 steps, or if the win rate versus the base answer falls below 50%.
 

@@ -48,3 +48,12 @@ Rates are the standard text prices recorded in `results/grpo-openai-judge.md` fr
 Each answer is counted as 1616 tokens, the response budget used as a stand-in. That is not a measured API token count. The question and the fixed instruction are counted as 40 tokens. One forward is two answers, so 3,272 input tokens, plus 1 output token, which is what the 50 reference calls returned.
 
 If all four rollouts pass the gate, the comparison group has five answers. That is 10 pairs, and both orders make 20 forwards. Input is 65,440 tokens and output is 20 tokens. The estimate is 65,440 / 1,000,000 * 0.40 + 20 / 1,000,000 * 1.60 = $0.026 per step.
+
+&nbsp;
+## Monitoring
+
+Every 10 steps, log the gate-fire rate, the DistilBERT score, the win rate versus the base answer by a separate evaluation judge, and 5 sample texts. The evaluation judge is separate from the training judge `gpt-4.1-mini-2025-04-14`. It is not `gpt-4.1-mini`, and it is not selected yet.
+
+Stop if the gate-fire rate rises for 20 steps, or if the win rate versus the base answer falls below 50%.
+
+No run was started.

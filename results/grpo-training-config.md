@@ -17,7 +17,7 @@ The detector is the frozen `qwen3-variable` classifier, the verifier that traine
 
 detector_i = (1 − P_AI_i) * length_score_i
 
-The softened score in `results/grpo-preflight-2.md` uses T = 1 in s_i = sigmoid(z_i / T), where z_i is the raw human-class logit. T = 1 is the smallest temperature that gives a real spread in most of the 20 base-answer groups. That choice is not accepted for a pilot until this config is reviewed.
+The reward uses T = 4 in sigmoid(z_i / 4), where z_i is the raw human-class logit. T is 4, not 1.
 &nbsp;
 ## Gate
 
@@ -31,13 +31,13 @@ The judge is `gpt-4.1-mini-2025-04-14`, both orders, temperature 0, the A/B prob
 
 The comparison group is the gated-in rollouts plus one frozen base-model answer to the same prompt. The base answer is sampled once from the initial policy and then held fixed. It is not trained. It is an opponent only.
 
-wins_i is the number of other gated-in completions j with signal(i over j) greater than 7. The base answer is one of those completions when it passes the gate. N is the number of other gated-in completions, and it includes the base answer.
+wins_i is the number of other completions j that are not hard zeros and have signal(i over j) greater than 7. The frozen base answer is included when it is not a hard zero. N is the number of other completions that are not hard zeros, and it includes the base answer.
 &nbsp;
 ## Reward
 
-reward_i = gate_i * detector_i * wins_i / N
+reward_i = hard_i * (trigram_ratio_i ** 2) * sigmoid(z_i / 4) * length_score_i * wins_i / N
 
-If the gate fires, gate_i is 0 and the reward is 0. If N is 0, the reward is 0 and the quotient is not taken. There is no KL term and no trigram term.
+hard_i is 0 for a stub under 30 words or a completion that reached 1616 tokens, and 1 otherwise. z_i is the raw human-class logit. T is 4. A win is signal greater than 7. The frozen base answer is included in wins and in N. If hard_i is 0, the reward is 0. If N is 0, the reward is 0 and the quotient is not taken.
 &nbsp;
 ## Reference result
 
@@ -54,8 +54,8 @@ If all four rollouts pass the gate, the comparison group has five answers. That 
 &nbsp;
 ## Monitoring
 
-Every 10 steps, log the gate-fire rate, the DistilBERT score, the win rate versus the base answer by the evaluation judge, and 5 sample texts. The evaluation judge is Claude via API. It writes a verdict in both orders, and only agreeing verdicts count. It is not in the reward. The key is not set up, and Claude was not called.
+Every 10 steps, log the mean trigram ratio, the stub count, the 1616-runaway count, the DistilBERT score, the Claude win rate versus the base answer, and 5 sample texts. Claude writes a verdict in both orders, and only agreeing verdicts count. It is not the reward judge, and it was not called.
 
-Stop if the gate-fire rate rises for 20 steps, or if the win rate versus the base answer falls below 50%.
+Stop if the mean trigram ratio falls for 20 steps, or if the Claude win rate versus the base answer drops below 50%.
 
-No run was started.
+The pilot is 40 steps. The judge is `gpt-4.1-mini-2025-04-14`. The response token budget is 1616. The pilot does not start until the Claude key is confirmed. No pilot was started.

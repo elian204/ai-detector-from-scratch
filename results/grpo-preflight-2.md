@@ -60,3 +60,36 @@ A group has a real spread when the largest of its three rewards exceeds the smal
 | 8 | 20 of 20 |
 
 The smallest T that does this in most of the 20 groups is 1. It is not accepted for a pilot until the training config is reviewed.
+&nbsp;
+## Squared trigram at T = 4
+
+No new judge calls. The signals and the raw human logits are the ones already saved. Check 2 is unchanged: there is no hard repetition cut, and the trigram ratio stays in the reward. This rerun changes the multiplier to the square of that ratio and sets T to 4.
+
+reward_i = hard_i * (trigram_ratio_i ** 2) * sigmoid(z_i / 4) * length_score_i * wins_i / N
+
+hard_i is 1 on all 80 answers. None is a stub under 30 words, and none reached 1616 tokens. Index 0 is the unpaid base opponent and is included in wins and in N. N is 3. A win is signal greater than 7. The spread is the largest reward minus the smallest.
+
+| prompt | index 1 | index 2 | index 3 | spread |
+| --- | ---: | ---: | ---: | ---: |
+| validation-00001 | 0.133024 | 0.000000 | 0.000000 | 0.133024 |
+| validation-00002 | 0.085306 | 0.088544 | 0.037088 | 0.051456 |
+| validation-00003 | 0.101780 | 0.072368 | 0.000000 | 0.101780 |
+| validation-00004 | 0.105513 | 0.102547 | 0.000000 | 0.105513 |
+| validation-00005 | 0.040988 | 0.046864 | 0.000000 | 0.046864 |
+| validation-00006 | 0.000000 | 0.113366 | 0.082150 | 0.113366 |
+| validation-00007 | 0.000000 | 0.049903 | 0.091548 | 0.091548 |
+| validation-00008 | 0.000000 | 0.067660 | 0.165232 | 0.165232 |
+| validation-00009 | 0.089824 | 0.077947 | 0.000000 | 0.089824 |
+| validation-00010 | 0.000000 | 0.034449 | 0.052662 | 0.052662 |
+| validation-00011 | 0.000000 | 0.039016 | 0.000000 | 0.039016 |
+| validation-00012 | 0.000000 | 0.037944 | 0.080910 | 0.080910 |
+| validation-00013 | 0.047913 | 0.068515 | 0.000000 | 0.068515 |
+| validation-00014 | 0.112294 | 0.272567 | 0.029681 | 0.242886 |
+| validation-00015 | 0.038717 | 0.044303 | 0.112884 | 0.074167 |
+| validation-00016 | 0.046096 | 0.039815 | 0.084776 | 0.044961 |
+| validation-00017 | 0.106094 | 0.000000 | 0.020945 | 0.106094 |
+| validation-00018 | 0.000000 | 0.104799 | 0.100232 | 0.104799 |
+| validation-00019 | 0.077391 | 0.044260 | 0.063403 | 0.033132 |
+| validation-00020 | 0.067290 | 0.104230 | 0.000000 | 0.104230 |
+
+20 of the 20 groups have a spread above 1e-4 with the largest reward above 0. The median spread is 0.090686.

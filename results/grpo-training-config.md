@@ -61,3 +61,10 @@ The evaluation judge is `claude-opus-5-5`. It writes a verdict in both orders. A
 Stop if the mean trigram ratio falls for 20 consecutive steps, or if the evaluation win rate versus the base answer drops below 50%.
 
 The pilot is 40 steps. The reward judge is `gpt-4.1-mini-2025-04-14`. The response token budget is 1616. The pilot ran on GPU 3 and stopped at step 20. The evaluation win rate at that check was 7 of 18 counted pairs, which is below 50%. The trigram-ratio stop did not fire. The record is `results/grpo-pilot-40.md`.
+
+&nbsp;
+## Rerun stop rule
+
+This rule is not running. The rerun is from scratch and waits for Eli's OK.
+
+Each check uses 50 Claude comparisons. Stop if the win rate is under 40%, or under 45% at two checks in a row.

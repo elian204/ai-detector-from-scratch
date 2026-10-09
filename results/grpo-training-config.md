@@ -65,6 +65,24 @@ The pilot is 40 steps. The reward judge is `gpt-4.1-mini-2025-04-14`. The respon
 &nbsp;
 ## Rerun stop rule
 
-This rule is not running. The rerun is from scratch and waits for Eli's OK.
+This rule was written before the Sonnet check. It did not run. The check is the next sections.
 
 Each check uses 50 Claude comparisons. Stop if the win rate is under 40%, or under 45% at two checks in a row.
+&nbsp;
+## Sonnet reward
+
+The reward tested in `results/grpo-sonnet-qualify.md` keeps the pilot product and changes the gate and the win. hard_i is 0 under 150 words, over 375 words, under 30 words, or on a max_new_tokens hit. Words from 150 through 375 stay in. A win is both orders of `claude-sonnet-5-5` naming the same answer. The prompt is "Which of these two answers to the same question is better? Reply with A or B." `max_tokens` is 32. Temperature 0 is deprecated on this model, so the qualification calls omitted temperature. The response model string was `claude-sonnet-5-5` on every call.
+
+reward_i = hard_i * (trigram_ratio_i ** 2) * sigmoid(z_i / 4) * length_score_i * wins_i / N
+
+The frozen base answer stays in wins and in N when it is gated in. If N is 0, the reward is 0. A run on this reward would use a 700-token response budget. The dry run kept the saved answers and applied the word rules, because those answers were not capped at 700.
+
+Held-out was 30 of 30. The high and medium-high reference pairs had no misses, and the medium pairs had no misses. The dry run spread on 7 of 20 groups. The 40-step run did not start.
+&nbsp;
+## Stop rule
+
+This rule is not running. The dry run spread on 7 of 20 groups, so the run that would use it did not start.
+
+Each check would use 50 validation prompts. The evaluation judge would be `claude-opus-5-5`, in both orders, and it would stay out of the reward. Stop if the Opus win rate versus the saved base answer is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps.
+
+Each check would also log the Sonnet win rate versus the base answer on those same texts, the mean of sigmoid(z / 4), the mean DistilBERT score, the mean word count, the mean trigram ratio, the gate-fire counts by reason, and 5 sample texts.

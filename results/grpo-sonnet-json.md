@@ -122,4 +122,23 @@ Saved index-0 bases are the opponents for `validation-00001` through `validation
 
 Stop if the Opus win rate is under 40%, or under 45% at two checks in a row, or the gate-fire count on the four rollouts rises for 20 consecutive steps. A check with no agreed pairs does not count as under 40%. After the run, the final 50 texts are scored once with `gpt-5.5` if that id is accepted, otherwise `gpt-5.4`, with reasoning, both orders, agreement only.
 
-GPU 3 already held this account's breakfast synthesis job. This run caps its own CUDA allocator and leaves that job in place. Detectors run on CPU. Weights go to `results/grpo-sonnet-json-weights` and are not committed. The log is `results/grpo-sonnet-json/run.log` in tmux session `grpo-sonnet-json-train`. Attach with `tmux attach -t grpo-sonnet-json-train` and detach with Ctrl-b then d.
+GPU 3 already held this account's breakfast synthesis job. This run capped its own CUDA allocator at half of the card and left that job in place. Detectors ran on CPU. Weights are in `results/grpo-sonnet-json-weights` and are not committed. The log is `results/grpo-sonnet-json/run.log`. The tmux session was `grpo-sonnet-json-train`.
+&nbsp;
+## Result
+
+The run finished all 40 steps. No stop rule fired. The longest streak of a rising gate-fire count was 3 steps. Reward-judge parse failures were 0 across 112 calls, all returned as `claude-sonnet-5-5`. Cache read and cache write on those calls were 0. The reward-judge cost was $0.320332.
+
+A win rate is trained wins divided by the pairs whose two orders named the same answer. Ties and unparsed pairs stay out of the denominator. Opus is `claude-opus-5-5`. Sonnet on the same texts uses the JSON schema. The five sample texts at each check are `validation-00001` through `validation-00005`. The full generations are in `results/grpo-sonnet-json/eval-step-0010.jsonl` through `eval-step-0040.jsonl`, and those files are not committed.
+
+| step | Opus | Sonnet | sigmoid(z/4) | DistilBERT | words | trigram | under 150 | over 375 | 700-token hit | hard zero |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 10 | 20/42 | 19/40 | 0.2206 | 0.0986 | 129.0 | 0.9907 | 40 | 1 | 0 | 41 |
+| 20 | 23/47 | 21/44 | 0.2218 | 0.0743 | 135.6 | 0.9921 | 36 | 0 | 0 | 36 |
+| 30 | 23/46 | 14/37 | 0.2645 | 0.1151 | 116.8 | 0.9885 | 46 | 1 | 0 | 47 |
+| 40 | 26/39 | 26/39 | 0.1971 | 0.0924 | 281.8 | 0.9759 | 6 | 11 | 1 | 17 |
+
+At step 10, Opus had 22 base wins and 8 ties. At step 20, 24 base wins, 2 ties, and 1 unparsed pair. At step 30, 23 base wins and 4 ties. At step 40, 13 base wins and 11 ties. Sonnet ties were 10, 6, 13, and 11. Opus had one remaining parse failure, at step 20, after the retry. Sonnet parse failures at the checks were 0. No check was under 40%, and no two checks in a row were under 45%.
+
+The final 50 texts are the step-40 generations. `gpt-5.5` accepted the id and returned `gpt-5.5-2026-04-23`. The call used the Responses API with reasoning effort low. Reasoning tokens were 8,990 of 9,688 output tokens. Input tokens were 63,127. Parse failures were 0. On those same texts the Opus win rate is 26 of 39, which is 66.7%. The gpt-5.5 win rate is 29 of 41, which is 70.7%, with 12 base wins and 9 ties.
+
+Twenty shuffled unlabeled pairs are in `results/grpo-pilot-sonnet-pairs.md`. The shuffle seed is 20261008. The map from A and B to the trained side is only in the store internal directory, and it is not committed.

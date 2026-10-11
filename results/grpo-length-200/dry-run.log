@@ -1,0 +1,36 @@
+median rollouts 188.0 pool 171.5 target 203 text_overlap 0
+pool gate {'under_30': 0, 'under_100': 17, 'over_300': 30, 'max_new_tokens': 1, 'hard_zero': 47} rate 47/160
+jobs 107
+judged 10/107
+judged 20/107
+judged 30/107
+judged 40/107
+judged 50/107
+judged 60/107
+judged 70/107
+judged 80/107
+judged 90/107
+judged 100/107
+judged 107/107
+validation-00001 0.1494 0.0000 0.1667 0.1958 spread 0.1958 REAL
+validation-00002 0.0837 0.0657 0.1443 0.0000 spread 0.1443 REAL
+validation-00003 0.0000 0.0000 0.0000 0.1353 spread 0.1353 REAL
+validation-00004 0.0000 0.1576 0.2177 0.0543 spread 0.2177 REAL
+validation-00005 0.0000 0.0000 0.0262 0.1070 spread 0.1070 REAL
+validation-00006 0.0000 0.5571 0.1461 0.0919 spread 0.5571 REAL
+validation-00007 0.0258 0.0223 0.0865 0.1219 spread 0.0996 REAL
+validation-00008 0.0928 0.0000 0.0319 0.0000 spread 0.0928 REAL
+validation-00009 0.0000 0.0000 0.1825 0.0000 spread 0.1825 REAL
+validation-00010 0.0000 0.1069 0.0261 0.0649 spread 0.1069 REAL
+validation-00011 0.0341 0.3755 0.1542 0.0729 spread 0.3414 REAL
+validation-00012 0.0000 0.0710 0.0000 0.1297 spread 0.1297 REAL
+validation-00013 0.0000 0.0000 0.1056 0.0000 spread 0.1056 REAL
+validation-00014 0.0930 0.0000 0.0000 0.0985 spread 0.0985 REAL
+validation-00015 0.0467 0.0000 0.0000 0.0000 spread 0.0467 REAL
+validation-00016 0.0000 0.0000 0.0000 0.1556 spread 0.1556 REAL
+validation-00017 0.0578 0.0000 0.0000 0.0000 spread 0.0578 REAL
+validation-00018 0.0000 0.0000 0.0000 0.0000 spread 0.0000 flat
+validation-00019 0.0000 0.0000 0.0000 0.0000 spread 0.0000 flat
+validation-00020 0.0000 0.0000 0.0815 0.0722 spread 0.0815 REAL
+real 18/20 parse 0 calls 214 cost 0.462480 models ['claude-sonnet-5-5'] gate 47/160 passed True
+PASS

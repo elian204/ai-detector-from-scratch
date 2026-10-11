@@ -105,20 +105,14 @@ The 40-step run uses this JSON verdict as the only reward judge. The response bu
 &nbsp;
 ## Length-matched setup
 
-This is the setup after the step-40 length comparison. The dry run is `results/grpo-length-matched-dry-run.md`. Training on this setup has not started.
+The length target is 203 words. `hard_i` is 0 under 100 words, over 300 words, under 30 words, or on a 700-token hit. Words from 100 through 300 stay in. Inside that band, `length_score` is min(words, 203) / max(words, 203). The reward judge is the JSON schema on `claude-sonnet-5-5`. The call sends no tools and no temperature.
 
-The length target is 203 words. The saved 80 base answers have median 187.0. The 160 new frozen-base samples have median 227.5. Those medians differ by 40.5 words, and the nearest integers are 187 and 228, so the target is the median of all 240 answers, which is 203. The prompt text still asks for approximately 250 words. The value 203 is the `length_score` target.
+reward_i = hard_i * (trigram_ratio_i ** 2) * sigmoid(z_i / T) * length_score_i * wins_i / N
 
-`hard_i` is 0 under 100 words, over 300 words, under 30 words, or on a 700-token hit. Words from 100 through 300 stay in. Inside that band, `length_score` is min(words, 203) / max(words, 203).
+The opponent for a rollout is the gated-in sample among eight frozen base answers whose word count is closest. A tie takes the lowest pool index.
 
-The reward judge stays the JSON schema on `claude-sonnet-5-5` from the previous section. The call sends no tools and no temperature.
+An earlier dry run, commit `a149083`, used a prompt that asked for approximately 250 words. The current training prompt asks for approximately 200 words. The 200-word dry run is `results/grpo-length-matched-dry-run.md`. It passed: a real spread on 18 of 20 groups, 0 parse failures, and a gate-fire rate of 47 of 160 pool answers, which is 0.29375. The length target stayed 203.
 
-reward_i = hard_i * (trigram_ratio_i ** 2) * sigmoid(z_i / 4) * length_score_i * wins_i / N
+The one-seed sweep follows that pass. T is 4, then 2, then 1. Seed 42. Each run is 80 steps from scratch. T is the divisor in `sigmoid(z / T)`. At steps 20, 40, and 60 the check is 50 validation prompts with `claude-opus-5-5` only. At step 80 the check is 100 validation prompts with Opus and `gpt-5.5`. Both orders, agreement only, against the length-matched base. Each check reports the win rate on all agreed pairs and on pairs within 20 percent of the matched length, plus the mean of `sigmoid(z / T)` and the mean DistilBERT score for the trained answers and for the matched base answers. A run stops if Opus is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps. A second seed is not part of this sweep.
 
-The comparison group is the gated-in rollouts plus one length-matched frozen base answer. For each prompt, eight answers are sampled from frozen `Qwen/Qwen3-0.6B-Base` at `max_new_tokens` 700, temperature 0.8, and `top_p` 0.9. The opponent for a rollout is the gated-in sample among those eight whose word count is closest. A tie takes the lowest pool index. If none of the eight are inside the gate, that rollout has no base opponent. In the dry run the rollouts were the saved indexes 0 through 3, and those four answers are not part of the pool of eight.
-
-A check is 100 validation prompts, `validation-00001` through `validation-00100`. The check has not been run. The judges are `claude-opus-5-5` and `gpt-5.5`, both orders, agreement only. The check reports the win rate on all agreed pairs and on pairs whose trained word count is between 0.8 and 1.2 times the matched base, plus the mean of sigmoid(z / 4) and the mean DistilBERT score for the trained answers and for the length-matched base answers.
-
-The T sweep is unstarted. It is T in {4, 2, 1}, two seeds each, 80 steps, with the same stop rules: Opus win rate under 40%, or under 45% at two checks in a row, or the gate-fire count rising for 20 consecutive steps. Every check reports the Opus win rate, the `gpt-5.5` win rate, and both detector scores. It waits for Eli's OK after the dry run.
-
-The gates in the sections above, including 150 through 375 and the 1616 cap, are the gates those runs used.
+The gates in the sections above, including 150 through 375 and the 1616 cap, are the gates those earlier runs used.

@@ -86,3 +86,9 @@ This rule is not running. The dry run spread on 7 of 20 groups, so the run that 
 Each check would use 50 validation prompts. The evaluation judge would be `claude-opus-5-5`, in both orders, and it would stay out of the reward. Stop if the Opus win rate versus the saved base answer is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps.
 
 Each check would also log the Sonnet win rate versus the base answer on those same texts, the mean of sigmoid(z / 4), the mean DistilBERT score, the mean word count, the mean trigram ratio, the gate-fire counts by reason, and 5 sample texts.
+&nbsp;
+## Judge format
+
+The requested reward-judge format is a forced tool call on `claude-sonnet-5-5`, not a free-text letter. One tool, `select_winner`. One field, `winner`, with values A, B, and tie. The prompt is "Which of these two answers to the same question is better? If they are equally good, choose tie." Temperature is omitted. `max_tokens` is 256. A reply that is not that tool call is a parse failure. Both orders are scored. A win is both orders naming the same answer. If either order says tie, the orders name different answers, or either call fails to parse, the pair is a tie.
+
+`tool_choice` type `tool` was sent once. The API returned HTTP 400: tool_choice type "tool" and "any" are not supported for this model. The Anthropic tool-use page says Claude Sonnet 5.5 returns that 400 for type `tool` and type `any`. The identical-answer check, the held-out 30, the reference bands, and the dry run were not sent. The 40-step run did not start. The record is `results/grpo-sonnet-tool.md`.

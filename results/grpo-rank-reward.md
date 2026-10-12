@@ -155,3 +155,55 @@ In each row the entries are the four rollouts in order. `v1` is `validation-0000
 | v19 | 1.0607 0.3652 0.8723 0.9451 | 1 1 1 1 | 1.00 0.00 0.33 0.67 | 215 492 165 243 | 0.6954 | yes | same |
 | v20 | 0.9664 0.8353 0.0380 0.2082 | 1 1 0 0.5 | 1.00 0.67 0.33 0.00 | 269 268 480 449 | 0.9284 | yes | same |
 
+&nbsp;
+## Run
+
+The dry run passed on both sets, so the run started. Seed 42, T = 1 in the logs but unused by this reward, `Qwen/Qwen3-0.6B-Base`, group size 4, `max_new_tokens` 700, temperature 0.8, `top_p` 0.9, AdamW at 1e-5, gradient clip 1.0, no KL, bfloat16, gradient checkpointing, the 200-word prompt. Zero-advantage steps skip backward and `optimizer.step()`. The script is `/tmp/grpo_len200_rank_train.py`, the tmux session was `grpo-rank-t1`, and the log is `results/grpo-length-200-rank-t1/run.log`. The checks and stop rules are those of the slope run. Weights are in `results/grpo-length-200-rank-t1-weights` on the lab machine and are not committed.
+
+The run stopped at step 40. The recorded reason is an Opus win rate under 40%. That rate is 13 of 48 agreed pairs, which is 0.271. Step 20 was 24 of 45, or 0.533, so the two-check streak rule did not apply. No other rule fired. The gate-fire rise streak peaked at 1, 1 step had no gradient, and the median length over 10 steps peaked at 269.5 words. Reward-judge parse failures are 0 over 306 calls, and Opus parse failures are 0. `gpt-5.5` was not called. Over the 40 steps the 160 rollouts were judged against their matched base as rollout 65, base 75, split 10, tie 3, and 7 were gated out.
+
+| step | judge | agreed pairs | within 20% length | trained sigmoid | base sigmoid | trained DistilBERT | base DistilBERT |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | Opus | 24/45 | 21/37 | 0.140022 | 0.144758 | 0.149680 | 0.128783 |
+| 40 | Opus | 13/48 | 9/33 | 0.350149 | 0.080392 | 0.400764 | 0.104174 |
+
+Win rates on all agreed pairs are 53.3% at step 20 and 27.1% at step 40. Within 20% length they are 56.8% and 27.3%. Opus ties were 5 and 2. The 95% Wilson interval at step 40 is 0.17 to 0.41.
+&nbsp;
+## Detector scores rose, and quality fell
+
+At step 20 the run looks like the slope run, with quality near even and the detectors level with the base. By step 40 the trained answers score much higher on both detectors than their matched bases. The Qwen3 sigmoid is 0.350 against 0.080, and DistilBERT is 0.401 against 0.104. The share of trained evaluation answers with z above 0 is 17 of 50, against 4 of 50 for the base. Opus prefers the base in 35 of 48 agreed pairs.
+
+The text got worse in a specific way. The mean trigram ratio of the training rollouts fell from 0.97 to 0.99 in the first 20 steps to 0.915 in steps 21 to 30 and 0.891 in steps 31 to 40, and the mean word count rose to 284. In the step-40 evaluation answers the trigram ratio is 0.925 for trained and 0.969 for base, 10 of 50 trained answers are under 0.9 against 4 of 50 base answers, and 4 of 50 trained answers are 700-token runaways. The two most repetitive trained answers run to 641 and 628 words. Gate fires went from 0 in the first 20 steps to 2 in steps 21 to 30 and 5 in steps 31 to 40.
+
+The rank term gives the detector a full 0.3 in every group, where the sigmoid gave about 0.01 in most. That reopened the route the T = 1 sweep took, to raise the detector score and lose on quality. q did not hold it back: the mean q of judged rollouts fell from 0.54 in steps 1 to 10 to 0.35 in steps 31 to 40, so the policy was moving toward detector-higher answers that lose to the base, and q was not enough to stop it. The rank cannot say how far apart the z values are, so even a group where all four answers are poor on the detector still gets a 0 to 1 spread, and the policy is pushed on every group.
+
+Compared at step 40 with the earlier runs:
+
+| Run | Opus agreed pairs | Trained sigmoid | Base sigmoid | Trained DistilBERT | Base DistilBERT |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| T = 1 sweep | 18/46 | 0.363 | 0.173 | 0.627 | 0.233 |
+| Slope, seed 42 | 22/39 | 0.121 | 0.111 | 0.140 | 0.145 |
+| Slope, seed 2 | 27/45 | 0.062 | 0.147 | 0.121 | 0.217 |
+| Rank, seed 42 | 13/48 | 0.350 | 0.080 | 0.401 | 0.104 |
+
+The rank run's detector gap at step 40 is 0.27 in sigmoid against 0.19 for the T = 1 sweep, and 0.30 in DistilBERT against 0.39. It loses more clearly on quality, 27% against 39%. The slope runs hold quality and do not move the detectors. No reward so far does both. The T = 1 sweep also ran without the zero-advantage skip, so that comparison carries the confound noted in `results/grpo-slope-reward.md`.
+&nbsp;
+## Training trajectory
+
+| steps | mean q of judged rollouts | mean words | mean sigmoid | mean DistilBERT | mean trigram ratio | mean reward | gate fires |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 to 10 | 0.537 | 163 | 0.196 | 0.295 | 0.969 | 0.375 | 0 |
+| 11 to 20 | 0.500 | 125 | 0.014 | 0.134 | 0.992 | 0.373 | 0 |
+| 21 to 30 | 0.450 | 192 | 0.248 | 0.334 | 0.915 | 0.287 | 2 |
+| 31 to 40 | 0.350 | 284 | 0.230 | 0.440 | 0.891 | 0.316 | 5 |
+&nbsp;
+## Cost
+
+| Part | Calls | USD |
+| --- | ---: | ---: |
+| Reward judge, `claude-sonnet-5-5` | 306 | 0.638 |
+| Opus checks, `claude-opus-5-5` | 200 | 2.053 |
+| `gpt-5.5` | 0 | 0.000 |
+| Total | 506 | 2.692 |
+
+The run took about 1 hour 35 minutes of wall time for 40 steps. Seed 2 was not started for this reward.

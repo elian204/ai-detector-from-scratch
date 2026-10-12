@@ -134,3 +134,9 @@ A step whose advantages are all zero skips the optimizer entirely. The earlier s
 The dry run of this reward on two sets of 20 groups, base rollouts and rollouts of the T = 1 step-40 checkpoint, had a real spread in 20 of 20 groups on both sets, 0 parse failures, and a gradient in 20 of 20 groups on both sets.
 
 The slope run finished 80 steps with no stop rule, no zero-gradient step, and 0 reward-judge parse failures. Opus won 49 of 83 agreed pairs at step 80 and `gpt-5.5` won 51 of 80. The detector means did not rise above the length-matched base. The cost was $7.95. The record is in `results/grpo-slope-reward.md`.
+
+The slope run was repeated with seed 2 in `results/grpo-slope-seed2.md`. The training prompts and their order are the same, and the torch seed is 2. It stopped at step 41 on the median-length rule, 362.5 words against a limit of 350, with the Opus win rate at 60% at step 40.
+
+A rank reward replaced the sigmoid term in `results/grpo-rank-reward.md`. reward_i = hard_i * length_score_i * trigram_ratio_i ** 2 * (q_i + 0.3 * r_i), where r_i is the rank of z_i among the group's four rollouts scaled to [0, 1], with ties sharing the average rank. Its dry run had a real spread in 20 of 20 groups on both sets. The seed-42 run stopped at step 40 with an Opus win rate of 13 of 48, while the detector scores rose to about 4 times the base.
+
+The T sweep and the quality-gate run did not skip zero-advantage steps, so AdamW momentum moved the weights on those steps. Their results are confounded on that point, as written in `results/grpo-slope-reward.md`.

@@ -207,3 +207,7 @@ The mean q rose from 0.44 to about 0.6 to 0.7 and stayed there. The trigram rati
 | Total | 1,344 | 7.952 |
 
 The reward judge cost about $0.018 per step, as the dry run predicted. The run took about 3 hours 15 minutes of wall time, most of it the step-80 check, because GPU 3 was shared with other jobs.
+&nbsp;
+## Seed 2
+
+The run was repeated with seed 2 in `results/grpo-slope-seed2.md`. It stopped at step 41 on the median-length rule. The Opus win rate was 62% at step 20 and 60% at step 40, in line with seed 42, and the detector means stayed below the base. The length drifted up in that run, to a 10-step median of 362.5 words, and did not in the seed-42 run. So the quality result held across two seeds, the length result did not, and the seed-42 run reaching step 80 is not guaranteed by the reward.

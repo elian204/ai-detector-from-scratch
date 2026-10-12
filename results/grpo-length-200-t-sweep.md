@@ -51,3 +51,7 @@ The run stopped at step 40. The recorded reason is an Opus win rate under 40%. T
 | sum |  |  | 14.627271 |
 
 Seed 2 did not start.
+&nbsp;
+## Confound: zero-advantage steps were not skipped
+
+The runs above did not skip zero-advantage steps. The training loop called `optimizer.step()` on every step, so on a step with all advantages zero AdamW still applied its momentum and weight decay and moved the weights. By the repo criterion the logs hold 2 such steps at T = 4, 4 at T = 2, and 4 at T = 1. The results are confounded on this point. The count is small, and its effect cannot be measured from the logs. The runs were not repeated. Details and the later runs that skip these steps are in `results/grpo-slope-reward.md`.

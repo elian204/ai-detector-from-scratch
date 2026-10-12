@@ -88,3 +88,7 @@ Two causes are plausible and neither was tested. The reward values are near 1e-3
 The dry run did not predict this. It used the frozen base's rollouts, of which 51 of 80 were gated in. The trained policy's rollouts were gated in 24 of 160 times.
 
 Cost: $3.049356 in total. The reward judge was $0.108496 over 48 calls with 0 parse failures, and Opus was $2.940860 over 200 calls with 0 parse failures. `gpt-5.5` was not called.
+&nbsp;
+## Confound: zero-advantage steps were not skipped
+
+The T = 1 run of this reward did not skip zero-advantage steps. Its training loop called `optimizer.step()` on every step, so on a step with all advantages zero AdamW still applied its stored momentum and weight decay and moved the weights. By the repo criterion, 33 of its 40 steps had advantages all zero. The earlier count of 28 steps with no judged rollout leaves out 5 steps whose rewards were all equal. So most of the run's weight changes after the first steps came from momentum. The drift to answers over 300 words and the stop at step 40 are confounded on this point, and the logs cannot separate the cause. The run was not repeated with the skip. Details and the later runs that skip these steps are in `results/grpo-slope-reward.md`.

@@ -17,6 +17,21 @@ A short check shows the difference. `/tmp/grpo_zero_adv_check.py` imports the re
 
 The slope run uses the skip. Its script, `/tmp/grpo_len200_slope_train.py`, does the same test. On a zero-advantage step it sets the loss to 0.0 and does not compute log-probabilities, call `backward`, clip, or call `optimizer.step()`. The step record has a `no_gradient` field. The earlier sweep and quality-gate numbers stand as they were reported, but any zero-advantage step in them also moved the weights through momentum, so those runs were not strictly "no update" on those steps.
 &nbsp;
+## Confound in the earlier runs
+
+The T sweep, `results/grpo-length-200-t-sweep.md`, and the quality-gate run, `results/grpo-quality-gate-reward.md`, did not skip zero-advantage steps. Their training loops called `optimizer.step()` on every step. On a step whose advantages were all zero the loss and the gradient were exactly zero, but AdamW still applied its stored momentum and its weight decay, and its step count advanced. So the weights moved on those steps. The results of those runs are confounded on this point. They should be read as runs with an extra update on every zero-advantage step, not as runs that made no update there.
+
+Counting the steps by the repo criterion, advantages all within 1e-8 of zero, in the saved step logs:
+
+| Run | Steps | Zero-advantage steps |
+| --- | ---: | ---: |
+| T = 4 | 40 | 2 |
+| T = 2 | 80 | 4 |
+| T = 1 | 40 | 4 |
+| Quality gate, T = 1 | 40 | 33 |
+
+For the sweep the count is small, so the effect on those results is probably small, though it cannot be measured from the logs. For the quality-gate run it is large. 33 of 40 steps moved the weights through momentum alone. The earlier note counted 28 steps with no judged rollout. The other 5 had a judged rollout, but every reward in the group was equal. The drift to answers over 300 words in that run cannot be separated from this. None of these runs were repeated with the skip. The slope runs, and every run after them, skip these steps, and zero steps had no gradient in the seed-42 slope run.
+&nbsp;
 ## Reward
 
 q_i = 1 if `claude-sonnet-5-5` picks the rollout over the matched base in both orders. q_i = 0 if it picks the base in both orders. q_i = 0.5 in every other case: a tie, a split between the orders, or a call that does not parse. Parse failures are counted and reported.

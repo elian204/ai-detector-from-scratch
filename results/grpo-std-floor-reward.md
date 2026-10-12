@@ -149,3 +149,87 @@ In each row the entries are the four rollouts in order. `v1` is `validation-0000
 | v19 (ties) | 1 1 1 1 | 0.847 0.151 0.666 0.702 | 1.001 0.151 0.709 0.790 | 0.697 and 0.851 | 1.08 -1.63 0.15 0.40 | 1.08 -1.63 0.15 0.40 |
 | v20  | 1 1 0 0.5 | 0.617 0.562 0.005 0.094 | 0.729 0.633 0.016 0.094 | 0.612 and 0.713 | 1.14 0.84 -1.11 -0.87 | 1.14 0.84 -1.11 -0.87 |
 
+&nbsp;
+## Runs
+
+The dry run passed, so two runs started. Both used seed 42, `Qwen/Qwen3-0.6B-Base`, group size 4, `max_new_tokens` 700, temperature 0.8, `top_p` 0.9, AdamW at 1e-5, gradient clip 1.0, no KL, bfloat16, gradient checkpointing, the 200-word prompt, the std-floor advantage, length score squared, and the reward-range skip. The run with w = 0.1 is `results/grpo-length-200-floor-w01` and the run with w = 0.3 is `results/grpo-length-200-floor-w03`. The script is `/tmp/grpo_len200_floor_train.py` with `RANK_W` set. Weights are in `results/grpo-length-200-floor-w01-weights` and `results/grpo-length-200-floor-w03-weights` on the lab machine and are not committed. The checks and stop rules are those of the slope run: Opus at steps 20, 40, and 60 on 50 validation prompts, step 80 on 100 prompts with Opus and `gpt-5.5`, both orders, agreed pairs. The stop rules are an Opus win rate under 40%, under 45% twice in a row, the gate-fire count rising for 20 steps, more than half of the last 10 steps with no gradient, and a median length over 350 words.
+
+The two runs shared GPU 0. GPUs 1 and 2 had about 5 GB free, which is not enough, and GPU 3 was left alone for the breakfast job. Each run used 6 to 7 GB, so both fit beside the other user's 6 GB process on GPU 0. The second run had its memory capped at a fraction of 0.35. The tmux sessions were `grpo-floor-w01` and `grpo-floor-w03`.
+
+Neither run reached step 80. Both hit a stop rule. The w = 0.3 run stopped at step 20 on the Opus rule, and the w = 0.1 run stopped at step 37 on the median-length rule. No run had a step with no gradient, and the reward judge had 0 parse failures in both.
+&nbsp;
+### w = 0.3
+
+The run stopped at step 20. The recorded reason is an Opus win rate under 40%. That rate is 13 of 48 agreed pairs, which is 0.271. Within 20% length it is 5 of 29, or 0.172. The gate-fire rise streak peaked at 1, with 3 fires in total, and the median length over 10 steps peaked at 174.5 words. Reward-judge parse failures are 0 over 154 calls and Opus parse failures are 0. Over the 20 steps the 80 rollouts were judged as rollout 29, base 39, split 6, tie 3, and 3 were gated out.
+
+| step | judge | agreed pairs | within 20% length | trained sigmoid | base sigmoid | trained DistilBERT | base DistilBERT |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | Opus | 13/48 | 5/29 | 0.424078 | 0.137102 | 0.560591 | 0.147150 |
+
+The detector scores are already high at step 20. The trained answers have a mean raw logit z of -0.86 against -4.39 for the matched base, and a sigmoid three times the base. This is the same outcome as the rank run, reached in 20 steps and not 40. The floor and the squared length did not stop the detector from driving the update at this weight.
+
+| steps | mean q of judged rollouts | mean words | mean sigmoid | mean DistilBERT | mean trigram ratio | mean reward | gate fires |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 to 10 | 0.388 | 185 | 0.112 | 0.236 | 0.970 | 0.222 | 0 |
+| 11 to 20 | 0.475 | 173 | 0.196 | 0.365 | 0.966 | 0.284 | 3 |
+
+| Part | Calls | USD |
+| --- | ---: | ---: |
+| Reward judge, `claude-sonnet-5-5` | 154 | 0.348 |
+| Opus check, `claude-opus-5-5` | 100 | 0.888 |
+| `gpt-5.5` | 0 | 0.000 |
+| Total | 254 | 1.236 |
+&nbsp;
+### w = 0.1
+
+The run stopped at step 37. The recorded reason is a median rollout length of 368.5 words over the last 10 steps, which is over 350. The median over the last 10 steps was 174.5 at step 30 and 266.5 at step 35, 274 at step 36, and 368.5 at step 37. The step-20 check was 21 of 41 agreed pairs, which is 0.512, so no Opus rule fired. 9 gate fires came in 7 steps, 8, 9, 30, 32, 33, 35, and 36, and the rise streak peaked at 2. Reward-judge parse failures are 0 over 278 calls and Opus parse failures are 0. Over the 37 steps the 148 rollouts were judged as rollout 60, base 57, split 18, tie 4, and 9 were gated out. There was no step-40 check, so the table has one row.
+
+| step | judge | agreed pairs | within 20% length | trained sigmoid | base sigmoid | trained DistilBERT | base DistilBERT |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | Opus | 21/41 | 18/33 | 0.121667 | 0.188124 | 0.167181 | 0.183812 |
+
+At step 20 the win rate is 51.2% on all pairs and 54.5% within 20% length, with 9 Opus ties. The 95% Wilson interval on all pairs is 0.36 to 0.66. The trained answers average 199 words against 182 for the base, and both detector scores are below the base, as in the slope runs. At this weight the detector term does not move the policy. The length is what failed, and the squared length score did not hold it. The slope run at seed 42 never passed a 10-step median of 205 words. This run reached 368.5 words by step 37 even with the squared score, as the slope run at seed 2 did.
+
+| steps | mean q of judged rollouts | mean words | mean sigmoid | mean DistilBERT | mean trigram ratio | mean reward | gate fires |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 to 10 | 0.458 | 243 | 0.097 | 0.175 | 0.963 | 0.219 | 2 |
+| 11 to 20 | 0.550 | 193 | 0.005 | 0.015 | 0.977 | 0.293 | 0 |
+| 21 to 30 | 0.571 | 230 | 0.113 | 0.257 | 0.952 | 0.312 | 1 |
+| 31 to 37 | 0.446 | 368 | 0.075 | 0.127 | 0.944 | 0.167 | 6 |
+
+| Part | Calls | USD |
+| --- | ---: | ---: |
+| Reward judge, `claude-sonnet-5-5` | 278 | 0.698 |
+| Opus check, `claude-opus-5-5` | 100 | 1.063 |
+| `gpt-5.5` | 0 | 0.000 |
+| Total | 378 | 1.761 |
+
+The w = 0.1 run took about 1 hour 5 minutes of wall time and the w = 0.3 run about 41 minutes.
+&nbsp;
+## Advantage sizes during training
+
+Each step is classed as tied when every gated-in rollout of its group has the same q, and differing otherwise. The statistics pool the four rollouts of each step in the class. The old columns are the std + 1e-4 normalization on the same logged rewards.
+
+| Run | Class | Steps | Floor abs(A) mean, median | Old abs(A) mean, median | Mean of the largest abs(A) |
+| --- | --- | ---: | --- | --- | ---: |
+| w = 0.1 | q ties | 3 | 0.562, 0.398 | 0.838, 0.677 | 1.124 |
+| w = 0.1 | q differs | 34 | 0.660, 0.512 | 0.871, 0.787 | 1.172 |
+| w = 0.3 | q ties | 5 | 0.405, 0.231 | 0.883, 0.954 | 0.648 |
+| w = 0.3 | q differs | 15 | 0.603, 0.542 | 0.873, 0.879 | 1.029 |
+
+The tied-group advantages are smaller than the differing-group advantages under the floor, as in the dry run, and the old normalization gives about the same size in both classes. The difference is clear at w = 0.3, with a median of 0.23 against 0.54, and small at w = 0.1, with 0.40 against 0.51. The comparison is weak for a more basic reason: tied steps are rare. Only 3 of 37 steps at w = 0.1 and 5 of 20 at w = 0.3 had all gated-in rollouts at the same q, so the premise that q ties in most groups does not hold in these runs. The average abs(A) over all steps is 0.652 at w = 0.1 and 0.554 at w = 0.3. These are advantage magnitudes, not weight changes, because the clip and AdamW rescale the update.
+
+The step-level correlation of the advantage with q and with the rank shows where the update direction comes from. Over the steps of each run, the mean Pearson correlation of the four advantages with the four q values is 0.80 at w = 0.1, 0.82 at w = 0.3, and 0.91 in the rank run. The mean correlation with the rank r is -0.05, 0.12, and 0.09. So the advantages follow q almost entirely at the step level, and the rank term shows up as a small positive correlation at w = 0.3 and none at w = 0.1. That is a description and not a causal test. It does not show that the rank term has no effect, because a small consistent push on the detector across 20 steps can still move the policy, and at w = 0.3 it did. It shows that the large advantages are not coming from tied groups in these logs.
+&nbsp;
+## What the runs show
+
+The std floor and the squared length did not give a run that holds quality and raises the detector. At w = 0.3 the detector drove the policy and quality fell within 20 steps. At w = 0.1 quality held at step 20 and the detectors stayed at or below the base, and the length then drifted past the stop limit by step 37. Compared with the earlier runs at the first check they reached:
+
+| Run | Check step | Opus agreed pairs | Trained sigmoid | Base sigmoid | Trained DistilBERT | Base DistilBERT |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Slope, seed 42 | 20 | 25/46 | 0.079 | 0.195 | 0.093 | 0.191 |
+| Rank, seed 42 | 20 | 24/45 | 0.140 | 0.145 | 0.150 | 0.129 |
+| Std floor, w = 0.1 | 20 | 21/41 | 0.122 | 0.188 | 0.167 | 0.184 |
+| Std floor, w = 0.3 | 20 | 13/48 | 0.424 | 0.137 | 0.561 | 0.147 |
+
+The w = 0.3 run reached the detector gain and the quality loss that the rank run took 40 steps to reach. This suggests the floor did not weaken the detector's pull at w = 0.3, though one seed per weight cannot rule out a difference in speed from run noise. At w = 0.1 the detector term is too weak to separate rollouts, which is what the slope run's sigmoid term showed. The weights between 0.1 and 0.3 were not tried, and seed 2 was not run for either weight.

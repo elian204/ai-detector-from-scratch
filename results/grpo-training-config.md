@@ -120,3 +120,15 @@ The sweep has finished. T = 4 stopped at step 40, T = 2 finished 80 steps, and T
 The gates in the sections above, including 150 through 375 and the 1616 cap, are the gates those earlier runs used.
 
 The quality-gate reward, q_i times the product with no win fraction, is written in `results/grpo-quality-gate-reward.md`. Its dry run at T = 1 had a real spread in 15 of 20 groups. The T = 1 run stopped at step 40 with the Opus win rate at 19 of 47 and then 18 of 43. The policy drifted to answers over 300 words, and 28 of 40 steps had no judged rollout and no gradient.
+
+The slope reward replaces the quality-gate reward for the next run. It is written in `results/grpo-slope-reward.md`.
+
+q_i is 1 if `claude-sonnet-5-5` picks the rollout over the matched base in both orders, 0 if it picks the base in both orders, and 0.5 otherwise, which covers a tie, a split, and a parse failure. Parse failures are counted. s_i = sigmoid(z_i / T) with T = 1, where z_i is the raw human-class logit before the saved temperature.
+
+reward_i = hard_i * length_score_i * trigram_ratio_i ** 2 * (q_i + 0.3 * s_i)
+
+hard_i is 0 only for a stub under 30 words or a 700-token runaway. There is no 100 to 300 word window. length_score_i = min(w, 203) / max(w, 203). The prompt asks for approximately 200 words. The matched base is the gated-in pool sample closest in word count, and only the stub and runaway rules gate the pool. The judge is the JSON verdict as before: no tools, no temperature, both orders. Group size 4, `max_new_tokens` 700, temperature 0.8, `top_p` 0.9, seed 42, AdamW at 1e-5, no KL.
+
+A step whose advantages are all zero skips the optimizer entirely. The earlier sweep and quality-gate scripts called `optimizer.step()` on every step, so a zero-advantage step still moved the weights through AdamW momentum and weight decay. The slope run follows the repo `--skip-zero-advantage-updates` behavior: no backward, no clip, no `optimizer.step()`. The check is in `results/grpo-slope-reward.md`.
+
+The dry run of this reward on two sets of 20 groups, base rollouts and rollouts of the T = 1 step-40 checkpoint, had a real spread in 20 of 20 groups on both sets, 0 parse failures, and a gradient in 20 of 20 groups on both sets.

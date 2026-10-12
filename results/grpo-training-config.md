@@ -132,3 +132,5 @@ hard_i is 0 only for a stub under 30 words or a 700-token runaway. There is no 1
 A step whose advantages are all zero skips the optimizer entirely. The earlier sweep and quality-gate scripts called `optimizer.step()` on every step, so a zero-advantage step still moved the weights through AdamW momentum and weight decay. The slope run follows the repo `--skip-zero-advantage-updates` behavior: no backward, no clip, no `optimizer.step()`. The check is in `results/grpo-slope-reward.md`.
 
 The dry run of this reward on two sets of 20 groups, base rollouts and rollouts of the T = 1 step-40 checkpoint, had a real spread in 20 of 20 groups on both sets, 0 parse failures, and a gradient in 20 of 20 groups on both sets.
+
+The slope run finished 80 steps with no stop rule, no zero-gradient step, and 0 reward-judge parse failures. Opus won 49 of 83 agreed pairs at step 80 and `gpt-5.5` won 51 of 80. The detector means did not rise above the length-matched base. The cost was $7.95. The record is in `results/grpo-slope-reward.md`.

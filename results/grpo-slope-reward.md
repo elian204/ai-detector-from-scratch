@@ -138,3 +138,57 @@ In each row the entries are the four rollouts in order. `v1` is `validation-0000
 | v19 | 0.0831 0.3234 0.5164 0.8682 | 0 0.5 0.5 1 | 158 139 217 228 | 0.7851 | yes |
 | v20 | 1.0937 0.1035 0.0052 0.7727 | 1 0 0 1 | 193 334 328 249 | 1.0885 | yes |
 
+&nbsp;
+## Run
+
+The dry run passed on both sets, so the run started. Seed 42, T = 1, `Qwen/Qwen3-0.6B-Base`, group size 4, 80 steps from scratch, `max_new_tokens` 700, temperature 0.8, `top_p` 0.9, AdamW at 1e-5, gradient clip 1.0, no KL, bfloat16, gradient checkpointing, GPU 3. The prompt asks for approximately 200 words. Zero-advantage steps skip the optimizer as in the optimizer check. The script is `/tmp/grpo_len200_slope_train.py`, the tmux session was `grpo-slope-t1`, and the log is `results/grpo-length-200-slope-t1/run.log`. Weights are in `results/grpo-length-200-slope-t1-weights` on the lab machine and are not committed. One seed only.
+
+The run finished all 80 steps. No stop rule fired. Zero steps had no gradient, so the skip never triggered. The gate fired once, at step 2, on a 700-token runaway. The gate-fire rise streak peaked at 1. The Opus win rate never fell under 40%. The median rollout length over any 10 steps peaked at 205 words, far under 350. The reward judge had 0 parse failures over 638 calls. Over the 80 steps the 320 rollouts were judged against their matched base as rollout 164, base 104, split 45, tie 6, and 1 was gated out.
+&nbsp;
+### Checks
+
+Opus is `claude-opus-5-5`. At steps 20, 40, and 60 the check is 50 validation prompts with Opus only. At step 80 it is 100 prompts with Opus and `gpt-5.5` (returned id `gpt-5.5-2026-04-23`). Both orders, agreed pairs only. Ties and unparsed pairs stay out of the denominator. The band is trained words divided by base words between 0.8 and 1.2. The base answer is the length-matched base answer from the eval pool. Detector means are over all prompts for the same texts.
+
+| step | judge | agreed pairs | within 20% length | trained sigmoid | base sigmoid | trained DistilBERT | base DistilBERT |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | Opus | 25/46 | 24/41 | 0.078708 | 0.194924 | 0.092788 | 0.191228 |
+| 40 | Opus | 22/39 | 17/31 | 0.120580 | 0.111463 | 0.139844 | 0.144639 |
+| 60 | Opus | 28/45 | 24/39 | 0.113588 | 0.172391 | 0.132594 | 0.186357 |
+| 80 | Opus | 49/83 | 36/63 | 0.112886 | 0.131564 | 0.150557 | 0.235134 |
+| 80 | gpt-5.5 | 51/80 | 43/65 | 0.112886 | 0.131564 | 0.150557 | 0.235134 |
+
+Win rates on all agreed pairs are 54.3%, 56.4%, 62.2%, and 59.0% for Opus at steps 20, 40, 60, and 80, and 63.8% for `gpt-5.5` at step 80. Within 20% length they are 58.5%, 54.8%, 61.5%, and 57.1% for Opus, and 66.2% for `gpt-5.5`. Opus ties were 4, 10, 5, and 15, and `gpt-5.5` ties were 20. At step 80 the 95% Wilson interval for the Opus rate is 0.48 to 0.69 and for the `gpt-5.5` rate 0.53 to 0.73. Opus had 5 unparsed pairs over the run, 1 at step 40 and 4 at step 80. `gpt-5.5` had 0.
+
+At step 80 the trained answers have a mean of 231 words and a median of 206, against 215 and 197 for the base answers. 17 of 100 trained answers and 12 of 100 base answers are over 300 words.
+&nbsp;
+### Detector scores did not rise
+
+The policy won on quality and did not become more human to either detector. At step 80 the trained sigmoid(z) is 0.113 against 0.132 for the base, and the trained DistilBERT P(human) is 0.151 against 0.235. At steps 20, 60, and 80 both detector means are below the base. At step 40 the sigmoid is level and DistilBERT is slightly below. The mean raw logit z at step 80 is -4.47 for trained and -4.37 for base.
+
+That is the opposite corner from the T = 1 sweep run, which raised both detectors about three times and lost on quality. In this reward q_i carries up to 1 and the detector term at most 0.3, and the sigmoid is small for almost every rollout. Over the run the mean sigmoid of the training rollouts was 0.005 to 0.24 per block of 10 steps, mostly under 0.1. With such small values the detector term hardly separates rollouts, so the ranking inside a group is set by q, length, and the trigram ratio. The policy learned to beat its base, and the detector term did not push it toward human text.
+&nbsp;
+### Training trajectory
+
+| steps | mean q of judged rollouts | mean words | mean sigmoid | mean DistilBERT | mean trigram ratio | mean reward | gate fires |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 to 10 | 0.438 | 181 | 0.076 | 0.101 | 0.969 | 0.266 | 1 |
+| 11 to 20 | 0.537 | 166 | 0.007 | 0.087 | 0.971 | 0.384 | 0 |
+| 21 to 30 | 0.613 | 187 | 0.017 | 0.100 | 0.983 | 0.453 | 0 |
+| 31 to 40 | 0.625 | 227 | 0.005 | 0.054 | 0.985 | 0.475 | 0 |
+| 41 to 50 | 0.600 | 195 | 0.242 | 0.190 | 0.987 | 0.521 | 0 |
+| 51 to 60 | 0.700 | 149 | 0.097 | 0.107 | 0.987 | 0.484 | 0 |
+| 61 to 70 | 0.637 | 214 | 0.044 | 0.016 | 0.984 | 0.472 | 0 |
+| 71 to 80 | 0.588 | 227 | 0.007 | 0.074 | 0.980 | 0.426 | 0 |
+
+The mean q rose from 0.44 to about 0.6 to 0.7 and stayed there. The trigram ratio rose from 0.969 to 0.98 or more. The length stayed near the target and did not drift up, which is where the quality-gate run failed. The block of steps 41 to 50 has a high mean sigmoid because of a few rollouts with a high z, not a trend.
+&nbsp;
+### Cost
+
+| Part | Calls | USD |
+| --- | ---: | ---: |
+| Reward judge, `claude-sonnet-5-5` | 638 | 1.416 |
+| Opus checks, `claude-opus-5-5` | 505 | 5.367 |
+| `gpt-5.5` at step 80 | 201 | 1.168 |
+| Total | 1,344 | 7.952 |
+
+The reward judge cost about $0.018 per step, as the dry run predicted. The run took about 3 hours 15 minutes of wall time, most of it the step-80 check, because GPU 3 was shared with other jobs.

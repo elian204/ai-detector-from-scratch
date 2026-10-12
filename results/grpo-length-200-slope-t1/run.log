@@ -1,0 +1,362 @@
+START slope T=1 try=0 2026-10-12T13:49:55+03:00
+selftest ok
+T 1 prompt 200 target 203
+Write a standalone answer to the question below in approximately 200 words. Return only the answer.
+cuda free 12.70 GiB of 21.98
+Using the latest cached version of the dataset since rasbt/human-writing-prompts-6k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/dsi/eli-bogdanov/.cache/huggingface/datasets/rasbt___human-writing-prompts-6k/default/0.0.0/460a9bbbe0bae514f16b0d11e0e412a34acf5930 (last modified on Mon Sep 28 14:24:38 2026).
+W1012 13:50:08.397000 3422923 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1012 13:50:08.481000 3422923 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights: 100%|██████████| 310/310 [00:00<00:00, 9343.85it/s]
+loading detectors on cpu
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 9162.18it/s]
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 5021.67it/s]
+training seed reset 42
+STEP 1 loss=7.4329 nograd=0 reward=0.3350 gate=0 q=0.62 rise=0 words=118.0 s=0.0353 usd=0.0120 time=27.3s
+STEP 2 loss=-58.3721 nograd=0 reward=0.0180 gate=1 q=0.00 rise=1 words=305.8 s=0.0800 usd=0.0259 time=85.6s
+STEP 3 loss=16.4091 nograd=0 reward=0.3052 gate=0 q=0.62 rise=0 words=82.2 s=0.2344 usd=0.0376 time=18.1s
+STEP 4 loss=8.3094 nograd=0 reward=0.2579 gate=0 q=0.38 rise=0 words=139.8 s=0.0087 usd=0.0504 time=24.2s
+STEP 5 loss=13.9470 nograd=0 reward=0.1498 gate=0 q=0.25 rise=0 words=299.8 s=0.0704 usd=0.0765 time=71.7s
+STEP 6 loss=4.7195 nograd=0 reward=0.2352 gate=0 q=0.50 rise=0 words=94.0 s=0.0079 usd=0.0881 time=19.1s
+STEP 7 loss=14.2349 nograd=0 reward=0.1580 gate=0 q=0.25 rise=0 words=93.5 s=0.3076 usd=0.0996 time=25.3s
+STEP 8 loss=-27.7547 nograd=0 reward=0.5748 gate=0 q=0.88 rise=0 words=299.8 s=0.0025 usd=0.1239 time=65.0s
+STEP 9 loss=-61.6391 nograd=0 reward=0.2630 gate=0 q=0.38 rise=0 words=225.2 s=0.0029 usd=0.1449 time=80.3s
+STEP 10 loss=-9.1819 nograd=0 reward=0.3637 gate=0 q=0.50 rise=0 words=156.0 s=0.0074 usd=0.1613 time=30.7s
+STEP 11 loss=-21.1052 nograd=0 reward=0.0718 gate=0 q=0.12 rise=0 words=159.0 s=0.0016 usd=0.1768 time=30.4s
+STEP 12 loss=-11.6505 nograd=0 reward=0.3360 gate=0 q=0.50 rise=0 words=148.0 s=0.0045 usd=0.1914 time=26.6s
+STEP 13 loss=-9.2708 nograd=0 reward=0.3160 gate=0 q=0.50 rise=0 words=148.2 s=0.0036 usd=0.2077 time=26.3s
+STEP 14 loss=34.1194 nograd=0 reward=0.4355 gate=0 q=0.62 rise=0 words=154.0 s=0.0394 usd=0.2218 time=43.7s
+STEP 15 loss=22.7535 nograd=0 reward=0.4822 gate=0 q=0.62 rise=0 words=151.2 s=0.0024 usd=0.2377 time=47.1s
+STEP 16 loss=1.5181 nograd=0 reward=0.6096 gate=0 q=0.75 rise=0 words=244.0 s=0.0013 usd=0.2586 time=68.5s
+STEP 17 loss=-14.2256 nograd=0 reward=0.1403 gate=0 q=0.25 rise=0 words=148.0 s=0.0102 usd=0.2741 time=38.7s
+STEP 18 loss=-83.2864 nograd=0 reward=0.5274 gate=0 q=0.75 rise=0 words=197.5 s=0.0017 usd=0.2929 time=69.9s
+STEP 19 loss=-16.7851 nograd=0 reward=0.6677 gate=0 q=0.88 rise=0 words=166.5 s=0.0035 usd=0.3089 time=43.0s
+Using the latest cached version of the dataset since rasbt/human-writing-prompts-6k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/dsi/eli-bogdanov/.cache/huggingface/datasets/rasbt___human-writing-prompts-6k/default/0.0.0/460a9bbbe0bae514f16b0d11e0e412a34acf5930 (last modified on Mon Sep 28 14:24:38 2026).
+eval gen validation-00001 words 152
+eval gen validation-00002 words 273
+eval gen validation-00003 words 343
+eval gen validation-00004 words 80
+eval gen validation-00005 words 95
+eval gen validation-00006 words 174
+eval gen validation-00007 words 113
+eval gen validation-00008 words 158
+eval gen validation-00009 words 105
+eval gen validation-00010 words 115
+eval gen validation-00011 words 273
+eval gen validation-00012 words 158
+eval gen validation-00013 words 122
+eval gen validation-00014 words 123
+eval gen validation-00015 words 92
+eval gen validation-00016 words 442
+eval gen validation-00017 words 107
+eval gen validation-00018 words 156
+eval gen validation-00019 words 362
+eval gen validation-00020 words 142
+eval gen validation-00021 words 132
+eval gen validation-00022 words 183
+eval gen validation-00023 words 129
+eval gen validation-00024 words 131
+eval gen validation-00025 words 142
+eval gen validation-00026 words 392
+eval gen validation-00027 words 165
+eval gen validation-00028 words 208
+eval gen validation-00029 words 178
+eval gen validation-00030 words 394
+eval gen validation-00031 words 96
+eval gen validation-00032 words 169
+eval gen validation-00033 words 103
+eval gen validation-00034 words 89
+eval gen validation-00035 words 86
+eval gen validation-00036 words 186
+eval gen validation-00037 words 160
+eval gen validation-00038 words 120
+eval gen validation-00039 words 166
+eval gen validation-00040 words 107
+eval gen validation-00041 words 118
+eval gen validation-00042 words 174
+eval gen validation-00043 words 318
+eval gen validation-00044 words 149
+eval gen validation-00045 words 171
+eval gen validation-00046 words 136
+eval gen validation-00047 words 278
+eval gen validation-00048 words 117
+eval gen validation-00049 words 117
+eval gen validation-00050 words 96
+EVAL step 20 opus 25/46 band 24/41 s 0.07870800233038733 base_s 0.19492422570467233
+STEP 20 loss=5.0794 nograd=0 reward=0.2571 gate=0 q=0.38 rise=0 words=140.2 s=0.0017 usd=1.3729 time=1117.9s
+STEP 21 loss=64.5474 nograd=0 reward=0.4181 gate=0 q=0.62 rise=0 words=175.8 s=0.0133 usd=1.3887 time=55.6s
+STEP 22 loss=64.7671 nograd=0 reward=0.4830 gate=0 q=0.75 rise=0 words=188.2 s=0.0403 usd=1.4040 time=61.3s
+STEP 23 loss=12.2164 nograd=0 reward=0.5358 gate=0 q=0.62 rise=0 words=173.8 s=0.0115 usd=1.4201 time=47.1s
+STEP 24 loss=-26.4641 nograd=0 reward=0.2193 gate=0 q=0.38 rise=0 words=139.0 s=0.0039 usd=1.4340 time=48.7s
+STEP 25 loss=33.2385 nograd=0 reward=0.5936 gate=0 q=0.75 rise=0 words=168.8 s=0.0624 usd=1.4499 time=51.7s
+STEP 26 loss=-0.6600 nograd=0 reward=0.5525 gate=0 q=0.75 rise=0 words=154.8 s=0.0143 usd=1.4662 time=46.9s
+STEP 27 loss=23.7475 nograd=0 reward=0.1550 gate=0 q=0.25 rise=0 words=266.8 s=0.0080 usd=1.4878 time=64.6s
+STEP 28 loss=-5.5549 nograd=0 reward=0.4169 gate=0 q=0.50 rise=0 words=185.0 s=0.0027 usd=1.5041 time=51.4s
+STEP 29 loss=-4.9660 nograd=0 reward=0.4589 gate=0 q=0.50 rise=0 words=213.8 s=0.0121 usd=1.5240 time=56.1s
+STEP 30 loss=-50.7901 nograd=0 reward=0.6976 gate=0 q=1.00 rise=0 words=204.0 s=0.0032 usd=1.5415 time=71.0s
+STEP 31 loss=-17.8935 nograd=0 reward=0.2859 gate=0 q=0.38 rise=0 words=182.5 s=0.0011 usd=1.5596 time=54.4s
+STEP 32 loss=-7.8166 nograd=0 reward=0.6361 gate=0 q=0.75 rise=0 words=191.2 s=0.0048 usd=1.5840 time=52.4s
+STEP 33 loss=-98.7811 nograd=0 reward=0.5181 gate=0 q=0.62 rise=0 words=330.5 s=0.0009 usd=1.6095 time=95.7s
+STEP 34 loss=27.0409 nograd=0 reward=0.7355 gate=0 q=1.00 rise=0 words=152.5 s=0.0066 usd=1.6229 time=49.3s
+STEP 35 loss=-96.3212 nograd=0 reward=0.4125 gate=0 q=0.62 rise=0 words=331.5 s=0.0033 usd=1.6495 time=91.7s
+STEP 36 loss=-12.4984 nograd=0 reward=0.5343 gate=0 q=0.62 rise=0 words=210.0 s=0.0065 usd=1.6676 time=53.6s
+STEP 37 loss=9.5277 nograd=0 reward=0.3882 gate=0 q=0.62 rise=0 words=200.8 s=0.0052 usd=1.6866 time=64.4s
+STEP 38 loss=53.2911 nograd=0 reward=0.1568 gate=0 q=0.25 rise=0 words=191.2 s=0.0130 usd=1.7065 time=65.9s
+STEP 39 loss=-17.6475 nograd=0 reward=0.5058 gate=0 q=0.62 rise=0 words=226.8 s=0.0039 usd=1.7273 time=61.6s
+Using the latest cached version of the dataset since rasbt/human-writing-prompts-6k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/dsi/eli-bogdanov/.cache/huggingface/datasets/rasbt___human-writing-prompts-6k/default/0.0.0/460a9bbbe0bae514f16b0d11e0e412a34acf5930 (last modified on Mon Sep 28 14:24:38 2026).
+eval gen validation-00001 words 184
+eval gen validation-00002 words 289
+eval gen validation-00003 words 364
+eval gen validation-00004 words 150
+eval gen validation-00005 words 294
+eval gen validation-00006 words 163
+eval gen validation-00007 words 143
+eval gen validation-00008 words 252
+eval gen validation-00009 words 129
+eval gen validation-00010 words 126
+eval gen validation-00011 words 169
+eval gen validation-00012 words 158
+eval gen validation-00013 words 172
+eval gen validation-00014 words 108
+eval gen validation-00015 words 100
+eval gen validation-00016 words 277
+eval gen validation-00017 words 221
+eval gen validation-00018 words 266
+eval gen validation-00019 words 203
+eval gen validation-00020 words 234
+eval gen validation-00021 words 199
+eval gen validation-00022 words 187
+eval gen validation-00023 words 206
+eval gen validation-00024 words 177
+eval gen validation-00025 words 561
+eval gen validation-00026 words 487
+eval gen validation-00027 words 161
+eval gen validation-00028 words 199
+eval gen validation-00029 words 346
+eval gen validation-00030 words 206
+eval gen validation-00031 words 200
+eval gen validation-00032 words 180
+eval gen validation-00033 words 228
+eval gen validation-00034 words 217
+eval gen validation-00035 words 128
+eval gen validation-00036 words 216
+eval gen validation-00037 words 270
+eval gen validation-00038 words 136
+eval gen validation-00039 words 135
+eval gen validation-00040 words 284
+eval gen validation-00041 words 143
+eval gen validation-00042 words 184
+eval gen validation-00043 words 178
+eval gen validation-00044 words 175
+eval gen validation-00045 words 545
+eval gen validation-00046 words 134
+eval gen validation-00047 words 177
+eval gen validation-00048 words 176
+eval gen validation-00049 words 316
+eval gen validation-00050 words 172
+EVAL step 40 opus 22/39 band 17/31 s 0.12057969075758405 base_s 0.11146333093689918
+STEP 40 loss=-35.7188 nograd=0 reward=0.5739 gate=0 q=0.75 rise=0 words=247.8 s=0.0055 usd=2.8636 time=1309.5s
+STEP 41 loss=-10.6158 nograd=0 reward=0.2171 gate=0 q=0.25 rise=0 words=232.8 s=0.0038 usd=2.8856 time=60.4s
+STEP 42 loss=8.0982 nograd=0 reward=0.8084 gate=0 q=0.75 rise=0 words=166.8 s=0.8242 usd=2.9005 time=45.6s
+STEP 43 loss=3.0658 nograd=0 reward=0.8518 gate=0 q=1.00 rise=0 words=192.0 s=0.0036 usd=2.9164 time=51.8s
+STEP 44 loss=-13.8798 nograd=0 reward=0.3582 gate=0 q=0.38 rise=0 words=176.5 s=0.1143 usd=2.9328 time=48.6s
+STEP 45 loss=2.7202 nograd=0 reward=0.2949 gate=0 q=0.38 rise=0 words=173.8 s=0.0023 usd=2.9506 time=49.4s
+STEP 46 loss=31.2136 nograd=0 reward=0.9633 gate=0 q=0.88 rise=0 words=177.8 s=0.9548 usd=2.9670 time=50.2s
+STEP 47 loss=-57.2836 nograd=0 reward=0.5006 gate=0 q=0.75 rise=0 words=185.0 s=0.0142 usd=2.9845 time=66.8s
+STEP 48 loss=-10.4591 nograd=0 reward=0.4142 gate=0 q=0.62 rise=0 words=178.2 s=0.0063 usd=3.0021 time=66.8s
+STEP 49 loss=-3.2208 nograd=0 reward=0.4873 gate=0 q=0.75 rise=0 words=291.0 s=0.0011 usd=3.0262 time=71.7s
+STEP 50 loss=4.0469 nograd=0 reward=0.3129 gate=0 q=0.25 rise=0 words=173.5 s=0.4974 usd=3.0420 time=45.3s
+STEP 51 loss=-9.1783 nograd=0 reward=0.4629 gate=0 q=0.62 rise=0 words=156.0 s=0.0022 usd=3.0563 time=42.7s
+STEP 52 loss=-21.2926 nograd=0 reward=0.2547 gate=0 q=0.38 rise=0 words=148.5 s=0.0049 usd=3.0717 time=47.2s
+STEP 53 loss=31.7919 nograd=0 reward=0.5783 gate=0 q=1.00 rise=0 words=164.5 s=0.0025 usd=3.0887 time=62.7s
+STEP 54 loss=-5.5338 nograd=0 reward=0.5396 gate=0 q=0.75 rise=0 words=153.2 s=0.0131 usd=3.1046 time=43.5s
+STEP 55 loss=6.2566 nograd=0 reward=0.4541 gate=0 q=0.25 rise=0 words=162.8 s=0.9266 usd=3.1193 time=47.6s
+STEP 56 loss=1.2134 nograd=0 reward=0.7313 gate=0 q=1.00 rise=0 words=155.8 s=0.0038 usd=3.1338 time=43.9s
+STEP 57 loss=11.1710 nograd=0 reward=0.4978 gate=0 q=0.75 rise=0 words=133.5 s=0.0066 usd=3.1469 time=44.2s
+STEP 58 loss=8.9593 nograd=0 reward=0.6002 gate=0 q=1.00 rise=0 words=122.2 s=0.0025 usd=3.1606 time=42.1s
+STEP 59 loss=18.1316 nograd=0 reward=0.5741 gate=0 q=1.00 rise=0 words=117.0 s=0.0016 usd=3.1739 time=42.4s
+Using the latest cached version of the dataset since rasbt/human-writing-prompts-6k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/dsi/eli-bogdanov/.cache/huggingface/datasets/rasbt___human-writing-prompts-6k/default/0.0.0/460a9bbbe0bae514f16b0d11e0e412a34acf5930 (last modified on Mon Sep 28 14:24:38 2026).
+eval gen validation-00001 words 214
+eval gen validation-00002 words 182
+eval gen validation-00003 words 248
+eval gen validation-00004 words 180
+eval gen validation-00005 words 117
+eval gen validation-00006 words 185
+eval gen validation-00007 words 145
+eval gen validation-00008 words 296
+eval gen validation-00009 words 226
+eval gen validation-00010 words 133
+eval gen validation-00011 words 175
+eval gen validation-00012 words 144
+eval gen validation-00013 words 113
+eval gen validation-00014 words 446
+eval gen validation-00015 words 96
+eval gen validation-00016 words 225
+eval gen validation-00017 words 132
+eval gen validation-00018 words 219
+eval gen validation-00019 words 173
+eval gen validation-00020 words 207
+eval gen validation-00021 words 96
+eval gen validation-00022 words 180
+eval gen validation-00023 words 163
+eval gen validation-00024 words 208
+eval gen validation-00025 words 155
+eval gen validation-00026 words 214
+eval gen validation-00027 words 142
+eval gen validation-00028 words 101
+eval gen validation-00029 words 178
+eval gen validation-00030 words 128
+eval gen validation-00031 words 142
+eval gen validation-00032 words 150
+eval gen validation-00033 words 116
+eval gen validation-00034 words 128
+eval gen validation-00035 words 126
+eval gen validation-00036 words 153
+eval gen validation-00037 words 306
+eval gen validation-00038 words 183
+eval gen validation-00039 words 140
+eval gen validation-00040 words 105
+eval gen validation-00041 words 162
+eval gen validation-00042 words 196
+eval gen validation-00043 words 115
+eval gen validation-00044 words 147
+eval gen validation-00045 words 162
+eval gen validation-00046 words 76
+eval gen validation-00047 words 162
+eval gen validation-00048 words 112
+eval gen validation-00049 words 453
+eval gen validation-00050 words 124
+EVAL step 60 opus 28/45 band 24/39 s 0.11358799105891192 base_s 0.1723907285205916
+STEP 60 loss=-41.2387 nograd=0 reward=0.1458 gate=0 q=0.25 rise=0 words=171.5 s=0.0024 usd=4.1520 time=1134.8s
+STEP 61 loss=21.5574 nograd=0 reward=0.2687 gate=0 q=0.38 rise=0 words=170.8 s=0.0071 usd=4.1676 time=56.2s
+STEP 62 loss=-0.1895 nograd=0 reward=0.7295 gate=0 q=1.00 rise=0 words=149.5 s=0.0022 usd=4.1847 time=45.5s
+STEP 63 loss=7.9743 nograd=0 reward=0.5730 gate=0 q=0.75 rise=0 words=152.0 s=0.0012 usd=4.1987 time=43.5s
+STEP 64 loss=-31.0327 nograd=0 reward=0.6967 gate=0 q=0.88 rise=0 words=272.5 s=0.3962 usd=4.2253 time=86.5s
+STEP 65 loss=-18.5527 nograd=0 reward=0.3097 gate=0 q=0.38 rise=0 words=214.2 s=0.0041 usd=4.2458 time=58.6s
+STEP 66 loss=-23.8895 nograd=0 reward=0.2989 gate=0 q=0.38 rise=0 words=225.8 s=0.0024 usd=4.2650 time=58.1s
+STEP 67 loss=9.0514 nograd=0 reward=0.6728 gate=0 q=1.00 rise=0 words=138.5 s=0.0024 usd=4.2790 time=46.4s
+STEP 68 loss=-33.2263 nograd=0 reward=0.5037 gate=0 q=0.62 rise=0 words=229.0 s=0.0056 usd=4.3002 time=71.1s
+STEP 69 loss=-17.2060 nograd=0 reward=0.3446 gate=0 q=0.62 rise=0 words=321.0 s=0.0024 usd=4.3258 time=93.1s
+STEP 70 loss=-62.1893 nograd=0 reward=0.3206 gate=0 q=0.38 rise=0 words=267.5 s=0.0155 usd=4.3452 time=82.2s
+STEP 71 loss=38.8331 nograd=0 reward=0.2315 gate=0 q=0.38 rise=0 words=263.2 s=0.0121 usd=4.3667 time=76.1s
+STEP 72 loss=6.9593 nograd=0 reward=0.1149 gate=0 q=0.12 rise=0 words=163.2 s=0.0095 usd=4.3830 time=46.1s
+STEP 73 loss=-47.3806 nograd=0 reward=0.3660 gate=0 q=0.50 rise=0 words=228.8 s=0.0012 usd=4.4027 time=79.3s
+STEP 74 loss=12.7319 nograd=0 reward=0.8339 gate=0 q=1.00 rise=0 words=177.2 s=0.0167 usd=4.4197 time=46.5s
+STEP 75 loss=-50.2213 nograd=0 reward=0.4649 gate=0 q=1.00 rise=0 words=410.0 s=0.0009 usd=4.4507 time=90.0s
+STEP 76 loss=-61.8197 nograd=0 reward=0.3338 gate=0 q=0.50 rise=0 words=319.5 s=0.0083 usd=4.4765 time=74.9s
+STEP 77 loss=13.2261 nograd=0 reward=0.6308 gate=0 q=0.75 rise=0 words=177.5 s=0.0080 usd=4.4913 time=45.0s
+STEP 78 loss=25.5685 nograd=0 reward=0.5765 gate=0 q=0.75 rise=0 words=188.5 s=0.0021 usd=4.5078 time=62.2s
+STEP 79 loss=-9.9552 nograd=0 reward=0.3154 gate=0 q=0.38 rise=0 words=176.2 s=0.0052 usd=4.5233 time=44.3s
+Using the latest cached version of the dataset since rasbt/human-writing-prompts-6k couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'default' at /home/dsi/eli-bogdanov/.cache/huggingface/datasets/rasbt___human-writing-prompts-6k/default/0.0.0/460a9bbbe0bae514f16b0d11e0e412a34acf5930 (last modified on Mon Sep 28 14:24:38 2026).
+eval gen validation-00001 words 181
+eval gen validation-00002 words 327
+eval gen validation-00003 words 571
+eval gen validation-00004 words 199
+eval gen validation-00005 words 216
+eval gen validation-00006 words 166
+eval gen validation-00007 words 148
+eval gen validation-00008 words 184
+eval gen validation-00009 words 169
+eval gen validation-00010 words 291
+eval gen validation-00011 words 188
+eval gen validation-00012 words 163
+eval gen validation-00013 words 190
+eval gen validation-00014 words 172
+eval gen validation-00015 words 215
+eval gen validation-00016 words 189
+eval gen validation-00017 words 281
+eval gen validation-00018 words 460
+eval gen validation-00019 words 213
+eval gen validation-00020 words 266
+eval gen validation-00021 words 259
+eval gen validation-00022 words 218
+eval gen validation-00023 words 319
+eval gen validation-00024 words 169
+eval gen validation-00025 words 224
+eval gen validation-00026 words 430
+eval gen validation-00027 words 207
+eval gen validation-00028 words 198
+eval gen validation-00029 words 160
+eval gen validation-00030 words 156
+eval gen validation-00031 words 223
+eval gen validation-00032 words 239
+eval gen validation-00033 words 139
+eval gen validation-00034 words 193
+eval gen validation-00035 words 141
+eval gen validation-00036 words 120
+eval gen validation-00037 words 184
+eval gen validation-00038 words 199
+eval gen validation-00039 words 308
+eval gen validation-00040 words 157
+eval gen validation-00041 words 143
+eval gen validation-00042 words 225
+eval gen validation-00043 words 176
+eval gen validation-00044 words 163
+eval gen validation-00045 words 312
+eval gen validation-00046 words 140
+eval gen validation-00047 words 142
+eval gen validation-00048 words 267
+eval gen validation-00049 words 248
+eval gen validation-00050 words 206
+eval gen validation-00051 words 179
+eval gen validation-00052 words 169
+eval gen validation-00053 words 347
+eval gen validation-00054 words 309
+eval gen validation-00055 words 140
+eval gen validation-00056 words 167
+eval gen validation-00057 words 503
+eval gen validation-00058 words 216
+eval gen validation-00059 words 226
+eval gen validation-00060 words 203
+eval gen validation-00061 words 159
+eval gen validation-00062 words 148
+eval gen validation-00063 words 227
+eval gen validation-00064 words 188
+eval gen validation-00065 words 251
+eval gen validation-00066 words 318
+eval gen validation-00067 words 185
+eval gen validation-00068 words 215
+eval gen validation-00069 words 180
+eval gen validation-00070 words 209
+eval gen validation-00071 words 170
+eval gen validation-00072 words 264
+eval gen validation-00073 words 252
+eval gen validation-00074 words 428
+eval gen validation-00075 words 227
+eval gen validation-00076 words 209
+eval gen validation-00077 words 377
+eval gen validation-00078 words 201
+eval gen validation-00079 words 173
+eval gen validation-00080 words 175
+eval gen validation-00081 words 284
+eval gen validation-00082 words 274
+eval gen validation-00083 words 245
+eval gen validation-00084 words 193
+eval gen validation-00085 words 274
+eval gen validation-00086 words 209
+eval gen validation-00087 words 204
+eval gen validation-00088 words 424
+eval gen validation-00089 words 145
+eval gen validation-00090 words 306
+eval gen validation-00091 words 254
+eval gen validation-00092 words 145
+eval gen validation-00093 words 189
+eval gen validation-00094 words 191
+eval gen validation-00095 words 570
+eval gen validation-00096 words 206
+eval gen validation-00097 words 362
+eval gen validation-00098 words 242
+eval gen validation-00099 words 181
+eval gen validation-00100 words 176
+gpt model gpt-5.5 returned gpt-5.5-2026-04-23
+EVAL step 80 opus 49/83 band 36/63 s 0.11288629495248348 base_s 0.1315644849305543
+STEP 80 loss=5.2796 nograd=0 reward=0.3933 gate=0 q=0.50 rise=0 words=161.0 s=0.0068 usd=7.9519 time=2814.3s
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.18s/it]Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.18s/it]
+weights /home/dsi/eli-bogdanov/ai-detector-from-scratch/results/grpo-length-200-slope-t1-weights
+DONE T=1 steps=80 usd=7.9519 stop=None
+END slope T=1 code=0 2026-10-12T17:04:54+03:00
+SLOPE DONE 2026-10-12T17:04:54+03:00

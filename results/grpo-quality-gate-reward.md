@@ -64,4 +64,27 @@ An 80-step run at this rate is about $0.90 for the reward judge. The evaluation 
 &nbsp;
 ## Decision
 
-The dry run has a real spread in 15 of 20 groups, which meets the bar. The T = 1 run follows with seed 42, 80 steps, from scratch, the 200-word prompt, and the same checks and stop rules as the sweep. At every check the record reports the Opus win rate, which is the quality, together with `sigmoid(z / 1)` and DistilBERT for the trained answers and the matched base answers. The reward, the dry run, and the run share the one q_i definition above.
+The dry run has a real spread in 15 of 20 groups, which meets the bar. The T = 1 run followed with seed 42, 80 steps planned, from scratch, the 200-word prompt, and the same checks and stop rules as the sweep. The reward, the dry run, and the run share the one q_i definition above. The run stopped at step 40. The record is in the next section.
+&nbsp;
+## T = 1 run
+
+The run stopped at step 40 on the rule "under 45% at two checks in a row". The Opus win rate was 19 of 47 at step 20 (0.4043) and 18 of 43 at step 40 (0.4186). The gate-fire rise streak peaked at 2 and never fired. Seed 2 did not start. Weights are `results/grpo-length-200-qgate-t1-weights` on the lab machine. The step log is `results/grpo-length-200-qgate-t1/run.log`.
+
+Quality and human score at each check, trained against the length-matched base. The matched base is the gated-in pool sample closest in word count to each trained answer, so for long trained answers it is a base answer near 300 words. That is why the base means differ from the sweep.
+
+| step | Opus agreed pairs | within 20% length | sigmoid(z / 1), trained | sigmoid(z / 1), base | DistilBERT, trained | DistilBERT, base | trained answers gated out | trained mean words |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | 19/47 | 2/3 | 0.031439 | 0.106336 | 0.072059 | 0.174049 | 47 of 50 | 508 |
+| 40 | 18/43 | 2/3 | 0.044962 | 0.106397 | 0.083364 | 0.174740 | 48 of 50 | 510 |
+
+Mean `z` was -5.31 for trained and -4.82 for base at step 20, and -5.15 against -4.80 at step 40. Both detector means for the trained answers are below the base's, not above. Only 3 pairs at each check fall inside the length band, so the band rate of 2 of 3 is not informative. Ties were 3 at step 20 and 7 at step 40.
+
+The cause is length. By step 5 the policy wrote about 440 words, and from step 8 most steps were four rollouts at 450 to 600 words. Over the 40 steps, 136 of 160 rollouts were gated out. That is 134 over 300 words and 77 at the 700-token cap, which overlap, plus 2 under 100. The window rates were 24 of 40 in steps 1 to 10, then 35, 38, and 39 of 40. At the checks, 47 and 48 of 50 trained answers were over 300 words, with a median near 540. The two step-40 answers I read are long essays with `###` and bold headings.
+
+The reward then gave no signal. In 28 of 40 steps all four rollouts were gated out, so no pair was judged, every reward was 0, and the loss was 0. Only 7 steps had a reward range above 1e-4, steps 1, 2, 3, 6, 7, 14, and 23. Only 24 rollouts were judged in the whole run, and 10 of them had q = 1. The sweep's T = 1 run, which had the same seed and the same first rollouts, had 36 of 40 steps with a range and one step with all four gated out. The old reward gave the surviving rollouts a win fraction against each other and the base. This reward judges only a rollout against its base, so a group with one or two survivors and q = 0 is flat.
+
+Two causes are plausible and neither was tested. The reward values are near 1e-3, and the advantage divides by the group standard deviation plus 1e-4, so a noise-level difference in one group can give a full-size update at a learning rate of 1e-5. And a step with zero advantage still calls the AdamW step, which keeps moving the weights on stored momentum. Either could push the policy toward longer text during steps 4 to 8. Once all four rollouts were gated out, nothing pulled it back.
+
+The dry run did not predict this. It used the frozen base's rollouts, of which 51 of 80 were gated in. The trained policy's rollouts were gated in 24 of 160 times.
+
+Cost: $3.049356 in total. The reward judge was $0.108496 over 48 calls with 0 parse failures, and Opus was $2.940860 over 200 calls with 0 parse failures. `gpt-5.5` was not called.

@@ -118,3 +118,5 @@ The one-seed sweep followed that pass. T is 4, then 2, then 1. Seed 42. Each run
 The sweep has finished. T = 4 stopped at step 40, T = 2 finished 80 steps, and T = 1 stopped at step 40. Seed 2 did not start. The record is `results/grpo-length-200-t-sweep.md`.
 
 The gates in the sections above, including 150 through 375 and the 1616 cap, are the gates those earlier runs used.
+
+The quality-gate reward, q_i times the product with no win fraction, is written in `results/grpo-quality-gate-reward.md`. Its dry run at T = 1 had a real spread in 15 of 20 groups. The T = 1 run stopped at step 40 with the Opus win rate at 19 of 47 and then 18 of 43. The policy drifted to answers over 300 words, and 28 of 40 steps had no judged rollout and no gradient.

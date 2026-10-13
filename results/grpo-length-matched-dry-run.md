@@ -3,7 +3,7 @@
 
 The training prompt asks for approximately 200 words. The `length_score` target stays 203. This dry run passed all three bars. The one-seed sweep starts after this note: T = 4, then T = 2, then T = 1, seed 42, 80 steps each, from scratch. A second seed is not in the plan.
 
-Commit `a149083` recorded the earlier dry run, whose prompt asked for approximately 250 words. Those samples are not the pool or the rollouts here.
+Commit `a149083` recorded the earlier dry run, whose prompt asked for approximately 250 words. Those samples are not the pool or the rollouts here. The artifacts of that 250-word dry run are in `results/grpo-length-matched/`. The artifacts of the 200-word dry run in this note, and the 200-word pools, are in `results/grpo-length-200/`.
 &nbsp;
 ## Samples
 

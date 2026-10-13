@@ -142,3 +142,7 @@ At step 10, Opus had 22 base wins and 8 ties. At step 20, 24 base wins, 2 ties, 
 The final 50 texts are the step-40 generations. `gpt-5.5` accepted the id and returned `gpt-5.5-2026-04-23`. The call used the Responses API with reasoning effort low. Reasoning tokens were 8,990 of 9,688 output tokens. Input tokens were 63,127. Parse failures were 0. On those same texts the Opus win rate is 26 of 39, which is 66.7%. The gpt-5.5 win rate is 29 of 41, which is 70.7%, with 12 base wins and 9 ties.
 
 Twenty shuffled unlabeled pairs are in `results/grpo-pilot-sonnet-pairs.md`. The shuffle seed is 20261008. The map from A and B to the trained side is only in the store internal directory, and it is not committed.
+&nbsp;
+## Confound: zero-advantage steps were not skipped
+
+The training loop of this run called `optimizer.step()` on every step and had no skip. Its saved step log has 24 of 40 steps with all four rewards equal to 0 and a loss of exactly 0, so on those steps the optimizer ran on a zero gradient and moved the weights through AdamW momentum and weight decay. Its result is confounded on this point in the same way. The steps are 1, 3, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, and 35. The script of this run has one `optimizer.step()` call, inside the step loop, and no skip flag. The Opus and `gpt-5.5` checks above are read with this in mind. The later runs that skip these steps are in `results/grpo-slope-reward.md`.

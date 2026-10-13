@@ -40,10 +40,8 @@ The mean count per step is 2.975. That is 119 length hard-zeros over 40 steps. T
 
 Of those rollouts, 113 are under 150 words, 6 are over 375, and 1 hit 700 tokens. The 700-token hit is also over 375, a step-40 rollout of 580 words, so the three reason counts sum to 120 and the union is 119. 113 of 160 rollouts, 70.6%, are under 150 words. 26 of 40 steps have a mean word count under 150. Most of the run is under 150 words.
 
-The proposal for the next run is a floor of 100 words. The current config keeps its floor of 150.
+At the time of this note the proposal for the next run was a floor of 100 words, and the config kept its floor of 150. The sweep that ran next used a window of 100 to 300 words (`results/grpo-length-200-t-sweep.md`).
 &nbsp;
-## Next experiment
+## What ran next
 
-This experiment has not started. It waits for Eli's OK.
-
-T is 4, 2, and 1. Each value gets 2 seeds. That is 6 runs of 80 steps. The stop rules are the same as the JSON run: stop if the Opus win rate is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps. Every check reports the Opus win rate, the `gpt-5.5` win rate, and both detector scores.
+The six-run plan that stood here, T = 4, 2, and 1 with two seeds each and a floor of 100 words, was not run as written. The sweep that ran used one seed, 42, for each T, with a length window of 100 to 300 words, and 80 steps, and the seed-2 runs did not start. The record is `results/grpo-length-200-t-sweep.md`. This J2 run also had 24 of 40 steps with all-equal rewards on which the optimizer still stepped (`results/grpo-sonnet-json.md`).

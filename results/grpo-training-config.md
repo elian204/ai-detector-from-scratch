@@ -100,7 +100,7 @@ The reward judge that passed is `claude-sonnet-5-5` with a JSON schema. The requ
 
 One probe returned HTTP 200, `{"winner":"tie"}`, and model `claude-sonnet-5-5`. The free-text last-line fallback was not used. The identical-answer check was a tie on all 10 pairs. Held-out was 30 of 30. High and medium-high pairs had no misses. Medium pairs had no misses. Low pair 4 returned B then A, and low pair 2 returned A then B. Those two low pairs are misses, and low misses do not fail the bar. Parse failures were 0. The dry run had a real spread on 15 of 20 groups and 0 parse failures. The record is `results/grpo-sonnet-json.md`.
 
-The 40-step run uses this JSON verdict as the only reward judge. The response budget is 700 tokens. `hard_i` is 0 under 150 words, over 375 words, under 30 words, or on a 700-token hit. The evaluation judge is `claude-opus-5-5`, written A or B, both orders, and it stays out of the reward. This run stops if the Opus win rate is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps. Each check uses 50 validation prompts. The forced-tool format in the previous section was rejected and is not used. The run finished all 40 steps. The final Opus win rate versus the base was 26 of 39. `gpt-5.5` on the same texts was 29 of 41. Weights stayed on the lab machine.
+The 40-step run uses this JSON verdict as the only reward judge. The response budget is 700 tokens. `hard_i` is 0 under 150 words, over 375 words, under 30 words, or on a 700-token hit. The evaluation judge is `claude-opus-5-5`, written A or B, both orders, and it stays out of the reward. This run stops if the Opus win rate is under 40%, or under 45% at two checks in a row, or the gate-fire count rises for 20 consecutive steps. Each check uses 50 validation prompts. The forced-tool format in the previous section was rejected and is not used. The run finished all 40 steps. The final Opus win rate versus the base was 26 of 39 on all pairs. On the 18 pairs within 1.2 times the base's length it was 5 of 11, and both detector means at step 40 were below the base's (sigmoid(z / 4) 0.1971 against 0.2655, DistilBERT 0.0924 against 0.2160), as in `results/grpo-step40-length.md`. `gpt-5.5` on the same texts was 29 of 41 on all pairs and 7 of 14 within the band. The run had 24 of 40 steps with all-equal rewards, and its script called `optimizer.step()` on those steps (see the confound at the end of this note). Weights stayed on the lab machine.
 
 &nbsp;
 ## Length-matched setup
@@ -119,7 +119,7 @@ The sweep has finished. T = 4 stopped at step 40, T = 2 finished 80 steps, and T
 
 The gates in the sections above, including 150 through 375 and the 1616 cap, are the gates those earlier runs used.
 
-The quality-gate reward, q_i times the product with no win fraction, is written in `results/grpo-quality-gate-reward.md`. Its dry run at T = 1 had a real spread in 15 of 20 groups. The T = 1 run stopped at step 40 with the Opus win rate at 19 of 47 and then 18 of 43. The policy drifted to answers over 300 words, and 28 of 40 steps had no judged rollout and no gradient.
+The quality-gate reward, q_i times the product with no win fraction, is written in `results/grpo-quality-gate-reward.md`. Its dry run at T = 1 had a real spread in 15 of 20 groups. The T = 1 run stopped at step 40 with the Opus win rate at 19 of 47 and then 18 of 43. The policy drifted to answers over 300 words, and 28 of 40 steps had no judged rollout. The count of steps with all advantages zero is 33, and the optimizer still stepped on them (`results/grpo-slope-reward.md`).
 
 The slope reward replaces the quality-gate reward for the next run. It is written in `results/grpo-slope-reward.md`.
 
@@ -129,7 +129,7 @@ reward_i = hard_i * length_score_i * trigram_ratio_i ** 2 * (q_i + 0.3 * s_i)
 
 hard_i is 0 only for a stub under 30 words or a 700-token runaway. There is no 100 to 300 word window. length_score_i = min(w, 203) / max(w, 203). The prompt asks for approximately 200 words. The matched base is the gated-in pool sample closest in word count, and only the stub and runaway rules gate the pool. The judge is the JSON verdict as before: no tools, no temperature, both orders. Group size 4, `max_new_tokens` 700, temperature 0.8, `top_p` 0.9, seed 42, AdamW at 1e-5, no KL.
 
-A step whose advantages are all zero skips the optimizer entirely. The earlier sweep and quality-gate scripts called `optimizer.step()` on every step, so a zero-advantage step still moved the weights through AdamW momentum and weight decay. The slope run follows the repo `--skip-zero-advantage-updates` behavior: no backward, no clip, no `optimizer.step()`. The check is in `results/grpo-slope-reward.md`.
+A step whose advantages are all zero skips the optimizer entirely. The earlier sweep, quality-gate, and Sonnet JSON scripts called `optimizer.step()` on every step, so a zero-advantage step still moved the weights through AdamW momentum and weight decay. The slope run follows the repo `--skip-zero-advantage-updates` behavior: no backward, no clip, no `optimizer.step()`. The check is in `results/grpo-slope-reward.md`.
 
 The dry run of this reward on two sets of 20 groups, base rollouts and rollouts of the T = 1 step-40 checkpoint, had a real spread in 20 of 20 groups on both sets, 0 parse failures, and a gradient in 20 of 20 groups on both sets.
 
@@ -139,4 +139,4 @@ The slope run was repeated with seed 2 in `results/grpo-slope-seed2.md`. The tra
 
 A rank reward replaced the sigmoid term in `results/grpo-rank-reward.md`. reward_i = hard_i * length_score_i * trigram_ratio_i ** 2 * (q_i + 0.3 * r_i), where r_i is the rank of z_i among the group's four rollouts scaled to [0, 1], with ties sharing the average rank. Its dry run had a real spread in 20 of 20 groups on both sets. The seed-42 run stopped at step 40 with an Opus win rate of 13 of 48, while the detector scores rose to about 4 times the base.
 
-The T sweep and the quality-gate run did not skip zero-advantage steps, so AdamW momentum moved the weights on those steps. Their results are confounded on that point, as written in `results/grpo-slope-reward.md`.
+The T sweep, the quality-gate run, and the Sonnet JSON 40-step run did not skip zero-advantage steps, so AdamW momentum moved the weights on those steps. The Sonnet JSON run had 24 of 40 steps with all four rewards equal to 0. Their results are confounded on that point, as written in `results/grpo-slope-reward.md`.

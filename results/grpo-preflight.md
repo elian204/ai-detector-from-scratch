@@ -5,7 +5,7 @@ No GRPO and no training. The 40-step pilot was not started.
 &nbsp;
 ## Confidence bands
 
-The signals are the ones already in `results/grpo-reference-labels.md`. The 25 pairs were not rescored. The judge there is `gpt-4.1-mini-2025-04-14`, both orders, signal = (m1 + m2) / 2.
+The reference labels and the confidence bands below were assigned by Claude Opus. Eli Bogdanov reviewed them as matching his judgment. They are model labels, not human labels. The signals are the ones already in `results/grpo-reference-labels.md`. The 25 pairs were not rescored. The judge there is `gpt-4.1-mini-2025-04-14`, both orders, signal = (m1 + m2) / 2.
 
 The exclusion set is pairs 13, 14, 16, 18, and 21. Pairs 9, 13, and 25 are not this exclusion set. The excluded pairs are outside the bands below.
 

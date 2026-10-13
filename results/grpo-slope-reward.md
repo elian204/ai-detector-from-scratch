@@ -1,13 +1,13 @@
 &nbsp;
 # Slope reward
 
-The quality-gate reward, `results/grpo-quality-gate-reward.md`, passed its dry run and then failed in training. The reward was 0 for most rollouts, so 28 of 40 steps had no judged rollout and no gradient, and the policy drifted to answers over 300 words. This note replaces it with a reward that has a slope everywhere. It records the optimizer check, the reward, and a dry run on two sets of 20 groups. The run that followed is at the end of the note.
+The quality-gate reward, `results/grpo-quality-gate-reward.md`, passed its dry run and then failed in training. The reward was 0 for most rollouts, so 28 of 40 steps had no judged rollout. The count of steps with all advantages zero is 33, as the confound section below shows, and the optimizer still stepped on them. The policy drifted to answers over 300 words. This note replaces it with a reward that has a slope everywhere. It records the optimizer check, the reward, and a dry run on two sets of 20 groups. The run that followed is at the end of the note.
 &nbsp;
 ## Optimizer check
 
 The question was what a zero-advantage step does to the optimizer. The repo trainer, `scripts/18_reinforcement-learning/05_train_grpo_human_writing.py`, has a flag `--skip-zero-advantage-updates`, and the flag is off by default. With it on, `compute_grpo_loss` computes the advantages and tests them with `torch.allclose(advantages, 0, atol=1e-8, rtol=0)`. If they are all zero it returns `loss_tensor = None` before any log-probability forward. The train loop runs `zero_grad`, `backward`, `clip_grad_norm_` and `optimizer.step()` only inside `if stats["loss_tensor"] is not None`. So with the flag on, a zero-advantage step skips the optimizer entirely. AdamW momentum, the second moment, the step count, and weight decay are all untouched.
 
-The earlier sweep and quality-gate scripts did not do this. They have their own training loop, they did not pass the flag, and they called `optimizer.step()` on every step. On a zero-advantage step the loss was exactly zero and the gradient was zero, but AdamW still ran. It applied the stored momentum, which moves the weights, it applied weight decay, and it incremented the step count.
+The earlier sweep, quality-gate, and Sonnet JSON 40-step scripts did not do this. They have their own training loop, they did not pass the flag, and they called `optimizer.step()` on every step. On a zero-advantage step the loss was exactly zero and the gradient was zero, but AdamW still ran. It applied the stored momentum, which moves the weights, it applied weight decay, and it incremented the step count.
 
 A short check shows the difference. `/tmp/grpo_zero_adv_check.py` imports the repo functions, builds a small linear model with AdamW at learning rate 1e-5, and takes 3 normal steps. Then it takes one zero-advantage step both ways.
 
@@ -19,7 +19,7 @@ The slope run uses the skip. Its script, `/tmp/grpo_len200_slope_train.py`, does
 &nbsp;
 ## Confound in the earlier runs
 
-The T sweep, `results/grpo-length-200-t-sweep.md`, and the quality-gate run, `results/grpo-quality-gate-reward.md`, did not skip zero-advantage steps. Their training loops called `optimizer.step()` on every step. On a step whose advantages were all zero the loss and the gradient were exactly zero, but AdamW still applied its stored momentum and its weight decay, and its step count advanced. So the weights moved on those steps. The results of those runs are confounded on this point. They should be read as runs with an extra update on every zero-advantage step, not as runs that made no update there.
+The T sweep, `results/grpo-length-200-t-sweep.md`, the quality-gate run, `results/grpo-quality-gate-reward.md`, and the Sonnet JSON 40-step run, `results/grpo-sonnet-json.md`, did not skip zero-advantage steps. Their training loops called `optimizer.step()` on every step. On a step whose advantages were all zero the loss and the gradient were exactly zero, but AdamW still applied its stored momentum and its weight decay, and its step count advanced. So the weights moved on those steps. The results of those runs are confounded on this point. They should be read as runs with an extra update on every zero-advantage step, not as runs that made no update there.
 
 Counting the steps by the repo criterion, advantages all within 1e-8 of zero, in the saved step logs:
 
@@ -29,8 +29,9 @@ Counting the steps by the repo criterion, advantages all within 1e-8 of zero, in
 | T = 2 | 80 | 4 |
 | T = 1 | 40 | 4 |
 | Quality gate, T = 1 | 40 | 33 |
+| Sonnet JSON 40-step run | 40 | 24 |
 
-For the sweep the count is small, so the effect on those results is probably small, though it cannot be measured from the logs. For the quality-gate run it is large. 33 of 40 steps moved the weights through momentum alone. The earlier note counted 28 steps with no judged rollout. The other 5 had a judged rollout, but every reward in the group was equal. The drift to answers over 300 words in that run cannot be separated from this. None of these runs were repeated with the skip. The slope runs, and every run after them, skip these steps, and zero steps had no gradient in the seed-42 slope run.
+For the sweep the count is small, so the effect on those results is probably small, though it cannot be measured from the logs. For the quality-gate run it is large. 33 of 40 steps moved the weights through momentum alone. The earlier note counted 28 steps with no judged rollout. The other 5 had a judged rollout, but every reward in the group was equal. The drift to answers over 300 words in that run cannot be separated from this. The Sonnet JSON run had 24 of 40 steps with all four rewards equal to 0, found in its saved step log and checked against its script, which has a single unconditional `optimizer.step()`. Its zero-advantage steps moved the weights through momentum as well, so its result is confounded in the same way. None of these runs were repeated with the skip. The slope runs, and every run after them, skip these steps, and zero steps had no gradient in the seed-42 slope run.
 &nbsp;
 ## Reward
 

@@ -115,7 +115,7 @@ word salad, and for digit salad.
 | --- | --- | --- |
 | distinct-3-gram | **falls** 0.667 -> 0.613 | **rises** 0.765 -> 0.913 |
 | base-model logprob | **rises** -1.00 -> -0.39 | **falls** -0.95 -> -4.67 |
-| held-out detector | agrees, 0.9986 | diverges, 0.8926 |
+| held-out detector (logistic regression) | agrees, 0.9986 | diverges, 0.8926 |
 
 Repetition is maximally *predictable*, so a language model likes it and mean
 token logprob goes up. Word salad never repeats a trigram, so distinct-n-gram
@@ -157,8 +157,10 @@ Three things the replication overturned from the single-pair reading:
   0.999 human.
 * "bf16 stays in the repetition regime" was wrong. Each bfloat16 seed settled
   in a different basin; seed 44 ended in **coherent on-topic prose** that the
-  training verifier rates ~0.9 human and the held-out detector rates ~0.3 —
-  verifier overfitting on real text, in the least-optimised run.
+  training verifier rates ~0.9 human and the held-out detector (logistic
+  regression, the `analyze_run.py` default) rates 0.3964 — verifier overfitting
+  on real text, in the least-optimised run. Float32 seed 44 ends at 0.3770 on the
+  same detector, with a collapsed repeated-string end state.
 
 What remains **not** established is *why* bfloat16 avoids collapse. The frozen
 87% of parameters (a structural regulariser) and the ~14× smaller effective step

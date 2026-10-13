@@ -63,7 +63,7 @@ Step 495, target 50, digit salad, 51 words, P(human) 0.9995, reward 0.980:
 ( Take 1 4 4 / 4 / 4 / ../ ../ /../ / 3  [ align ] Tarefas Group common Core 4l - 4l 4l 4/4 /4 4 / 4 /
 ```
 
-Bfloat16 seed 44 ended in coherent prose. The training verifier scored it about 0.9 human and the held-out detector about 0.3. Why bfloat16 collapses less is not settled.
+Bfloat16 seed 44 ended in coherent prose. The training verifier scored it about 0.9 human and the held-out detector about 0.3. The held-out detector in the phase-2 tables is the logistic-regression detector, the default of `analyze_run.py`. Rescoring the 200 rollouts of steps 451 to 500 of that run gave 0.3964 on it and 0.9480 on DistilBERT. Float32 seed 44 also ends low on the same detector, at 0.3770, with a collapsed repeated-string end state (`seed-replication/summary.txt`). Why bfloat16 collapses less is not settled.
 &nbsp;
 ## 3. 250 words, cut at 416 tokens
 
@@ -135,7 +135,7 @@ The no-penalty step 60, scored after the fact with the same trigram function, wo
 &nbsp;
 ## 7. KL, β = 0.05
 
-`results/grpo-250w-kl`. Fresh base model, 60 steps, trigram off, β = 0.05. Same prompt at step 60, `train-00770`.
+`results/grpo-250w-kl`. Fresh base model, 60 steps, trigram off, β = 0.05. This section covers the β = 0.05 run only. The β = 0.5 run, with the same setup and loops of a return instruction at step 60, is recorded in `results/grpo-250w-kl-beta0.5/README.md`. Same prompt at step 60, `train-00770`.
 
 Group mean: length 0.234, kl 1.051, reward 0.180, 151.0 words, training P(human) 0.9962. The mean hides the split.
 
@@ -170,7 +170,7 @@ Training P(human) is 0.9905, 0.9979, 0.9987, 0.9978. DistilBERT, temperature 1.2
 
 A training score near 0.999 is not a writing result. The same score sits on the digit salad, the `of the U.S.` loop, the question-phrase loop, the template, the spaceless tail, and `<content>`.
 
-DistilBERT agreeing is not a second pass. It calls those strings human too. The held-out drop that is on record is bfloat16 seed 44, coherent prose, training about 0.9 and held-out about 0.3. One 1616 step-20 answer is the other way around: training 0.998, DistilBERT 0.132.
+DistilBERT agreeing is not a second pass. It calls those strings human too. The held-out drop that is on record, on the logistic-regression held-out detector, is bfloat16 seed 44, coherent prose, training about 0.9 and held-out 0.3964, and float32 seed 44, training 0.9994 and held-out 0.3770. One 1616 step-20 answer is the other way around: training 0.998, DistilBERT 0.132.
 
 The 1616 budget did not reproduce the 250-word `of the U.S.` ending through step 60. The continuation did not either, and it cannot be read as step 100 of the original Adam state.
 

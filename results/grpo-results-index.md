@@ -1,19 +1,20 @@
 &nbsp;
 # GRPO results index
 
-This file indexes the GRPO work on `Qwen/Qwen3-0.6B-Base` against the frozen `qwen3-variable` detector, with and without a judge in the reward. It was built from the existing notes under `results/`, the committed `run.log` files, and the saved `summary.json` and `steps.jsonl` files of the 200-word runs, which stay on the lab machine. No training and no judge call was made for it. A cell that the material does not fill says `n/a` and gives the reason. The inconsistencies found while reading are listed at the end of the Confounds section.
+This file indexes the GRPO work on `Qwen/Qwen3-0.6B-Base` against the frozen `qwen3-variable` detector, with and without a judge in the reward. It was built from the existing notes under `results/`, the committed `run.log` files, and the saved `summary.json` and `steps.jsonl` files of the 200-word runs, which stay on the lab machine. No training was run for it. The common-scale detector scores in section 1 were rescored from saved answers on CPU, and the evaluation-judge qualification in section 2 made API calls. A cell that the material does not fill says `n/a` and gives the reason. The inconsistencies found while reading, and which of them were fixed, are listed at the end of the Confounds section.
 &nbsp;
 ## Headline findings
 
 Each point is a statement of a note, with the note named.
 
 1. Training against the detector alone raises the training verifier's P(human) to about 0.999 within about 50 steps and the text degrades. In the short-target pilot the float32 runs mode-collapsed in 4 of 4 seeds and the bfloat16 runs in 0 of 4, which met the pre-registered rule (Fisher p = 0.014). The 250-word float32 runs ended in loops that both detectors call human. Sources: `grpo-human-baseline/README.md`, `grpo-human-baseline/seed-replication/RESULT.md`, `grpo-lab-note.md`.
-2. Two reward judges were used. `gpt-4.1-mini` failed the OpenAI gate and was accepted for the 40-step pilot on the reference bands, and that pilot stopped at step 20. `claude-sonnet-5-5` with a JSON schema then passed (identical answers 10 of 10 ties, held-out 30 of 30) and is the reward judge of every later run. The local Qwen2.5 pairwise judges failed the support-vector pair, and a forced Sonnet tool call was rejected by the API. The evaluation judges, Opus and `gpt-5.5`, were never qualified. Sources: section 2.
+2. Two reward judges were used. `gpt-4.1-mini` failed the OpenAI gate and was accepted for the 40-step pilot on the reference bands, and that pilot stopped at step 20. `claude-sonnet-5-5` with a JSON schema then passed (identical answers 10 of 10 ties, held-out 30 of 30) and is the reward judge of every later run. The local Qwen2.5 pairwise judges failed the support-vector pair, and a forced Sonnet tool call was rejected by the API. The evaluation judges, Opus and `gpt-5.5`, were qualified afterwards on the held-out 30 and the 10 identical answers. Both got 30 of 30. Neither gave a tie verdict on identical answers: both put every letter they gave on slot A, and the both-order rule turns that into a tie. Sources: section 2, `grpo-eval-judge-qualification.md`.
 3. With Sonnet in the reward and Opus as the evaluation judge, no reward so far held quality and raised both detector scores. T = 1 raised both detectors about 3 times and Opus preferred the trained answer in 18 of 46 pairs. T = 4 stopped at step 40 on 17 of 44 with both detectors slightly above the base, and T = 2 finished 80 steps at 49 of 90 with both below the base. The slope reward held quality (Opus 49 of 83, `gpt-5.5` 51 of 80 at step 80) with both detectors below the base at three of its four checks and level at the fourth. The rank reward at step 40 and the std-floor reward at w = 0.3 at step 20 raised both detectors and lost quality (13 of 48 in both). Sources: `grpo-length-200-t-sweep.md`, `grpo-slope-reward.md`, `grpo-rank-reward.md`, `grpo-std-floor-reward.md`.
 4. The T = 1 detector gain is not typography. Straightening quotes and stripping markup left the Qwen3 sigmoid gap at 0.198 (from 0.189) and the DistilBERT gap at 0.360 (from 0.394). The Qwen3 detector does read layout: flattening whitespace moved its trained mean from 0.374 to 0.741. Source: `grpo-typography-test.md`.
 5. Length is not pinned by the reward. Slope seed 2 stopped at step 41 and std-floor w = 0.1 at step 37, both on a median length above 350 words, while slope seed 42 never passed a 10-step median of 205. Sources: `grpo-slope-seed2.md`, `grpo-std-floor-reward.md`, `grpo-slope-reward.md`.
 6. The training judge did not clearly track the evaluation judge. In the std-floor w = 0.3 run Opus fell to 27% at step 20 while Sonnet's training q stayed at 0.45 to 0.50. In the rank run both fell. The adaptive constraint was therefore not run. Source: `grpo-sonnet-vs-opus-q.md`.
-7. Every setting has one seed except slope, and the earliest sweep and quality-gate runs did not skip zero-advantage steps. See the Confounds section. Source: `grpo-slope-reward.md`.
+7. Every setting has one seed except slope, and the sweep, the quality-gate run, and the Sonnet JSON 40-step run did not skip zero-advantage steps. The Sonnet JSON run had 24 of 40 such steps. See the Confounds section. Source: `grpo-slope-reward.md`.
+8. On one detector scale, raw `qwen3-variable` z and DistilBERT with trained minus matched base, three L runs raise both detectors a lot and lose on Opus: T = 1 (z +2.74, DistilBERT +0.39), rank (+3.04, +0.30), and std floor w = 0.3 (+3.53, +0.41). T = 4 at step 40 is +0.34 and +0.03. Every other L run and J2 is between -1.43 and +0.34 on z and between -0.12 and +0.03 on DistilBERT. The sigmoid(z / T) columns cannot show this across T. Source: the common-scale table in section 1.
 &nbsp;
 ## 1. Runs
 
@@ -32,12 +33,12 @@ The commit hashes are the commits that added or changed the recording note. For 
 | E3 | seed replication, 6 runs: seeds 43, 44, 45 in bf16 and fp32 | 43, 44, 45 | 500 of 500 each | none, all `EXIT=0` | no API judge; two waves of about 55 min | `3429e0b` |
 | E4 | `grpo-250w-fp32` | 42 | 100 of 100 | none, finished | n/a: GPU time not documented; 12.23 GB peak | `1cea54b`, `1fc6d34` |
 | E5 | `grpo-250w-cap1616` | 42 | 60 of 100 | training process died saving the step-60 checkpoint: disk full | n/a: GPU time not documented | `ad5fa69`, `95b111f`, `1fc6d34` |
-| E5b | `grpo-250w-cap1616/continuation`, steps 51 to 100 from the step-50 checkpoint | 42 | 100 of 100 | none, finished | n/a: GPU time not documented; 15.50 GB peak | `95b111f`, `1fc6d34` |
+| E5b | `grpo-250w-cap1616/continuation`, steps 51 to 100 from the step-50 checkpoint | 42 | 100 of 100 | none, finished | n/a: GPU time not documented; 15.50 GB peak, from the continuation's `run.log` (the parent run died without a peak line) | `95b111f`, `1fc6d34` |
 | E6 | `grpo-250w-trigram` | 42 | 60 of 60 | none, finished | n/a: GPU time not documented; 15.29 GB peak | `95b111f`, `1fc6d34` |
 | E7 | `grpo-250w-kl`, KL beta 0.05 | 42 | 60 of 60 | none, finished | n/a: GPU time not documented; 17.50 GB peak | `4cb7923` |
 | E8 | `grpo-250w-kl-beta0.5` | 42 | 60 of 60 | none, finished | n/a: GPU time not documented; 17.72 GB peak | `d5492aa` |
-| J1 | 40-step pilot (`grpo-pilot-40`) | 42 in the note; `shuffle_seed` 20261008 in `summary.json` | 20 of 40 | Opus win rate under 50% at step 20 (7 of 18, 38.9%) | Opus checks $0.4936 + $0.5324; reward-judge cost n/a: not recorded, estimated $0.026 per step | `c287f3e`, `e06e8a0` |
-| J2 | Sonnet JSON 40-step run (`grpo-sonnet-json`), the first run to finish 40 of 40 with no stop rule | 42 (`shuffle_seed` 20261008) | 40 of 40 | none, finished | reward judge $0.320332 over 112 calls (note); $5.34 with the Opus and Sonnet check calls, summed from `summary.json`, not stated in a note; `gpt-5.5` final call n/a: the note gives tokens only | `711d081`, `0e5bb0e`, `5c0540e` |
+| J1 | 40-step pilot (`grpo-pilot-40`) | 42, also the train-split shuffle seed; `shuffle_seed` 20261008 in `summary.json` only sets the A/B side of the hand-reading pairs | 20 of 40 | Opus win rate under 50% at step 20 (7 of 18, 38.9%) | Opus checks $0.4936 + $0.5324; reward-judge cost n/a: not recorded, estimated $0.026 per step | `c287f3e`, `e06e8a0` |
+| J2 | Sonnet JSON 40-step run (`grpo-sonnet-json`), the first run to finish 40 of 40 with no stop rule | 42, also the train-split shuffle seed; `shuffle_seed` 20261008 only sets the A/B side of the hand-reading pairs | 40 of 40 | none, finished | reward judge $0.320332 over 112 calls (note); $5.34 with the Opus and Sonnet check calls, summed from `summary.json`, not stated in a note; `gpt-5.5` final call n/a: the note gives tokens only | `711d081`, `0e5bb0e`, `5c0540e` |
 | L1 | length-matched sweep, T = 4 | 42 | 40 of 80 | Opus win rate under 40% (17 of 44, 38.6%) | $3.068520; 1 h 28 min | `b89057d` |
 | L2 | length-matched sweep, T = 2 | 42 | 80 of 80 | none, finished | $8.565829; 3 h 32 min | `b89057d` |
 | L3 | length-matched sweep, T = 1 | 42 | 40 of 80 | Opus win rate under 40% (18 of 46, 39.1%); step 20 was already under 45% | $2.992922; 1 h 37 min | `b89057d` |
@@ -61,8 +62,8 @@ The "first clean 40-step run" is not a phrase any note uses. J2 is the first run
 | E5, E5b | same as E4 with the 1616-token budget; E5b has a fresh AdamW state | none | same | same | yes (`run.sh`) |
 | E6 | P(human) * length_score * (unique trigrams / all trigrams), linear trigram, 1616 budget, fp32 | none | same | same | yes (`run.sh`) |
 | E7, E8 | P(human) * length_score - beta * kl, beta 0.05 and 0.5, no trigram term, 1616 budget, fp32 | none | same | same | yes (`run.sh`) |
-| J1 | hard * trigram_ratio^2 * sigmoid(z / 4) * length_score * wins / N, T = 4; a win is gpt-4.1-mini signal above 7; the frozen base answer is an opponent and counts in wins and N; bf16 (from `summary.json`, not in the note); grad clip 1.0; 1616 budget | reward `gpt-4.1-mini-2025-04-14`, both orders; evaluation `claude-opus-5-5` on `validation-00001` to `-00020`, both orders, agreed pairs | target 250; hard = 0 for under 30 words or a 1616-token hit | per-group z-score over the 4 rollouts only, as above | n/a: not documented; 0 of 20 steps had equal rewards, so the question did not arise |
-| J2 | same product formula, T = 4, win = both Sonnet orders agree; 700-token budget; bf16; grad clip 1.0 | reward `claude-sonnet-5-5`, JSON schema; evaluation Opus on 50 validation prompts every 10 steps with Sonnet on the same texts, `gpt-5.5` at the end | target 250; hard = 0 under 150 words, over 375 words, under 30 words, or at 700 tokens | same | n/a: not documented; 24 of 40 steps had all-equal rewards (from `summary.json`), and whether those steps called the optimizer is not recorded |
+| J1 | hard * trigram_ratio^2 * sigmoid(z / 4) * length_score * wins / N, T = 4; a win is gpt-4.1-mini signal above 7; the frozen base answer is an opponent and counts in wins and N; bf16 (`summary.json`, now also stated in the note); grad clip 1.0; 1616 budget | reward `gpt-4.1-mini-2025-04-14`, both orders; evaluation `claude-opus-5-5` on `validation-00001` to `-00020`, both orders, agreed pairs | target 250; hard = 0 for under 30 words or a 1616-token hit | per-group z-score over the 4 rollouts only, as above | n/a: not documented; 0 of 20 steps had equal rewards, so the question did not arise |
+| J2 | same product formula, T = 4, win = both Sonnet orders agree; 700-token budget; bf16; grad clip 1.0 | reward `claude-sonnet-5-5`, JSON schema; evaluation Opus on 50 validation prompts every 10 steps with Sonnet on the same texts, `gpt-5.5` at the end | target 250; hard = 0 under 150 words, over 375 words, under 30 words, or at 700 tokens | same | no; `optimizer.step()` ran on every step, including the 24 of 40 steps whose four rewards were all 0 (`steps.jsonl`; the script has one unconditional `optimizer.step()`) |
 | L1, L2, L3 | hard * trigram_ratio^2 * sigmoid(z / T) * length_score * wins / N, T = 4, 2, 1; wins count the other gated-in rollouts and the matched base | reward `claude-sonnet-5-5`, JSON schema, no tools, no temperature, both orders; evaluation Opus (steps 20, 40, 60 on 50 prompts; step 80 on 100 prompts with `gpt-5.5`), agreed pairs | target 203; hard = 0 under 100 words, over 300 words, under 30 words, or at 700 tokens | (r - mean) / (std + 1e-4) (stated for the quality-gate run and the repo loop; the sweep note does not restate it) | no; `optimizer.step()` ran every step |
 | L4 | hard * q * trigram_ratio^2 * sigmoid(z / 1) * length_score; q = 1 if Sonnet does not prefer the matched base in either order, else 0 (strict reading) | same | same window 100 to 300 words | (r - mean) / (std + 1e-4) | no |
 | L5, L6 | hard * length_score * trigram_ratio^2 * (q + 0.3 * sigmoid(z / 1)); q = 1, 0.5, 0 for a win in both orders, a split or tie or parse failure, a loss in both orders | same | target 203; hard = 0 only for under 30 words or a 700-token hit; no window | (r - mean) / (std + 1e-4), `unbiased=False` | yes, the repo criterion on the advantages (allclose, atol 1e-8) |
@@ -77,9 +78,9 @@ Opus is `claude-opus-5-5`. Win rate is trained over trained plus base, agreed pa
 
 | id | last check | Opus, all agreed pairs | Opus, within 20% length | `gpt-5.5`, all pairs and within 20% | Qwen3 sigmoid, trained vs base | DistilBERT P(human), trained vs base |
 | --- | --- | --- | --- | --- | --- | --- |
-| E1 | step 500 | n/a: no judge | n/a | n/a | training verifier P(human) 0.9981 at the end; base n/a: not measured in the run | held-out 0.9800 (`summary.txt`); the held-out detector is not named in the notes |
-| E2 | steps 451 to 500 | n/a | n/a | n/a | training verifier P(human) 0.9996, pinned from step 51; 105 collapsed steps | held-out 0.7564 |
-| E3 | step 500 | n/a | n/a | n/a | final train P(human): s43 bf 0.9993, s43 fp 0.9991, s44 bf 0.8844, s44 fp 0.9994, s45 bf 0.9993, s45 fp 0.9985 | held-out: s43 bf 0.8576, s43 fp 0.6783, s44 bf 0.3964, s44 fp 0.3770, s45 bf 0.9870, s45 fp 0.9891 |
+| E1 | step 500 | n/a: no judge | n/a | n/a | training verifier P(human) 0.9981 at the end; base n/a: not measured in the run | held-out 0.9800 (`summary.txt`), on the logistic-regression detector, the `analyze_run.py` default |
+| E2 | steps 451 to 500 | n/a | n/a | n/a | training verifier P(human) 0.9996, pinned from step 51; 105 collapsed steps | held-out 0.7564, logistic regression |
+| E3 | step 500 | n/a | n/a | n/a | final train P(human): s43 bf 0.9993, s43 fp 0.9991, s44 bf 0.8844, s44 fp 0.9994, s45 bf 0.9993, s45 fp 0.9985 | held-out, logistic regression: s43 bf 0.8576, s43 fp 0.6783, s44 bf 0.3964, s44 fp 0.3770, s45 bf 0.9870, s45 fp 0.9891 |
 | E4 | step 100 | n/a | n/a | n/a | training verifier P(human) 0.9995 on the one "of the U.S." loop | 0.9958 on the loop |
 | E5 | step 60 | n/a | n/a | n/a | 0.999047 | mean 0.997 on the four step-60 loops |
 | E5b | step 100 | n/a | n/a | n/a | 0.9973 | 0.9993, 0.9995, 0.9989, 0.9991 |
@@ -101,6 +102,61 @@ Opus is `claude-opus-5-5`. Win rate is trained over trained plus base, agreed pa
 Reference values for the frozen base on the 250-word prompt, 80 answers: Qwen3 P(human) 0.133 and DistilBERT 0.223 (`grpo-base-detector-scores.md`). For L2 the note's T = 2 sigmoid is the first value, and the T = 1 sigmoid in `grpo-t-sweep-qualitative.md` is the second. The L1 sigmoid at T = 1 is n/a: no note gives it. The percentages are the notes' counts divided out. The notes give percentages for L5 to L9 and J1 and J2, and the other percentages are arithmetic on the stated counts. L4 had 47 of 50 and 48 of 50 trained answers over 300 words at its two checks, so its length band is nearly empty.
 
 The step-80 Wilson 95% intervals the notes give are 0.48 to 0.69 for L5 Opus and 0.53 to 0.73 for L5 `gpt-5.5` (`grpo-slope-reward.md`), 0.36 to 0.66 for L8 at step 20 (`grpo-std-floor-reward.md`), and 0.17 to 0.41 for L7 at step 40 (`grpo-rank-reward.md`). No other check has an interval in a note.
+
+### Common-scale detector gaps
+
+The sigmoid(z / T) columns above use each run's own T, so L1 (T = 4) and L2 (T = 2) cannot be compared with the T = 1 runs. This table puts every run on one scale. z is the raw human-class logit of the frozen `qwen3-variable` detector, before the saved temperature, and the gap is the mean of the trained answer's z minus the matched base answer's z, so positive means more human-like. DistilBERT is P(human), and its gap is trained minus base. The base is the same matched base answer as in the run's quality check. Both gaps are paired means over the same prompts.
+
+| id | check | n | mean raw z, trained vs base | z gap | DistilBERT, trained vs base | DistilBERT gap | how obtained |
+| --- | --- | ---: | --- | ---: | --- | ---: | --- |
+| L1 | step 40 | 50 | -3.963 vs -4.298 | +0.335 | 0.2063 vs 0.1731 | +0.033 | stored in `eval-step-*.jsonl`, no rescoring |
+| L2 | step 80 | 100 | -4.096 vs -3.573 | -0.523 | 0.1734 vs 0.2852 | -0.112 | stored in `eval-step-*.jsonl`, no rescoring |
+| L3 | step 40 | 50 | -0.951 vs -3.695 | +2.745 | 0.6267 vs 0.2327 | +0.394 | stored in `eval-step-*.jsonl`, no rescoring |
+| L4 | step 40 | 50 | -5.153 vs -4.805 | -0.348 | 0.0834 vs 0.1747 | -0.091 | stored in `eval-step-*.jsonl`, no rescoring |
+| L5 | step 80 | 100 | -4.474 vs -4.374 | -0.101 | 0.1506 vs 0.2351 | -0.085 | stored in `eval-step-*.jsonl`, no rescoring |
+| L6 | step 40 | 50 | -5.100 vs -4.235 | -0.866 | 0.1209 vs 0.2169 | -0.096 | stored in `eval-step-*.jsonl`, no rescoring |
+| L7 | step 40 | 50 | -1.990 vs -5.030 | +3.040 | 0.4008 vs 0.1042 | +0.297 | stored in `eval-step-*.jsonl`, no rescoring |
+| L8 | step 20 | 50 | -4.356 vs -3.770 | -0.586 | 0.1672 vs 0.1838 | -0.017 | stored in `eval-step-*.jsonl`, no rescoring |
+| L9 | step 20 | 50 | -0.861 vs -4.393 | +3.532 | 0.5606 vs 0.1472 | +0.413 | stored in `eval-step-*.jsonl`, no rescoring |
+| J2 | step 40 | 50 | -5.846 vs -4.419 | -1.427 | 0.0924 vs 0.2160 | -0.124 | trained stored, base rescored on CPU; a rescore of the trained texts matched the stored z within 0.031 and DistilBERT exactly |
+| J1 | step 20 | 20 | -2.404 vs -2.955 | +0.551 | 0.4996 vs 0.3870 | +0.113 | both sides of the 20 saved hand-reading pairs rescored on CPU; the base is the saved index-0 answer |
+
+The L rows read the `z`, `base_z`, `distilbert`, and `base_distilbert` fields that each check wrote, so no model was run for them. J1 and J2 were rescored from saved answers on CPU, with no generation and without GPU 3, which held the breakfast job. The sigmoid columns above are not comparable across T, and the z gap here is. L8 and L9 stopped at step 20, so step 20 is their last check. The z gap is in logit units, so a gap of 3 is about a factor of 20 in the odds of the human class.
+
+The same gaps at every check the run reached, as z gap / DistilBERT gap:
+
+| id | step 20 | step 40 | step 60 | step 80 |
+| --- | --- | --- | --- | --- |
+| L1 | -0.577 / -0.074 | +0.335 / +0.033 | - | - |
+| L2 | -0.802 / -0.005 | -0.966 / +0.009 | -1.417 / -0.100 | -0.523 / -0.112 |
+| L3 | +2.835 / +0.411 | +2.745 / +0.394 | - | - |
+| L4 | -0.495 / -0.102 | -0.348 / -0.091 | - | - |
+| L5 | -1.336 / -0.098 | -0.062 / -0.005 | -1.053 / -0.054 | -0.101 / -0.085 |
+| L6 | -0.366 / -0.050 | -0.866 / -0.096 | - | - |
+| L7 | -0.026 / +0.021 | +3.040 / +0.297 | - | - |
+| L8 | -0.586 / -0.017 | - | - | - |
+| L9 | +3.532 / +0.413 | - | - | - |
+
+The step-80 checks of L2 and L5 use 100 prompts and the other checks 50. J1 and J2 are given at their last check only.
+
+The E runs have no matched base and no quality check. The rows below take the 20 rollouts of the last 5 steps of each run, sampled on training prompts, and compare them with one reference, the 80 frozen-base answers to the 250-word prompt (mean z -4.372, DistilBERT 0.2226). These are unmatched gaps and indicative only. The prompts differ from the base prompts. For E1, E2, and E3 the targets were 50 and 100 words with a 256-token budget, so those texts are far shorter than the 250-word base answers and the gap carries a length difference. No short-target base answers were saved, so a length-matched gap for E1 to E3 is n/a. The trained side is also the detector the run optimized, so these gaps measure how far the optimization went, not generalization. All rollouts were saved in `rollouts.jsonl`, so no run is n/a, and all of these were rescored on CPU.
+
+| id | rollouts | n | mean raw z, trained vs 80 base | z gap | DistilBERT, trained vs 80 base | DistilBERT gap |
+| --- | --- | ---: | --- | ---: | --- | ---: |
+| E1 | steps 496 to 500 | 20 | 5.425 vs -4.372 | +9.797 | 0.9984 vs 0.2226 | +0.776 |
+| E2 | steps 496 to 500 | 20 | 6.359 vs -4.372 | +10.731 | 0.9995 vs 0.2226 | +0.777 |
+| E3 s43 bf16 | steps 496 to 500 | 20 | 5.384 vs -4.372 | +9.756 | 0.9991 vs 0.2226 | +0.776 |
+| E3 s43 fp32 | steps 496 to 500 | 20 | 5.619 vs -4.372 | +9.991 | 0.9995 vs 0.2226 | +0.777 |
+| E3 s44 bf16 | steps 496 to 500 | 20 | 4.046 vs -4.372 | +8.418 | 0.9983 vs 0.2226 | +0.776 |
+| E3 s44 fp32 | steps 496 to 500 | 20 | 5.888 vs -4.372 | +10.260 | 0.9991 vs 0.2226 | +0.777 |
+| E3 s45 bf16 | steps 496 to 500 | 20 | 5.728 vs -4.372 | +10.100 | 0.9991 vs 0.2226 | +0.777 |
+| E3 s45 fp32 | steps 496 to 500 | 20 | 5.219 vs -4.372 | +9.591 | 0.9993 vs 0.2226 | +0.777 |
+| E4 | steps 96 to 100 | 20 | 5.825 vs -4.372 | +10.197 | 0.9960 vs 0.2226 | +0.773 |
+| E5 | steps 56 to 60 | 20 | 5.116 vs -4.372 | +9.488 | 0.9405 vs 0.2226 | +0.718 |
+| E5b | steps 96 to 100 | 20 | 5.412 vs -4.372 | +9.785 | 0.9507 vs 0.2226 | +0.728 |
+| E6 | steps 56 to 60 | 20 | 5.591 vs -4.372 | +9.963 | 0.9985 vs 0.2226 | +0.776 |
+| E7 | steps 56 to 60 | 20 | 4.811 vs -4.372 | +9.183 | 0.9803 vs 0.2226 | +0.758 |
+| E8 | steps 56 to 60 | 20 | 5.733 vs -4.372 | +10.105 | 0.9755 vs 0.2226 | +0.753 |
 
 ### Opus check history
 
@@ -160,10 +216,11 @@ One row per judge or method. Gold or reference labels for each set are described
 | 12 | `claude-sonnet-5-5` | written letter, pairwise prompt, `max_tokens` 32, temperature omitted | held-out 30; 20 of the 25 reference pairs; 10 identical pairs | same | identical answers: no opening letter in 10 of 10, so no slot preference was readable | $0.216448 for 120 calls; dry run $0.181064 | qualification passed (held-out 30 of 30, no misses in High and Medium); dry run spread on 7 of 20 groups, so the run did not start | `grpo-sonnet-qualify.md` |
 | 13 | `claude-sonnet-5-5` | forced tool call `select_winner` | none sent | n/a | n/a: no verdicts | n/a: one probe, cost not stated | not runnable: HTTP 400, `tool_choice` type `tool` unsupported for this model | `grpo-sonnet-tool.md` |
 | 14 | `claude-sonnet-5-5` | JSON schema, `winner` in A, B, tie; no tools, no temperature; `max_tokens` 1024; both orders | held-out 30; 20 reference pairs; 10 identical pairs; dry run | same | identical answers: 20 of 20 calls returned `tie` | probe $0.000688; step 2 $0.246218; step 3 $0.209286; 200-word dry run $0.462480 | passed and adopted as the only reward judge: 10 of 10 ties, held-out 30 of 30, no misses in High and Medium (low pairs 2 and 4 missed, not counted), 0 parse failures, dry-run spread 15 of 20 | `grpo-sonnet-json.md`, `grpo-length-matched-dry-run.md` |
-| 15 | `claude-opus-5-5`, evaluation judge, never in a reward | written A or B, both orders, agreed pairs | n/a: no held-out, reference-band, or identical-answer run for Opus appears in any note | n/a | n/a: not measured | rates $4 and $20 per million tokens; $5.367 for the 505 calls of L5 | never qualified; used unqualified as the evaluation judge | `grpo-pilot-40.md`, `grpo-training-config.md` |
-| 16 | `gpt-5.5`, returned id `gpt-5.5-2026-04-23`, reasoning low | written letter, Responses API, both orders, agreed pairs | n/a: no qualification run in any note | n/a | n/a | $1.168 for 201 calls in L5; J2 final call 63,127 input and 9,688 output tokens | never qualified; used as a second evaluation judge only (J2 step 40, L2 and L5 step 80) | `grpo-sonnet-json.md`, `grpo-length-200-t-sweep.md`, `grpo-slope-reward.md` |
+| 15 | `claude-opus-5-5`, evaluation judge, never in a reward | written A or B, `max_tokens` 1024, no temperature, both orders, agreed pairs; retry once on a missing letter | held-out 30 (30 of 30 correct); 10 identical pairs; the 25 reference pairs were not used, because Opus assigned their labels | n/a: Opus labeled the reference pairs, so they cannot qualify it | held-out: A when the corrected text was in A and B when it was in B on every pair, so no position effect. Identical answers: 13 calls A, 0 B, 7 with no letter; a fresh read of those 7 prompts gave "The two answers are identical, so neither is better. If I must pick one: A" every time | $0.461164 for 80 calls; for scale, the 505 calls of L5 cost $5.367 | qualified on the held-out set: 30 of 30, no miss, no disagreement. Identical answers: 10 of 10 end as ties under the agreed-pair rule (5 pairs A in both orders, 5 with a missing letter), by position preference or a prose tie, not a tie verdict | `grpo-eval-judge-qualification.md` |
+| 16 | `gpt-5.5`, returned id `gpt-5.5-2026-04-23`, reasoning low | written letter, Responses API, `max_output_tokens` 1024, store false, both orders, agreed pairs; retry once on a missing letter | held-out 30 (30 of 30 correct); 10 identical pairs | see row 16b | held-out: no position effect. Identical answers: 20 of 20 calls A, 0 B, 0 parse failures | $0.225570 for 80 calls (1,422 reasoning tokens in 1,950 output); for scale, $1.168 for 201 calls in L5; J2 final call 63,127 input and 9,688 output tokens | qualified on the held-out set: 30 of 30, no miss. Identical answers: 10 of 10 end as ties under the agreed-pair rule, all by A in both orders, never by a tie verdict | `grpo-eval-judge-qualification.md` |
+| 16b | `gpt-5.5`, reasoning low, reference pairs only | same as row 16 | 20 in-band reference pairs (13, 14, 16, 18, 21 not sent) | Claude Opus labels reviewed by Eli, not human labels; 12 High and Med-High, 6 Medium, 2 Low | pair 9 returned B in both orders | $0.199460 for 40 calls | High and Med-High 12 of 12 correct, Medium 5 correct and 1 disagreement (pair 9), no Medium miss, so the band bar is met. Low pairs 2 and 4 are misses, reported only, and Sonnet JSON missed the same two | `grpo-eval-judge-qualification.md` |
 
-Sets. "Old 30" and "held-out 30" are constructed factual pairs with one false sentence, gold SHA hashed before scoring (`grpo-judge-length-matched.md`, `grpo-judge-methods.md`). The 20 prose-vs-junk pairs are two rollouts from one prompt group, with the prose side as gold, labeled per `grpo-early-answer-labels.md`; that note does not name the labeler. The 10 identical-answer pairs have the same base answer in both slots and expect a tie. The 25 reference pairs are in `grpo-prose-pairs.pdf` and `grpo-reference-labels.md`: pairs 1 to 20 are prose against prose and pairs 21 to 25 are trigram-run template essays against a normal answer. The labeling Opus snapshot, the assignment of bands, and the reason for the five out-of-band pairs are not stated in any note.
+Sets. "Old 30" and "held-out 30" are constructed factual pairs with one false sentence, gold SHA hashed before scoring (`grpo-judge-length-matched.md`, `grpo-judge-methods.md`). The 20 prose-vs-junk pairs are two rollouts from one prompt group, with the prose side as gold, labeled per `grpo-early-answer-labels.md`; that note does not name the labeler. The 10 identical-answer pairs have the same base answer in both slots and expect a tie. The 25 reference pairs are in `grpo-prose-pairs.pdf` and `grpo-reference-labels.md`: pairs 1 to 20 are prose against prose and pairs 21 to 25 are trigram-run template essays against a normal answer. The labels of the 25 reference pairs and the confidence bands were assigned by Claude Opus and reviewed by Eli as matching his judgment. They are model labels, not human labels (`grpo-reference-labels.md`, `grpo-preflight.md`). The Opus model id used for the labeling and the reason for the five out-of-band pairs are not stated in any note. The evaluation-judge rows 15 to 16b use the held-out 30 and the identical set of rows 6 and 14. Opus was not run on the reference pairs, and `gpt-5.5` was run on them separately in row 16b.
 
 The gate for the reference pairs is no misses on High and Med-High, at most one miss on Medium, and Low misses reported only (`grpo-preflight.md`). A miss is both orders naming the wrong side. A disagreement or a missing letter is not a miss.
 &nbsp;
@@ -171,7 +228,7 @@ The gate for the reference pairs is no misses on High and Med-High, at most one 
 
 ### a. Runs that did not skip zero-advantage steps
 
-L1 to L4 called `optimizer.step()` on every step. On a step whose advantages were all zero the gradient was zero, but AdamW still applied its stored momentum and weight decay, so the weights moved (`grpo-slope-reward.md`, optimizer check: a maximum weight change of 3.1e-6 in the check, against none on the repo skip path). The count of zero-advantage steps by the repo criterion, advantages within 1e-8 of zero, is below. I recounted these from each run's `steps.jsonl`, and the counts match the notes.
+L1 to L4 and J2 called `optimizer.step()` on every step. On a step whose advantages were all zero the gradient was zero, but AdamW still applied its stored momentum and weight decay, so the weights moved (`grpo-slope-reward.md`, optimizer check: a maximum weight change of 3.1e-6 in the check, against none on the repo skip path). The count of zero-advantage steps by the repo criterion, advantages within 1e-8 of zero, is below. I recounted these from each run's `steps.jsonl`, and the counts match the notes.
 
 | run | steps | zero-advantage steps | what the note says |
 | --- | ---: | ---: | --- |
@@ -179,9 +236,10 @@ L1 to L4 called `optimizer.step()` on every step. On a step whose advantages wer
 | L2, T = 2 | 80 | 4 | same |
 | L3, T = 1 | 40 | 4 | same |
 | L4, quality gate | 40 | 33 | large: 28 steps had no judged rollout and 5 had equal rewards, so most weight changes after the first steps came from momentum; the drift to answers over 300 words cannot be separated from this |
+| J2, Sonnet JSON 40-step run | 40 | 24 | all four rewards were 0 and the loss was exactly 0 on each of those steps, so every one of them moved the weights through momentum; the note did not state it before |
 | L5 to L9 | | 0 for L5, L6, L8, L9; 1 for L7 | these runs skip, so the one L7 step made no update |
 
-J1 had 0 of 20 steps with equal rewards. J2 had 24 of 40 steps with all-equal rewards in `summary.json`, and its note does not say whether those steps called the optimizer. The J2 case is not covered by the confound note, which names only the sweep and the quality-gate run.
+J1 had 0 of 20 steps with equal rewards. J2 had 24 of 40 steps with all-equal rewards, and its script has a single unconditional `optimizer.step()` per step with no skip path, so the optimizer did step on all 24 (steps 1, 3, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, and 35 of `steps.jsonl`). J2 is therefore part of the momentum confound, and the notes that state the confound now say so. The J2 step-40 result, its Opus win rate and its detector gap, is confounded in the same way as the sweep and quality-gate results.
 
 ### b. One seed per setting
 
@@ -200,26 +258,28 @@ The log analysis in `grpo-sonnet-vs-opus-q.md` compares Sonnet's training q with
 - Small n. A check has 39 to 48 agreed pairs at 50 prompts, so a 95% interval is about 15 points either side (0.36 to 0.66 at 41 pairs, 0.17 to 0.41 at 48). The within-20% band has 3 to 41 pairs.
 - Stop-rule noise. The J1 pilot stopped at step 20 on 7 of 18 agreed pairs (38.9%) after 11 of 20 at step 10, with no interval in its note. L3 was recorded as stopped on under 40% at 18 of 46 (39.1%), where one more trained win would have given 41.3%.
 - Reference labels are model labels. They are Claude Opus labels that Eli reviewed as matching his judgment, not human labels (`grpo-reference-labels.md`).
-- Opus and `gpt-5.5` were never qualified (section 2, rows 15 and 16).
+- Opus and `gpt-5.5` were qualified only on the held-out 30 and the identical answers (section 2, rows 15 to 16b). Both lean to slot A on identical answers, and neither gives a tie verdict. The held-out set is a one-sentence factual difference, so it says nothing about style or length differences. Opus has no reference-pair result.
 - J2 headline versus length band. J2's Opus 26 of 39 is on all pairs. On the 18 pairs within 1.2 times the base's length Opus is 5 of 11, and both detector means were below the base's (`grpo-step40-length.md`). Its trained answers at steps 10 to 30 averaged 117 to 136 words (`grpo-sonnet-json.md`), and 74.4% of its rollouts were hard-zeroed for length.
 - Pool and dry-run costs are not in the run totals.
 
 ### Inconsistencies between notes
 
-None changes a result. They are listed so the notes can be read together.
+None changes a result. All 12 found while building this index have been checked and the notes edited to match. One of them turned out not to be an inconsistency.
 
-1. `grpo-pilot-40.md` says the training prompts were shuffled with seed 42. `grpo-pilot-40/summary.json` and the J2 summary record `shuffle_seed` 20261008.
-2. `grpo-pilot-40.md` does not state the precision. `summary.json` says bfloat16, and all 250-word E runs are float32.
-3. The "held-out about 0.3" figure for the short pilot is not tied to a detector name. `analyze_run.py` defaults to the logistic-regression detector, so the figure may be that detector and not DistilBERT. That is an inference. `grpo-lab-note.md` and the README put it next to DistilBERT text.
-4. `grpo-lab-note.md` and the human-baseline README cite only bf16 seed 44 as the held-out drop (0.3964), but fp32 seed 44 also ends at 0.3770 (`seed-replication/summary.txt`).
-5. `grpo-250w-kl/README.md` says the 1616-token float32 run peaked at 15.50 GB. That figure is the continuation's `run.log` value. The cap1616 parent run died without a peak line.
-6. `grpo-training-config.md` reports J2's final Opus win rate as 26 of 39 and does not mention the 5 of 11 within the length band or that both detectors fell below the base. `grpo-step40-length.md` has both.
-7. `grpo-step40-length.md` has a closing "Next experiment" section that proposes T = 4, 2, 1 with two seeds each, 6 runs, and a 100-word floor. The sweep that ran used one seed and a 100 to 300 word window, and seed 2 did not start (`grpo-length-200-t-sweep.md`). The section is stale.
-8. `grpo-training-config.md` says 28 of 40 quality-gate steps "had no judged rollout and no gradient". `grpo-slope-reward.md` corrects the count: 33 of 40 steps had zero advantages and the optimizer still stepped on them.
-9. The `sigmoid` column means different things across notes. In `grpo-length-200-t-sweep.md` it is sigmoid(z / T) for the run's T, so L1 (T = 4) and L2 (T = 2) are not comparable with L3 to L9, which are at T = 1. `grpo-t-sweep-qualitative.md` gives L2 at step 80 as 0.168 against 0.210 at T = 1, and 0.199 against 0.237 at T = 2.
-10. `grpo-lab-note.md` covers the beta 0.05 KL run only. The beta 0.5 run is in `grpo-250w-kl-beta0.5/README.md`.
-11. `grpo-length-matched-dry-run.md` now describes the 200-word dry run, while the directory `results/grpo-length-matched/` holds the 250-word artifacts and `results/grpo-length-200/` the 200-word ones. The 250-word figures in this index come from commit `a149083`.
-12. `grpo-quality-gate-reward.md` says T = 2 and T = 4 "kept quality and did not become more human". L1 (T = 4) was stopped on the Opus under-40% rule at 17 of 44, and its two detector means at step 40 were slightly above its base (`grpo-length-200-t-sweep.md`). Only L2 kept quality through step 80.
+1. Fixed, and not a conflict. `grpo-pilot-40.md` says the training prompts were shuffled with seed 42, and the run summaries record `shuffle_seed` 20261008. The scripts show that 42 is the training seed and the train-split shuffle seed, and 20261008 only seeds the A/B side of the hand-reading pairs. `grpo-pilot-40.md` now says so.
+2. Fixed. `grpo-pilot-40.md` did not state the precision. It now says bfloat16, from the run summary and the script. All 250-word E runs are float32.
+3. Fixed, checked by rescoring. The "held-out about 0.3" figure for the short pilot is the logistic-regression detector, the `analyze_run.py` default. Rescoring the 200 rollouts of steps 451 to 500 of seed 44 bf16 gave 0.3964 on it, equal to the table, and 0.9480 on DistilBERT. `grpo-lab-note.md` and the human-baseline README now name the detector.
+4. Fixed. `grpo-lab-note.md` and the human-baseline README now give both seed-44 held-out drops, bf16 0.3964 and fp32 0.3770.
+5. Fixed. `grpo-250w-kl/README.md` now attributes 15.50 GB to the continuation's `run.log` and says the cap1616 parent run died without a peak line. The index E5b cell says the same.
+6. Fixed. `grpo-training-config.md` now gives J2's 5 of 11 within the length band and both detector means below the base, with the base values.
+7. Fixed. The stale "Next experiment" section of `grpo-step40-length.md` is replaced by a "What ran next" section that says the sweep used one seed and a 100 to 300 word window.
+8. Fixed. `grpo-training-config.md` and the opening of `grpo-slope-reward.md` now say 33 of 40 quality-gate steps had all advantages zero and 28 had no judged rollout, with the optimizer stepping on all 33.
+9. Fixed. `grpo-length-200-t-sweep.md` now says its sigmoid columns are sigmoid(z / T) with the run's own T, and the common-scale table above gives raw z for every run.
+10. Fixed. `grpo-lab-note.md` section 7 now says it covers beta 0.05 only and points to `grpo-250w-kl-beta0.5/README.md`.
+11. Fixed. `grpo-length-matched-dry-run.md` now says `results/grpo-length-matched/` holds the 250-word dry-run artifacts and `results/grpo-length-200/` the 200-word ones.
+12. Fixed. `grpo-quality-gate-reward.md` now says T = 2 held a small edge on quality (Opus 49 of 90) and T = 4 did not (stopped at 17 of 44 on the Opus rule, both detectors slightly above the base).
+
+Found while fixing these. `grpo-preflight.md` and the index did not say who assigned the reference labels and the bands. Both now say Claude Opus assigned them and Eli reviewed them as matching his judgment, as model labels and not human labels. The J2 run did step the optimizer on its 24 all-equal-reward steps. That is now stated in `grpo-slope-reward.md`, `grpo-sonnet-json.md`, `grpo-step40-length.md`, `grpo-length-200-t-sweep.md`, `grpo-quality-gate-reward.md`, and `grpo-training-config.md`.
 
 The saved `summary.json` costs for L1 to L9 and the costs in the notes agree to the cent, and the zero-advantage counts match the notes.
 &nbsp;
@@ -270,6 +330,7 @@ Links are relative to `results/`. Where files sit in a folder the folder's own R
 - [grpo-sonnet-qualify.md](grpo-sonnet-qualify.md): Sonnet free-text letter, qualified, dry run spread 7 of 20.
 - [grpo-sonnet-tool.md](grpo-sonnet-tool.md): forced tool call rejected by the API.
 - [grpo-sonnet-json.md](grpo-sonnet-json.md): the JSON-schema judge, its qualification, and the 40-step run J2.
+- [grpo-eval-judge-qualification.md](grpo-eval-judge-qualification.md): the evaluation judges Opus and `gpt-5.5` on the held-out 30 and the identical answers, and `gpt-5.5` on the reference pairs.
 
 ### Pilots and preflight
 

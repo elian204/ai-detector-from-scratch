@@ -24,7 +24,7 @@ Finished, exit 0. β = 0.05 and the trigram factor is off. The step 60 winner is
 &nbsp;
 ## Memory
 
-The 1616-token float32 run peaked at 15.50 GB allocated. The frozen base is about 2.4 GB of weights and is not optimized, so policy, base, and verifier share GPU 0. A second card was free and was not used.
+The continuation of the 1616-token float32 run (steps 51 to 100, `grpo-250w-cap1616/continuation/run.log`) peaked at 15.50 GB allocated. The parent run died while saving the step-60 checkpoint and logged no peak line. The frozen base is about 2.4 GB of weights and is not optimized, so policy, base, and verifier share GPU 0. A second card was free and was not used.
 
 &nbsp;
 ## Command

@@ -1,7 +1,7 @@
 &nbsp;
 # Reference labels
 
-No GRPO and no training. These are Claude Opus reference labels for the 25 pairs in `results/grpo-prose-pairs.pdf`, in pair order 1 to 25. Eli Bogdanov reviewed them as matching his judgment. They are not human labels. The confidence bands in `results/grpo-preflight.md` were also assigned by Claude Opus and reviewed by Eli the same way.
+No GRPO and no training. These are Claude Opus reference labels for the 25 pairs in `results/grpo-prose-pairs.pdf`, in pair order 1 to 25. The labeller was Claude Opus in the Claude app. The version is not recorded in the repository or in any note. Eli Bogdanov reviewed them as matching his judgment. They are not human labels. The confidence bands in `results/grpo-preflight.md` were also assigned by Claude Opus and reviewed by Eli the same way. Pairs 13, 14, 16, 18, and 21 were excluded because the labeller marked them "both unacceptable", as Eli reports. The labeller's own notes are not in this repository, and `results/grpo-reference-labels.md` lists only pairs 9, 13, and 25 as both bad.
 
 The letter is the PDF slot. The A/B assignment used to build the PDF is not in this repository.
 

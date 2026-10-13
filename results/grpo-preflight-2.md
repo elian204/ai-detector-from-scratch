@@ -11,7 +11,7 @@ The accepted tie threshold is 7. A win is signal greater than 7. Absolute signal
 
 These ranges are before any new threshold. The 6-gram count is the highest number of times one casefolded whitespace-word 6-gram occurs. The trigram ratio is the number of distinct casefolded word trigrams divided by the number of trigram positions. For an even count, the median is the average of the two central sorted values.
 
-The junk sides are the 20 junk rollouts in the prose-versus-junk table in `results/grpo-judge-bias.md`. The preferred sides are the PDF slots named by the reference labels, excluding pairs 13, 14, 16, 18, and 21, which the labeller marked "both unacceptable". The base answers are the 80 rows in `results/grpo-base-detector-scores/base-answers.jsonl`.
+The junk sides are the 20 junk rollouts in the prose-versus-junk table in `results/grpo-judge-bias.md`. The preferred sides are the PDF slots named by the reference labels, excluding pairs 13, 14, 16, 18, and 21, the labeller's both-unacceptable set ("14, 16 and 18, and arguably 13 and 21", `results/grpo-reference-labels-source.md`). The base answers are the 80 rows in `results/grpo-base-detector-scores/base-answers.jsonl`.
 
 | group | n | 6-gram min | median | max | trigram min | median | max |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |

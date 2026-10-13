@@ -5,9 +5,9 @@ No GRPO and no training. The 40-step pilot was not started.
 &nbsp;
 ## Confidence bands
 
-The reference labels and the confidence bands below were assigned by Claude Opus in the Claude app, version not recorded. Eli Bogdanov reviewed them as matching his judgment. They are model labels, not human labels. The signals are the ones already in `results/grpo-reference-labels.md`. The 25 pairs were not rescored. The judge there is `gpt-4.1-mini-2025-04-14`, both orders, signal = (m1 + m2) / 2.
+The reference labels and the confidence bands below were assigned by Claude Opus in the Claude app, version not recorded. The labeller's own table and remarks are in `results/grpo-reference-labels-source.md`. Eli Bogdanov reviewed them as matching his judgment. They are model labels, not human labels. The signals are the ones already in `results/grpo-reference-labels.md`. The 25 pairs were not rescored. The judge there is `gpt-4.1-mini-2025-04-14`, both orders, signal = (m1 + m2) / 2.
 
-The exclusion set is pairs 13, 14, 16, 18, and 21. The labeller marked them "both unacceptable", as Eli reports. The labeller's own notes are not in this repository. Pairs 9, 13, and 25 are the both-bad pairs of `results/grpo-reference-labels.md`, and they are not this exclusion set. The excluded pairs are outside the bands below.
+The exclusion set is pairs 13, 14, 16, 18, and 21. The set is the labeller's own. Its line is "Both-unacceptable pairs: 14, 16 and 18, and arguably 13 and 21." (`results/grpo-reference-labels-source.md`). Pairs 9, 13, and 25 are the pairs the lab worker's first scoring pass called both bad, from its own judgment after seeing the judge results, and they are not the labeller's set. The excluded pairs are outside the bands below.
 
 High and Med-High: 3, 6, 7, 8, 10, 11, 15, 17, 19, 20, 22, 25. Medium: 1, 5, 9, 12, 23, 24. Low: 2, 4.
 

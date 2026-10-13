@@ -1,7 +1,7 @@
 &nbsp;
 # Reference labels
 
-No GRPO and no training. These are Claude Opus reference labels for the 25 pairs in `results/grpo-prose-pairs.pdf`, in pair order 1 to 25. The labeller was Claude Opus in the Claude app. The version is not recorded in the repository or in any note. Eli Bogdanov reviewed them as matching his judgment. They are not human labels. The confidence bands in `results/grpo-preflight.md` were also assigned by Claude Opus and reviewed by Eli the same way. Pairs 13, 14, 16, 18, and 21 were excluded because the labeller marked them "both unacceptable", as Eli reports. The labeller's own notes are not in this repository, and `results/grpo-reference-labels.md` lists only pairs 9, 13, and 25 as both bad.
+No GRPO and no training. These are Claude Opus reference labels for the 25 pairs in `results/grpo-prose-pairs.pdf`, in pair order 1 to 25. The labeller was Claude Opus in the Claude app. The version is not recorded in the repository or in any note. The labeller's full table and remarks, as it wrote them, are in `results/grpo-reference-labels-source.md`. Eli Bogdanov reviewed them as matching his judgment. They are not human labels. The confidence bands in `results/grpo-preflight.md` were also assigned by Claude Opus and reviewed by Eli the same way. Pairs 13, 14, 16, 18, and 21 are the excluded set, and it is the labeller's own. Its line is "Both-unacceptable pairs: 14, 16 and 18, and arguably 13 and 21." The labeller rated 14, 16, and 18 "Low (both bad)" and 13 and 21 "Low–Med". The labeller did not flag pair 9 or pair 25 as both bad.
 
 The letter is the PDF slot. The A/B assignment used to build the PDF is not in this repository.
 
@@ -15,7 +15,7 @@ The tie threshold is 14. A match is signal greater than 14. A tie is absolute si
 
 The response `model` field was `gpt-4.1-mini-2025-04-14` on every call. Of the 50 calls, 31 had both letters in the top list and 19 used the chosen-only fallback. Fourteen of those fallback calls were clamped, the same floor as in `results/grpo-openai-judge.md`.
 
-Three pairs are both bad, and they are left out of the counts. Pair 9 is two ten-item lists of the same regulations frame, "the role of the regulations" and "the importance of the regulations", with no distinct content. Pair 13 is a fabricated multiple-choice item against an answer that opens with an empty quote and then repeats one settlement frame. Pair 25 is two multiple-choice shells followed by the same "this will help in determining" frame. The letters for those three pairs are still in the table.
+The first scoring pass, by the lab worker, left three pairs out of the counts as both bad: 9, 13, and 25. That was the lab worker's own judgment after seeing the judge results, not the labeller's. The labeller rated pair 9 Medium and pair 25 High, did not flag either as both bad, and rated pair 13 Low–Med and arguably both unacceptable. Pair 9 is two ten-item lists of the same regulations frame, "the role of the regulations" and "the importance of the regulations", with no distinct content. Pair 13 is a fabricated multiple-choice item against an answer that opens with an empty quote and then repeats one settlement frame. Pair 25 is two multiple-choice shells followed by the same "this will help in determining" frame. The letters for those three pairs are still in the table.
 
 On the other 22 pairs the judge has 15 matches, 6 ties, and 1 miss. Pairs 1–20, after dropping 9 and 13, are 13 matches, 4 ties, and 1 miss. The template pairs that remain, 21–24, are 2 matches, 2 ties, and 0 misses. The miss is pair 4.
 

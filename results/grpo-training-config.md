@@ -41,7 +41,7 @@ hard_i is 0 for a stub under 30 words or a completion that reached 1616 tokens, 
 &nbsp;
 ## Reference result
 
-On the 22 pairs in `results/grpo-reference-labels.md` that are not both-bad, this judge has 15 matches, 6 ties, and 1 miss against the Claude Opus reference labels. The both-bad pairs, 9, 13, and 25, are excluded from that count. The one miss is pair 4.
+On the 22 pairs in `results/grpo-reference-labels.md` that are not both-bad, this judge has 15 matches, 6 ties, and 1 miss against the Claude Opus reference labels. Pairs 9, 13, and 25, which the lab worker's first scoring pass called both bad from its own judgment (not the labeller's), are excluded from that count. The one miss is pair 4.
 &nbsp;
 ## API cost, an estimate
 
